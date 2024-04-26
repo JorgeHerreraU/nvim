@@ -1,0 +1,15 @@
+{
+  "angular-language-server": "17.3.1",
+  "csharpier": "0.28.2",
+  "css-lsp": "4.8.0",
+  "gopls": "v0.15.3",
+  "html-lsp": "4.8.0",
+  "jdtls": "v1.34.0",
+  "lua-language-server": "3.7.4",
+  "netcoredbg": "3.1.0-1031",
+  "omnisharp": "v1.39.11",
+  "prettierd": "0.25.3",
+  "pyright": "1.1.359",
+  "rust-analyzer": "2024-04-22",
+  "stylua": "v0.20.0"
+}
