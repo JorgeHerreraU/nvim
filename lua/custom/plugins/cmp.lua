@@ -29,6 +29,7 @@ return {
     },
     {
       'Exafunction/codeium.nvim',
+      enabled = true,
       dependencies = {
         'nvim-lua/plenary.nvim',
         'hrsh7th/nvim-cmp',
@@ -95,7 +96,6 @@ return {
     }, { key = 'cs' })
 
     ls.config.setup {}
-    local lspkind = require 'lspkind'
     local sources = {
       { name = 'codeium', max_item_count = 3 },
       { name = 'nvim_lsp', max_item_count = 10 },
@@ -107,6 +107,8 @@ return {
     local buffer_source_enabled = true
     function ToggleMLCompletion()
       buffer_source_enabled = not buffer_source_enabled
+      vim.g.codeium_enabled = buffer_source_enabled
+
       if buffer_source_enabled then
         table.insert(sources, { name = 'codeium' })
       else
@@ -117,6 +119,7 @@ return {
           end
         end
       end
+
       cmp.setup {
         sources = cmp.config.sources(sources),
       }
@@ -131,7 +134,7 @@ return {
           local lspkind = require 'lspkind'
 
           vim.cmd [[ 
-            highlight CustomCmpCodeium guibg=#0057b8 guifg=#ffffff
+            highlight CustomCmpCodeium guifg=#D1FFD6
           ]]
 
           local menus = {
@@ -238,5 +241,8 @@ return {
       },
       sources = cmp.config.sources(sources),
     }
+    require('cmp').event:on('menu_opened', function()
+      vim.fn['codeium#Clear']()
+    end)
   end,
 }
