@@ -140,6 +140,11 @@ return {
     -- omnisharp
     require('lspconfig').omnisharp.setup {
       capabilities = capabilities,
+      settings = {
+        RoslynExtensionsOptions = {
+          EnableImportCompletion = true,
+        },
+      },
     }
 
     -- typescript lsp
