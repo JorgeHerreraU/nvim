@@ -150,7 +150,7 @@ return {
     -- typescript lsp
     require('typescript-tools').setup {
       on_attach = function(client, bufnr)
-        vim.lsp.inlay_hint.enable(bufnr, true)
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
       end,
       handlers = handlers,
       settings = {

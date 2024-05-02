@@ -9,3 +9,7 @@ if pcall(require, 'omnisharp_extended') then
     { noremap = true, silent = true, desc = '[G]oto [D]efinition' }
   )
 end
+
+vim.bo.shiftwidth = 4
+vim.bo.tabstop = 4
+vim.bo.expandtab = true

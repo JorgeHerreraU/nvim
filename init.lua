@@ -35,6 +35,7 @@ Refer to https://neovim.io/doc/user/lua-guide.html for Neovim's Lua integration.
 require 'settings' -- Load basic settings
 require 'keybindings' -- Load key mappings
 require 'autocmds' -- Load autocommands
+require 'usercmds' -- Load user commands
 -- Plugin management with `lazy.nvim`
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
