@@ -135,7 +135,24 @@ return {
     -- LSP servers configuration
 
     -- lua
-    require('lspconfig').lua_ls.setup {}
+    require('lspconfig').lua_ls.setup {
+      capabilities = capabilities,
+    }
+
+    --golsp
+    require('lspconfig').gopls.setup {
+      capabilities = capabilities,
+      cmd = { 'gopls', 'serve' },
+      settings = {
+        gopls = {
+          gofumpt = true,
+          analyses = {
+            unusedparams = true,
+          },
+          staticcheck = true,
+        },
+      },
+    }
 
     -- omnisharp
     require('lspconfig').omnisharp.setup {

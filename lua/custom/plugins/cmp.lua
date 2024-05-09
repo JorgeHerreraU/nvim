@@ -134,12 +134,13 @@ return {
           local lspkind = require 'lspkind'
 
           vim.cmd [[ 
-            highlight CustomCmpCodeium guifg=#D1FFD6
+            highlight CustomCmpCodeium guifg=#E0AF68
+            
           ]]
 
           local menus = {
             buffer = '[buf]',
-            codeium = '[ML]',
+            codeium = '[Codeium]',
             nvim_lsp = '[LSP]',
             path = '[path]',
             luasnip = '[snip]',
@@ -149,14 +150,14 @@ return {
           vim_item.menu = menus[entry.source.name] or ''
 
           local symbol_map = {
-            Codeium = '',
+            Codeium = '󰑴',
           }
 
           vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = 'symbol_text' })
 
           if entry.source.name == 'codeium' then
             vim_item.kind = symbol_map['Codeium']
-            vim_item.kind = vim_item.kind .. ' AI'
+            vim_item.kind = vim_item.kind .. ' ML'
             vim_item.kind_hl_group = 'CustomCmpCodeium'
           end
 
@@ -241,8 +242,5 @@ return {
       },
       sources = cmp.config.sources(sources),
     }
-    require('cmp').event:on('menu_opened', function()
-      vim.fn['codeium#Clear']()
-    end)
   end,
 }
