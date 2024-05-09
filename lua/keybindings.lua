@@ -1,3 +1,4 @@
+local utils = require 'utils'
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -41,48 +42,9 @@ end, { silent = true, noremap = true, desc = 'toggle signature' }) ]]
 
 vim.keymap.set({ 'i' }, '<F3>', vim.lsp.buf.code_action, { desc = 'Code action' })
 
-local function lazy(keys)
-  keys = vim.api.nvim_replace_termcodes(keys, true, false, true)
-  return function()
-    local old = vim.o.lazyredraw
-    vim.o.lazyredraw = true
-    vim.api.nvim_feedkeys(keys, 'nx', false)
-    vim.o.lazyredraw = old
-  end
-end
+vim.keymap.set('n', '<c-d>', utils.lazy '<c-d>zz', { desc = 'Scroll down half screen' })
 
-vim.keymap.set('n', '<c-d>', lazy '<c-d>zz', { desc = 'Scroll down half screen' })
-
--- expand curly braces c# style
-local function remove_braces(line)
-  return line:gsub('%s*{%s*}', '')
-end
-
-local function create_braces_block(trimmed_line, indent)
-  local new_lines = { trimmed_line }
-  table.insert(new_lines, indent .. '{')
-  table.insert(new_lines, indent .. '    ')
-  table.insert(new_lines, indent .. '}')
-  return new_lines
-end
-
-local function expand_braces()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local line_num = vim.fn.getcurpos()[2] - 1
-  local line = vim.api.nvim_buf_get_lines(bufnr, line_num, line_num + 1, false)[1]
-  local indent = line:match '^%s*'
-
-  if line:find '{%s*}' then
-    local trimmed_line = remove_braces(line)
-    local new_lines = create_braces_block(trimmed_line, indent)
-
-    vim.api.nvim_buf_set_lines(bufnr, line_num, line_num + 1, false, new_lines)
-    vim.api.nvim_win_set_cursor(0, { line_num + 3, #indent + 4 })
-    vim.cmd 'startinsert!'
-  end
-end
-
-vim.keymap.set('n', '<C-m>', expand_braces, { desc = 'Expand curly braces' })
+vim.keymap.set('n', '<C-m>', utils.expand_braces, { desc = 'Expand curly braces' })
 -- copy contents
 vim.keymap.set('n', '<C-c>', '"+yy', { desc = 'Copy the current line to the clipboard' })
 vim.keymap.set('v', '<C-c>', '"+y', { desc = 'Copy the selection to the clipboard' })
