@@ -44,14 +44,6 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
-  {
-    'zapling/mason-lock.nvim',
-    init = function()
-      require('mason-lock').setup {
-        lockfile_path = vim.fn.stdpath 'config' .. '/mason-lock.json', -- (default)
-      }
-    end,
-  },
   { import = 'custom.plugins' },
   { import = 'custom.themes' },
 }, {

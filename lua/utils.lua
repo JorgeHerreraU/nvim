@@ -69,4 +69,10 @@ function M.setup_cmp_sources(sources)
   vim.api.nvim_set_keymap('n', '<F5>', '<cmd>lua require("utils").toggle_codeium()<CR>', { noremap = true, silent = true })
 end
 
+-- check wsl
+function M.is_wsl()
+  local output = vim.fn.systemlist 'uname -r'
+  return not not string.find(output[1] or '', 'WSL')
+end
+
 return M

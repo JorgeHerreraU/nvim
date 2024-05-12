@@ -87,17 +87,17 @@ return {
         -- word under your cursor when your cursor rests there for a little while.
         --    See `:help CursorHold` for information about when this is executed
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client.server_capabilities.documentHighlightProvider then
-          vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            buffer = event.buf,
-            callback = vim.lsp.buf.document_highlight,
-          })
-          vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-            buffer = event.buf,
-            callback = vim.lsp.buf.clear_references,
-          })
-        end
+        -- local client = vim.lsp.get_client_by_id(event.data.client_id)
+        -- if client and client.server_capabilities.documentHighlightProvider then
+        --   vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+        --     buffer = event.buf,
+        --     callback = vim.lsp.buf.document_highlight,
+        --   })
+        --   vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+        --     buffer = event.buf,
+        --     callback = vim.lsp.buf.clear_references,
+        --   })
+        -- end
       end,
     })
 
@@ -130,7 +130,7 @@ return {
     require('mason').setup {}
     -- lsp installation list
     require('mason-lspconfig').setup {
-      ensure_installed = { 'omnisharp', 'gopls', 'lua_ls', 'html', 'cssls', 'angularls', 'jdtls' },
+      ensure_installed = { 'omnisharp', 'gopls', 'lua_ls', 'html', 'cssls', 'angularls', 'jdtls', 'jsonls' },
     }
     -- LSP servers configuration
 
@@ -139,7 +139,12 @@ return {
       capabilities = capabilities,
     }
 
-    --golsp
+    -- jsonls
+    require('lspconfig').jsonls.setup {
+      capabilities = capabilities,
+    }
+
+    -- golsp
     require('lspconfig').gopls.setup {
       capabilities = capabilities,
       cmd = { 'gopls', 'serve' },

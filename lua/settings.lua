@@ -1,3 +1,4 @@
+local utils = require 'utils'
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -32,6 +33,7 @@ vim.opt.undofile = true
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
+
 vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
@@ -46,12 +48,14 @@ vim.opt.timeoutlen = 300
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
+
 vim.opt.splitbelow = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
+
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
@@ -91,7 +95,7 @@ vim.wo.relativenumber = true
 -- vim.opt.clipboard = 'unnamedplus'
 vim.opt.clipboard = 'unnamedplus'
 
-if vim.fn.has 'wsl2' then
+if utils.is_wsl() then
   vim.g.clipboard = {
     name = 'wsl2-clipboard',
     copy = {
