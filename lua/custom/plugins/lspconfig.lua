@@ -15,6 +15,7 @@ return {
     { 'pmizio/typescript-tools.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' }, opts = {} },
     -- omnisharp (go-to definitions)
     -- 'Hoffs/omnisharp-extended-lsp.nvim',
+    'Decodetalkers/csharpls-extended-lsp.nvim',
     -- rust
     {
       'simrat39/rust-tools.nvim',
@@ -41,9 +42,9 @@ return {
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
+          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
         end
 
-        map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
         -- Find references for the word under your cursor.
         map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
@@ -161,6 +162,13 @@ return {
 
     -- csharp_ls
     require('lspconfig').csharp_ls.setup {
+      on_attach = function(client, bufnr)
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      end,
+      handlers = {
+        ['textDocument/definition'] = require('csharpls_extended').handler,
+        ['textDocument/typeDefinition'] = require('csharpls_extended').handler,
+      },
       capabilities = capabilities,
     }
 
