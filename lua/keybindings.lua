@@ -57,7 +57,4 @@ vim.keymap.set('n', '<C-Right>', ':vertical resize +5<CR>', { noremap = true, si
 vim.keymap.set('n', '<C-Left>', ':vertical resize -5<CR>', { noremap = true, silent = true })
 
 -- Keybinding to disable autoformatting
-vim.keymap.set('n', '<F4>', ':FormatDisable<CR>', { desc = 'Disable autoformat-on-save' })
-
--- Keybinding to enable autoformatting
-vim.keymap.set('n', '<F6>', ':FormatEnable<CR>', { desc = 'Enable autoformat-on-save' })
+vim.keymap.set('n', '<F4>', utils.toggle_autoformat, { noremap = true, silent = true })
