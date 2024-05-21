@@ -37,8 +37,8 @@ return {
         end
 
         -- NOTE: ftplugin overrides go-to-definition keybinding
-        local buf_ft = vim.api.nvim_buf_get_option(event.buf, 'filetype')
-        if buf_ft ~= 'cs' and buf_ft ~= 'java' then -- Skip for filetypes
+        local buffer_filetype = vim.api.nvim_get_option_value('filetype', { buf = event.buf })
+        if buffer_filetype ~= 'cs' and buffer_filetype ~= 'java' then -- Skip for filetypes
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
