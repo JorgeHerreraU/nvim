@@ -1,6 +1,6 @@
 return {
   'rebelot/kanagawa.nvim',
-  enabled = false,
+  enabled = true,
   config = function()
     require('kanagawa').setup {
       overrides = function(colors)

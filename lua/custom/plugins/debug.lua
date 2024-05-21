@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 -- debug.lua
 --
 -- Shows how to use the DAP plugin to debug your code.
@@ -22,7 +23,6 @@ return {
     {
       'microsoft/vscode-js-debug',
       build = 'npm install --legacy-peer-deps --no-save && npx gulp vsDebugServerBundle && rm -rf out && mv dist out',
-      -- version = '1.*',
     },
   },
   config = function()
@@ -47,16 +47,16 @@ return {
     }
 
     -- Basic debugging keymaps, feel free to change to your liking!
-    vim.keymap.set('n', '<leader>dc', dap.continue, { desc = 'Debug: Start/[C]ontinue' })
+    vim.keymap.set('n', '<leader>dc', dap.continue, { desc = 'Debug: Start/Continue' })
     vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
     vim.keymap.set('n', '<leader>dn', dap.step_over, { desc = 'Debug: Step Over' })
     vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
-    vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'Debug: Toggle [B]reakpoint' })
+    vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
     vim.keymap.set('n', '<leader>dB', function()
-      dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-    end, { desc = 'Debug: Set [B]reakpoint' })
+      dap.set_breakpoint(vim.fn.input 'Debug: Breakpoint condition: ')
+    end, { desc = 'Debug: Set Breakpoint' })
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-    vim.keymap.set('n', '<leader>di', dapui.toggle, { desc = 'Debug:Toggle [I]nterface.' })
+    vim.keymap.set('n', '<leader>di', dapui.toggle, { desc = 'Debug: Toggle Interface' })
 
     -- c#
     dap.adapters.coreclr = {
