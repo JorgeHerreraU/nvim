@@ -43,6 +43,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'coreclr',
+        'delve',
       },
     }
 
@@ -97,6 +98,40 @@ return {
         cwd = function()
           return vim.fn.input('appsettings.json: ', vim.fn.getcwd() .. '/', 'file')
         end,
+      },
+    }
+
+    -- go
+    dap.adapters.go = {
+      type = 'server',
+      port = '${port}',
+      executable = {
+        command = vim.fn.stdpath 'data' .. '/mason/bin/dlv',
+        args = { 'dap', '-l', '127.0.0.1:${port}' },
+      },
+    }
+
+    dap.configurations.go = {
+      {
+        type = 'go',
+        name = 'Debug',
+        request = 'launch',
+        program = '${file}',
+      },
+      {
+        type = 'go',
+        name = 'Debug test', -- configuration for debugging test files
+        request = 'launch',
+        mode = 'test',
+        program = '${file}',
+      },
+
+      {
+        type = 'go',
+        name = 'Debug test (go.mod)',
+        request = 'launch',
+        mode = 'test',
+        program = './${relativeFileDirname}',
       },
     }
 
