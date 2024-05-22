@@ -5,11 +5,8 @@ return {
   dependencies = {
     {
       'Exafunction/codeium.nvim',
-      enabled = true,
-      dependencies = {
-        'nvim-lua/plenary.nvim',
-        'hrsh7th/nvim-cmp',
-      },
+      cmd = 'Codeium',
+      build = ':Codeium Auth',
       opts = {},
     },
     -- Adds other completion capabilities.
