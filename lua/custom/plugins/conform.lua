@@ -4,8 +4,15 @@ return {
   dependencies = {
     'williamboman/mason.nvim',
     {
-      'zapling/mason-conform.nvim',
-      opts = {},
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
+      opts = {
+        ensure_installed = {
+          'stylua',
+          'goimports',
+          'prettier',
+          'csharpier',
+        },
+      },
     },
   },
   opts = {
@@ -26,11 +33,8 @@ return {
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
-      csharp = { 'csharpier' },
       cs = { 'csharpier' },
-      css = { 'prettierd' },
-      scss = { 'prettierd' },
-      html = { 'prettierd' },
+      html = { 'prettier' },
       go = { 'goimports' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
