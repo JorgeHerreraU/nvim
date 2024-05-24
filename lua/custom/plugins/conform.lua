@@ -3,17 +3,7 @@ return {
   'stevearc/conform.nvim',
   dependencies = {
     'williamboman/mason.nvim',
-    {
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
-      opts = {
-        ensure_installed = {
-          'stylua',
-          'goimports',
-          'prettier',
-          'csharpier',
-        },
-      },
-    },
+    'zapling/mason-conform.nvim',
   },
   opts = {
     notify_on_error = false,
