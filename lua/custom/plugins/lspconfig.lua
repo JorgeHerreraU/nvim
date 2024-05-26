@@ -131,7 +131,7 @@ return {
     require('mason').setup {}
     -- lsp installation list
     require('mason-lspconfig').setup {
-      ensure_installed = { 'csharp_ls', 'gopls', 'lua_ls', 'html', 'cssls', 'angularls', 'jdtls', 'jsonls' },
+      ensure_installed = { 'csharp_ls', 'gopls', 'lua_ls', 'html', 'cssls', 'angularls', 'jdtls', 'jsonls', 'rust_analyzer' },
     }
     -- LSP servers configuration
 
