@@ -26,6 +26,8 @@ return {
       cs = { 'csharpier' },
       html = { 'prettier' },
       go = { 'goimports' },
+      javascript = { 'prettierd' },
+      typescript = { 'prettierd' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
