@@ -12,7 +12,7 @@ return {
     -- used for completion, annotations and signatures of Neovim apis
     { 'folke/neodev.nvim', opts = {} },
     -- typescript
-    { 'pmizio/typescript-tools.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' }, opts = {} },
+    -- { 'pmizio/typescript-tools.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' }, opts = {} },
     -- omnisharp (go-to definitions)
     -- 'Hoffs/omnisharp-extended-lsp.nvim',
     'Decodetalkers/csharpls-extended-lsp.nvim',
@@ -131,7 +131,7 @@ return {
     require('mason').setup {}
     -- lsp installation list
     require('mason-lspconfig').setup {
-      ensure_installed = { 'csharp_ls', 'gopls', 'lua_ls', 'html', 'cssls', 'angularls', 'jdtls', 'jsonls', 'rust_analyzer' },
+      ensure_installed = { 'csharp_ls', 'gopls', 'lua_ls', 'html', 'cssls', 'angularls', 'jdtls', 'jsonls', 'rust_analyzer', 'vtsls' },
     }
     -- LSP servers configuration
 
@@ -182,47 +182,69 @@ return {
     --   },
     -- }
 
-    -- typescript lsp
-    require('typescript-tools').setup {
+    require('lspconfig').vtsls.setup {
+      capabilities = capabilities,
       on_attach = function(client, bufnr)
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
       end,
-      handlers = handlers,
       settings = {
-        -- spawn additional tsserver instance to calculate diagnostics on it
-        separate_diagnostic_server = true,
-        -- "change"|"insert_leave" determine when the client asks the server about diagnostic
-        publish_diagnostic_on = 'change',
-        -- array of strings("fix_all"|"add_missing_imports"|"remove_unused"|
-        -- "remove_unused_imports"|"organize_imports") -- or string "all"
-        -- to include all supported code actions
-        -- specify commands exposed as code_actions
-        expose_as_code_action = {},
-        -- string|nil - specify a custom path to `tsserver.js` file, if this is nil or file under path
-        -- not exists then standard path resolution strategy is applied
-        tsserver_path = '',
-        -- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
-        -- (see 💅 `styled-components` support section)
-        tsserver_plugins = {},
-        -- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
-        -- memory limit in megabytes or "auto"(basically no limit)
-        tsserver_max_memory = 'auto',
-        -- described below
-        tsserver_format_options = {
-          semicolons = 'insert',
+        typescript = {
+          suggest = {
+            completeFunctionCalls = true,
+          },
+          inlayHints = {
+            enumMemberValues = { enabled = true },
+            functionLikeReturnTypes = { enabled = true },
+            parameterNames = { enabled = 'literals' },
+            parameterTypes = { enabled = true },
+            propertyDeclarationTypes = { enabled = true },
+            variableTypes = { enabled = false },
+          },
         },
-        tsserver_file_preferences = {
-          includeInlayParameterNameHints = 'all',
-          includeInlayVariableTypeHints = true,
-          includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-          quotePreference = 'auto',
-        },
-        -- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
-        complete_function_calls = false,
-        include_completions_with_insert_text = true,
       },
     }
 
+    -- -- typescript lsp
+    -- require('typescript-tools').setup {
+    --   on_attach = function(client, bufnr)
+    --     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    --   end,
+    --   handlers = handlers,
+    --   settings = {
+    --     -- spawn additional tsserver instance to calculate diagnostics on it
+    --     separate_diagnostic_server = true,
+    --     -- "change"|"insert_leave" determine when the client asks the server about diagnostic
+    --     publish_diagnostic_on = 'change',
+    --     -- array of strings("fix_all"|"add_missing_imports"|"remove_unused"|
+    --     -- "remove_unused_imports"|"organize_imports") -- or string "all"
+    --     -- to include all supported code actions
+    --     -- specify commands exposed as code_actions
+    --     expose_as_code_action = {},
+    --     -- string|nil - specify a custom path to `tsserver.js` file, if this is nil or file under path
+    --     -- not exists then standard path resolution strategy is applied
+    --     tsserver_path = '',
+    --     -- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
+    --     -- (see 💅 `styled-components` support section)
+    --     tsserver_plugins = {},
+    --     -- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
+    --     -- memory limit in megabytes or "auto"(basically no limit)
+    --     tsserver_max_memory = 'auto',
+    --     -- described below
+    --     tsserver_format_options = {
+    --       semicolons = 'insert',
+    --     },
+    --     tsserver_file_preferences = {
+    --       includeInlayParameterNameHints = 'all',
+    --       includeInlayVariableTypeHints = true,
+    --       includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+    --       quotePreference = 'auto',
+    --     },
+    --     -- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
+    --     complete_function_calls = false,
+    --     include_completions_with_insert_text = true,
+    --   },
+    -- }
+    --
     -- rust
     require('rust-tools').setup {
       server = {
