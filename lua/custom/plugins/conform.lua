@@ -21,6 +21,7 @@ return {
         -- lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
       }
     end,
+    ---@type nil|table<string, conform.FiletypeFormatter>
     formatters_by_ft = {
       lua = { 'stylua' },
       cs = { 'csharpier' },
@@ -28,6 +29,8 @@ return {
       go = { 'goimports' },
       javascript = { 'prettierd' },
       typescript = { 'prettierd' },
+      typescriptreact = { 'prettierd' },
+
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
