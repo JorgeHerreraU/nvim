@@ -6,7 +6,7 @@ return {
       disabled_filetypes = {
         statusline = { 'NvimTree', 'alpha' },
       },
-      globalstatus = true,
+      globalstatus = false,
       component_separator = { left = '', right = '' },
     },
     sections = {
