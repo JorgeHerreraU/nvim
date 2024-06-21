@@ -1,6 +1,6 @@
 return {
   'rebelot/kanagawa.nvim',
-  enabled = false,
+  enabled = true,
   config = function()
     require('kanagawa').setup {
       overrides = function(colors)
@@ -47,6 +47,7 @@ return {
       vim.cmd 'highlight GitSignsChangeDelete guifg=#00FFFF guibg=NONE',
       vim.cmd 'highlight Keyword guifg=#8183FA',
       vim.cmd 'highlight Type guifg=#D2CFCF',
+      vim.cmd 'highlight NormalFloat guibg=NONE',
     }
   end,
 }
