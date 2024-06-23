@@ -18,7 +18,7 @@ return {
         update_root = false,
       },
       view = {
-        adaptive_size = true,
+        adaptive_size = false,
         side = 'left',
         relativenumber = true,
         float = {
