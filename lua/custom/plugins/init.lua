@@ -12,4 +12,5 @@ return {
       border = 'rounded',
     },
   },
+  'ThePrimeagen/vim-be-good',
 }
