@@ -30,6 +30,7 @@ return {
       javascript = { 'prettierd' },
       typescript = { 'prettierd' },
       typescriptreact = { 'prettierd' },
+      json = { 'prettierd' },
 
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },

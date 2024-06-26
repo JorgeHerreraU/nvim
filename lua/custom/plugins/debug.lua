@@ -52,6 +52,8 @@ return {
     vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
     vim.keymap.set('n', '<leader>dn', dap.step_over, { desc = 'Debug: Step Over' })
     vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
+    vim.keymap.set('n', '<leader>ds', dap.close, { desc = 'Debug: Stop' })
+    vim.keymap.set('n', '<leader>dt', dap.terminate, { desc = 'Debug: Terminate' })
     vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
     vim.keymap.set('n', '<leader>dB', function()
       dap.set_breakpoint(vim.fn.input 'Debug: Breakpoint condition: ')
@@ -143,6 +145,7 @@ return {
 
     for _, language in ipairs { 'typescript', 'javascript', 'typescriptreact' } do
       dap.configurations[language] = {
+        -- Debug single nodejs file
         {
           type = 'pwa-node',
           request = 'launch',
@@ -150,6 +153,18 @@ return {
           program = '${file}',
           cwd = '${workspaceFolder}',
           runtimeExecutable = 'tsx',
+        },
+        -- Debug nodejs process
+        {
+          type = 'pwa-node',
+          request = 'attach',
+          name = 'Auto Attach',
+          cwd = vim.fn.getcwd(),
+          protocol = 'inspector',
+          resolveSourceMapLocations = {
+            '${workspaceFolder}/**',
+            '!**/node_modules/**',
+          },
         },
       }
     end
