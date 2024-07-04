@@ -80,6 +80,8 @@ vim.opt.autoindent = true
 
 vim.opt.smartindent = true
 
+vim.opt.showcmd = false
+
 -- remove ~ from empty lines
 vim.opt.fillchars:append { eob = ' ' }
 

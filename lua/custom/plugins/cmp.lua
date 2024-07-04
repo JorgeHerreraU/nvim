@@ -69,15 +69,15 @@ return {
         end,
       },
       preselect = 'None',
-      completion = { completeopt = 'menu,menuone,noselect,noinsert' },
+      completion = { completeopt = 'menu,menuone,noinsert,noselect' },
       -- For an understanding of why these mappings were
       -- chosen, you will need to read `:help ins-completion`
       -- No, but seriously. Please read `:help ins-completion`, it is really good!
       mapping = cmp.mapping.preset.insert {
         -- Select the [n]ext item
-        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
         -- Select the [p]revious item
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
         -- Scroll the documentation window [b]ack / [f]orward
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -91,18 +91,13 @@ return {
         ['<C-Space>'] = cmp.mapping.complete {},
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_next_item()
+            cmp.confirm { select = true }
           else
             fallback()
           end
         end, { 'i', 's' }),
-
         ['<S-Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          else
-            fallback()
-          end
+          fallback()
         end, { 'i', 's' }),
       },
       sources = cmp.config.sources(sources),
