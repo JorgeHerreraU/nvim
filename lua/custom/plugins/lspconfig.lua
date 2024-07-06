@@ -207,6 +207,11 @@ return {
             variableTypes = { enabled = false },
           },
         },
+        vtsls = {
+          experimental = {
+            maxInlayHintLength = 25,
+          },
+        },
       },
     }
 

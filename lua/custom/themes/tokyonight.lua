@@ -17,5 +17,6 @@ return {
       end,
     }
     vim.cmd.colorscheme 'tokyonight'
+    vim.api.nvim_set_hl(0, 'LspInlayHint', { bg = 'None', fg = '#8a8a8a' })
   end,
 }
