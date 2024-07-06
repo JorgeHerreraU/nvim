@@ -154,6 +154,9 @@ return {
     -- golsp
     require('lspconfig').gopls.setup {
       capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      end,
       cmd = { 'gopls', 'serve' },
       settings = {
         gopls = {
