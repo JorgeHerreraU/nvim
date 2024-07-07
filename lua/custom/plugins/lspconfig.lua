@@ -191,6 +191,7 @@ return {
     --   },
     -- }
 
+    -- typescript
     require('lspconfig').vtsls.setup {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
@@ -216,6 +217,14 @@ return {
           },
         },
       },
+    }
+
+    -- css
+    require('lspconfig').cssls.setup {
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      end,
     }
 
     -- rust
