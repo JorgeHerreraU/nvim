@@ -19,6 +19,9 @@ return {
         node_decremental = 'V',
       },
     },
+    indent = {
+      enable = true,
+    },
   },
   config = function(_, opts)
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
