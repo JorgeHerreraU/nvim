@@ -27,6 +27,21 @@ return {
       { name = 'nvim_lsp' },
       { name = 'codeium' },
       { name = 'path' },
+      {
+        name = 'html-css',
+        option = {
+          enable_on = {
+            'html',
+            'javascript',
+            'typescriptreact',
+          },
+          file_extensions = { 'css', 'sass', 'less' },
+          style_sheets = {
+            -- example of remote styles, only css no js for now
+            'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
+          },
+        },
+      },
     }
     -- Pass sources to utils setup for additional resources configuration
     utils.setup_cmp_sources(sources)
