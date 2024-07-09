@@ -17,8 +17,6 @@ return {
     -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
     { 'folke/neodev.nvim', opts = {} },
-    -- typescript
-    -- { 'pmizio/typescript-tools.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' }, opts = {} },
     -- omnisharp (go-to definitions)
     -- 'Hoffs/omnisharp-extended-lsp.nvim',
     'Decodetalkers/csharpls-extended-lsp.nvim',
@@ -171,6 +169,7 @@ return {
 
     -- csharp_ls
     require('lspconfig').csharp_ls.setup {
+      capabilities = capabilities,
       on_attach = function(client, bufnr)
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
       end,
@@ -178,7 +177,6 @@ return {
         ['textDocument/definition'] = require('csharpls_extended').handler,
         ['textDocument/typeDefinition'] = require('csharpls_extended').handler,
       },
-      capabilities = capabilities,
     }
 
     -- -- omnisharp
