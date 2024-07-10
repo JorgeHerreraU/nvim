@@ -62,41 +62,38 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
+      window = {
+        completion = {
+          border = 'rounded',
+          winhighlight = 'Normal:NormalFloat,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None',
+          col_offset = -3,
+          side_padding = 0,
+        },
+        documentation = {
+          border = 'rounded',
+          winhighlight = 'Normal:NormalFloat,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None',
+        },
+      },
+
       ---@diagnostic disable-next-line: missing-fields
       formatting = {
+        fields = { 'kind', 'abbr', 'menu' },
         format = function(entry, vim_item)
           local lspkind = require 'lspkind'
-
-          vim.cmd [[ 
-            highlight CustomCmpCodeium guifg=#E0AF68
-            
-          ]]
-
-          local menus = {
-            buffer = '[buf]',
-            codeium = '[Codeium]',
-            nvim_lsp = '[LSP]',
-            path = '[path]',
-            nvim_lua = '[lua]',
-          }
-
-          vim_item.menu = menus[entry.source.name] or ''
-
-          local symbol_map = {
-            Codeium = '󰑴',
-          }
-
-          vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = 'symbol_text' })
+          local kind = lspkind.cmp_format { mode = 'symbol_text', maxwidth = 50 }(entry, vim_item)
+          local strings = vim.split(kind.kind, '%s', { trimempty = true })
 
           if entry.source.name == 'codeium' then
-            vim_item.kind = symbol_map['Codeium']
-            vim_item.kind = vim_item.kind .. ' ML'
-            vim_item.kind_hl_group = 'CustomCmpCodeium'
+            kind.kind = ' 󰘦'
+            kind.menu = '    (Codeium)'
+            vim.cmd [[highlight CustomCmpCodeium guifg=#A08DBF]]
+            kind.kind_hl_group = 'CustomCmpCodeium'
+          else
+            kind.kind = ' ' .. (strings[1] or '') .. ' '
+            kind.menu = '    (' .. (strings[2] or '') .. ')'
           end
 
-          vim_item.kind = vim_item.kind .. ' ' .. vim_item.menu
-
-          return vim_item
+          return kind
         end,
       },
       preselect = 'None',

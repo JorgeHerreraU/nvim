@@ -18,5 +18,6 @@ return {
     }
     vim.cmd.colorscheme 'tokyonight'
     vim.api.nvim_set_hl(0, 'LspInlayHint', { bg = 'None', fg = '#8a8a8a' })
+    vim.api.nvim_set_hl(0, 'CmpBorder', { fg = '#3b4261', bg = 'NONE' })
   end,
 }

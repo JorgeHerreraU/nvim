@@ -21,6 +21,7 @@ return {
     },
     indent = {
       enable = true,
+      disable = { 'lua' },
     },
   },
   config = function(_, opts)
