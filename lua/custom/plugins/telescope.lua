@@ -87,7 +87,7 @@ return {
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find Diagnostics' })
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Find Resume' })
     vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Find Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find existing buffers' })
+    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find Opened Buffers' })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()
@@ -96,7 +96,7 @@ return {
         winblend = 0,
         previewer = false,
       })
-    end, { desc = 'Fuzzily search in current buffer' })
+    end, { desc = 'Search in buffer' })
 
     -- It's also possible to pass additional configuration options.
     --  See `:help telescope.builtin.live_grep()` for information about particular keys

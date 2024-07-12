@@ -18,15 +18,13 @@ return {
   'folke/which-key.nvim',
   event = 'VimEnter', -- Sets the loading event to 'VimEnter'
   config = function() -- This is the function that runs, AFTER loading
-    require('which-key').setup()
-
-    -- Document existing key chains
-    require('which-key').register {
-      ['<leader>d'] = { name = 'Debug', _ = 'which_key_ignore' },
-      ['<leader>e'] = { name = 'Explorer', _ = 'which_key_ignore' },
-      ['<leader>f'] = { name = 'Find', _ = 'which_key_ignore' },
-      ['<leader>l'] = { name = 'Lsp', _ = 'which_key_ignore' },
-      ['<leader>m'] = { name = 'MTests', _ = 'which_key_ignore' },
+    local wk = require 'which-key'
+    wk.add {
+      { '<leader>d', group = 'Debug' },
+      { '<leader>e', group = 'File' },
+      { '<leader>f', group = 'Find' },
+      { '<leader>l', group = 'Code Actions' },
+      { '<leader>m', group = 'Testing' },
     }
   end,
 }
