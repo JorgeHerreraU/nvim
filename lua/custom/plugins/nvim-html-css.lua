@@ -1,7 +1,7 @@
 return {
   'Jezda1337/nvim-html-css',
   lazy = true,
-  event = { 'BufReadPre', 'BufNewFile' },
+  ft = { 'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
     'nvim-lua/plenary.nvim',
