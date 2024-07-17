@@ -1,9 +1,20 @@
 return {
-  'williamboman/mason.nvim',
   'stevearc/conform.nvim',
-  'zapling/mason-conform.nvim',
+  dependencies = {
+    'williamboman/mason.nvim',
+    {
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
+      opts = {
+        ensure_installed = {
+          'stylua',
+          'csharpier',
+          'prettier',
+          'prettierd',
+        },
+      },
+    },
+  },
   config = function()
-    require('mason-conform').setup {}
     require('conform').setup {
       notify_on_error = false,
       format_on_save = function(bufnr)
@@ -40,3 +51,4 @@ return {
     }
   end,
 }
+
