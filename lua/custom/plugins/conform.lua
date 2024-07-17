@@ -7,6 +7,7 @@ return {
       opts = {
         ensure_installed = {
           'stylua',
+          'goimports',
           'csharpier',
           'prettier',
           'prettierd',
@@ -51,4 +52,3 @@ return {
     }
   end,
 }
-
