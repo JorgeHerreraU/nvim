@@ -107,5 +107,12 @@ return {
         },
       },
     }
+    -- Add autocommand to close nvim-tree with escape key
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'NvimTree',
+      callback = function()
+        vim.api.nvim_buf_set_keymap(0, 'n', '<Esc>', ':NvimTreeClose<CR>', { noremap = true, silent = true })
+      end,
+    })
   end,
 }
