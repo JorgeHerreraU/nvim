@@ -51,7 +51,7 @@ function M.lazy(keys)
 end
 
 -- Toggle Codeium completions
-local buffer_source_enabled = true
+local buffer_source_enabled = false
 function M.toggle_codeium()
   buffer_source_enabled = not buffer_source_enabled
   vim.g.codeium_enabled = buffer_source_enabled

@@ -27,7 +27,6 @@ return {
   },
   config = function()
     -- See `:help cmp`
-    require('codeium').setup {}
     require('luasnip.loaders.from_vscode').lazy_load()
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
@@ -35,7 +34,6 @@ return {
     -- Register sources
     local sources = {
       { name = 'nvim_lsp' },
-      { name = 'codeium' },
       { name = 'luasnip' },
       { name = 'path' },
       {
