@@ -36,19 +36,19 @@ return {
           { 'diff' },
         },
         lualine_y = {
-          {
-            'progress',
-          },
-          {
-            'location',
-            color = utils.get_hlgroup 'Boolean',
-          },
+          -- {
+          --   'progress',
+          -- },
+          -- {
+          --   'location',
+          --   color = utils.get_hlgroup 'Boolean',
+          -- },
         },
         lualine_z = {
-          {
-            'datetime',
-            style = '  %X',
-          },
+          -- {
+          --   'datetime',
+          --   style = '  %X',
+          -- },
         },
       },
       extensions = { 'lazy', 'toggleterm', 'mason' },
