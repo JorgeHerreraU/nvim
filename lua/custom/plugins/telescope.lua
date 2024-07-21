@@ -71,7 +71,9 @@ return {
 
             -- Add the new <C-e> mapping
             ['<C-e>'] = function(bufnr)
-              actions.select_vertical(bufnr)
+              local selection = action_state.get_selected_entry()
+              actions.close(bufnr)
+              vim.cmd('vertical sb ' .. selection.value)
             end,
           },
           n = {
@@ -80,7 +82,9 @@ return {
 
             -- Add the new <C-e> mapping
             ['<C-e>'] = function(bufnr)
-              actions.select_vertical(bufnr)
+              local selection = action_state.get_selected_entry()
+              actions.close(bufnr)
+              vim.cmd('vertical sb ' .. selection.value)
             end,
           },
         },
