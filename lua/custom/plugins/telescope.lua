@@ -85,6 +85,8 @@ return {
       defaults = {
         file_ignore_patterns = { 'node%_modules/.*', 'bin/.*', 'obj/.*' },
         get_selection_window = custom_get_selection_window,
+        layout_strategy = 'vertical',
+        path_display = { 'smart' },
       },
       extensions = {
         ['ui-select'] = {
