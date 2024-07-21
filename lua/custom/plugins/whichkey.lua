@@ -21,10 +21,20 @@ return {
     local wk = require 'which-key'
     wk.add {
       { '<leader>d', group = 'Debug' },
-      { '<leader>e', group = 'File' },
-      { '<leader>f', group = 'Find' },
+      { '<leader>e', group = 'File Explorer' },
+      { '<leader>f', group = 'Search' },
       { '<leader>l', group = 'Code Actions' },
       { '<leader>m', group = 'Testing' },
+    }
+    wk.setup {
+      preset = 'modern',
+      win = {
+        height = { min = 10, max = 15 },
+      },
+      layout = {
+        width = { min = 40, max = 40 },
+        spacing = 6,
+      },
     }
   end,
 }
