@@ -27,6 +27,12 @@ return {
 
     -- Useful for getting pretty icons, but requires a Nerd Font.
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+    {
+      's1n7ax/nvim-window-picker',
+      name = 'window-picker',
+      event = 'VeryLazy',
+      version = '2.*',
+    },
   },
   config = function()
     -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -50,8 +56,22 @@ return {
 
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
-    local actions = require 'telescope.actions'
-    local action_state = require 'telescope.actions.state'
+    local window_picker = require 'window-picker'
+
+    -- Configure the window picker (adjust these settings as you prefer)
+    window_picker.setup {
+      hint = 'floating-big-letter',
+      filter_rules = {
+        autoselect_one = true,
+        include_current_win = true,
+      },
+    }
+
+    local function custom_get_selection_window(picker, entry)
+      local picked_window_id = window_picker.pick_window() or vim.api.nvim_get_current_win()
+      return picked_window_id
+    end
+
     require('telescope').setup {
       -- You can put your default mappings / updates / etc. in here
       --  All the info you're looking for is in `:help telescope.setup()`
@@ -64,30 +84,7 @@ return {
       -- pickers = {}
       defaults = {
         file_ignore_patterns = { 'node%_modules/.*', 'bin/.*', 'obj/.*' },
-        mappings = {
-          i = {
-            -- Remove the default <C-n> mapping
-            ['<C-n>'] = false,
-
-            -- Add the new <C-e> mapping
-            ['<C-e>'] = function(bufnr)
-              local selection = action_state.get_selected_entry()
-              actions.close(bufnr)
-              vim.cmd('vertical sb ' .. selection.value)
-            end,
-          },
-          n = {
-            -- Remove the default <C-n> mapping
-            ['<C-n>'] = false,
-
-            -- Add the new <C-e> mapping
-            ['<C-e>'] = function(bufnr)
-              local selection = action_state.get_selected_entry()
-              actions.close(bufnr)
-              vim.cmd('vertical sb ' .. selection.value)
-            end,
-          },
-        },
+        get_selection_window = custom_get_selection_window,
       },
       extensions = {
         ['ui-select'] = {
