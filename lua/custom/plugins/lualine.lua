@@ -13,7 +13,7 @@ return {
       },
       sections = {
         lualine_a = { { 'mode', icon = '' } },
-        lualine_b = { { 'branch', icon = '' } },
+        lualine_b = { { '', icon = '' } },
         lualine_c = {
           {
             'diagnostics',
