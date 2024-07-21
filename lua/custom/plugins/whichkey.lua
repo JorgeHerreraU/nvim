@@ -22,7 +22,7 @@ return {
     wk.add {
       { '<leader>d', group = 'Debug' },
       { '<leader>e', group = 'File Explorer' },
-      { '<leader>f', group = 'Search' },
+      { '<leader>f', group = 'Find' },
       { '<leader>l', group = 'Code Actions' },
       { '<leader>m', group = 'Testing' },
     }

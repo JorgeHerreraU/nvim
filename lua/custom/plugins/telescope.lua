@@ -50,6 +50,8 @@ return {
 
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
+    local actions = require 'telescope.actions'
+    local action_state = require 'telescope.actions.state'
     require('telescope').setup {
       -- You can put your default mappings / updates / etc. in here
       --  All the info you're looking for is in `:help telescope.setup()`
@@ -62,6 +64,26 @@ return {
       -- pickers = {}
       defaults = {
         file_ignore_patterns = { 'node%_modules/.*', 'bin/.*', 'obj/.*' },
+        mappings = {
+          i = {
+            -- Remove the default <C-n> mapping
+            ['<C-n>'] = false,
+
+            -- Add the new <C-e> mapping
+            ['<C-e>'] = function(bufnr)
+              actions.select_vertical(bufnr)
+            end,
+          },
+          n = {
+            -- Remove the default <C-n> mapping
+            ['<C-n>'] = false,
+
+            -- Add the new <C-e> mapping
+            ['<C-e>'] = function(bufnr)
+              actions.select_vertical(bufnr)
+            end,
+          },
+        },
       },
       extensions = {
         ['ui-select'] = {
@@ -87,7 +109,7 @@ return {
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find Diagnostics' })
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Find Resume' })
     vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Find Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Search opened buffers' })
+    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find opened buffers' })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()
@@ -96,7 +118,7 @@ return {
         winblend = 0,
         previewer = false,
       })
-    end, { desc = 'Search in buffer' })
+    end, { desc = 'Find in buffer' })
 
     -- It's also possible to pass additional configuration options.
     --  See `:help telescope.builtin.live_grep()` for information about particular keys
