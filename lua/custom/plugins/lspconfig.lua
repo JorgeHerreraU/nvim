@@ -192,6 +192,22 @@ return {
     -- typescript
     require('lspconfig').vtsls.setup {
       capabilities = capabilities,
+      handlers = {
+        ['textDocument/publishDiagnostics'] = function(_, result, ctx, config)
+          if result.diagnostics ~= nil then
+            local idx = 1
+            while idx <= #result.diagnostics do
+              -- 8001 File is a commonjs module
+              if result.diagnostics[idx].code == 80001 then
+                table.remove(result.diagnostics, idx)
+              else
+                idx = idx + 1
+              end
+            end
+          end
+          vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+        end,
+      },
       on_attach = function(client, bufnr)
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
       end,
