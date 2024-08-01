@@ -135,7 +135,20 @@ return {
     require('mason').setup {}
     -- lsp installation list
     require('mason-lspconfig').setup {
-      ensure_installed = { 'csharp_ls', 'gopls', 'lua_ls', 'html', 'intelephense', 'cssls', 'angularls', 'jdtls', 'jsonls', 'rust_analyzer', 'vtsls' },
+      ensure_installed = {
+        'csharp_ls',
+        'gopls',
+        'lua_ls',
+        'html',
+        'intelephense',
+        'cssls',
+        'angularls',
+        'jdtls',
+        'jsonls',
+        'rust_analyzer',
+        'vtsls',
+        'dockerls',
+      },
     }
     -- LSP servers configuration
 
@@ -265,6 +278,11 @@ return {
           },
         },
       },
+    }
+
+    -- docker
+    require('lspconfig').dockerls.setup {
+      capabilities = capabilities,
     }
   end,
 }
