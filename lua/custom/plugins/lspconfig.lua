@@ -238,6 +238,19 @@ return {
             variableTypes = { enabled = false },
           },
         },
+        javascript = {
+          suggest = {
+            completeFunctionCalls = true,
+          },
+          inlayHints = {
+            enumMemberValues = { enabled = true },
+            functionLikeReturnTypes = { enabled = true },
+            parameterNames = { enabled = 'literals' },
+            parameterTypes = { enabled = true },
+            propertyDeclarationTypes = { enabled = true },
+            variableTypes = { enabled = false },
+          },
+        },
         vtsls = {
           experimental = {
             maxInlayHintLength = 25,
