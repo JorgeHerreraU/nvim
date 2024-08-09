@@ -1,7 +1,6 @@
 return {
   'sho-87/kanagawa-paper.nvim',
-  enabled = true,
-  lazy = false,
+  enabled = false,
   priority = 1000,
   config = function()
     require('kanagawa-paper').setup {
