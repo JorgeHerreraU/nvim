@@ -18,8 +18,8 @@ return {
     -- used for completion, annotations and signatures of Neovim apis
     { 'folke/neodev.nvim', opts = {} },
     -- omnisharp (go-to definitions)
-    -- 'Hoffs/omnisharp-extended-lsp.nvim',
-    'Decodetalkers/csharpls-extended-lsp.nvim',
+    'Hoffs/omnisharp-extended-lsp.nvim',
+    -- 'Decodetalkers/csharpls-extended-lsp.nvim',
     -- rust
     {
       'simrat39/rust-tools.nvim',
@@ -181,26 +181,31 @@ return {
     }
 
     -- csharp_ls
-    require('lspconfig').csharp_ls.setup {
-      capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-      end,
-      handlers = {
-        ['textDocument/definition'] = require('csharpls_extended').handler,
-        ['textDocument/typeDefinition'] = require('csharpls_extended').handler,
-      },
-    }
-
-    -- -- omnisharp
-    -- require('lspconfig').omnisharp.setup {
+    -- require('lspconfig').csharp_ls.setup {
     --   capabilities = capabilities,
-    --   settings = {
-    --     RoslynExtensionsOptions = {
-    --       EnableImportCompletion = true,
-    --     },
+    --   on_attach = function(client, bufnr)
+    --     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    --   end,
+    --   handlers = {
+    --     ['textDocument/definition'] = require('csharpls_extended').handler,
+    --     ['textDocument/typeDefinition'] = require('csharpls_extended').handler,
     --   },
     -- }
+    --
+    -- require('lspconfig').omnisharp.setup {
+    --   -- cmd = { "dotnet", vim.fn.stdpath "data" .. "/mason/packages/omnisharp/libexec/OmniSharp.dll" }
+    --   cmd = { '/home/watynecc/Downloads/omnisharp/OmniSharp' },
+    -- }
+
+    -- omnisharp
+    require('lspconfig').omnisharp.setup {
+      capabilities = capabilities,
+      settings = {
+        RoslynExtensionsOptions = {
+          EnableImportCompletion = true,
+        },
+      },
+    }
 
     -- typescript
     require('lspconfig').vtsls.setup {
