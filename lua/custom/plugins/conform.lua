@@ -2,20 +2,18 @@ return {
   'stevearc/conform.nvim',
   dependencies = {
     'williamboman/mason.nvim',
-    {
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
-      opts = {
-        ensure_installed = {
-          'stylua',
-          'goimports',
-          'csharpier',
-          'prettier',
-          'prettierd',
-        },
-      },
-    },
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
   },
   config = function()
+    require('mason-tool-installer').setup({
+      ensure_installed = {
+        'stylua',
+        'goimports',
+        'csharpier',
+        'prettier',
+        'prettierd',
+      },
+    })
     require('conform').setup {
       notify_on_error = false,
       format_on_save = function(bufnr)
