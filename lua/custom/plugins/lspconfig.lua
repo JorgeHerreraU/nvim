@@ -139,7 +139,6 @@ return {
         'gopls',
         'lua_ls',
         'html',
-        'intelephense',
         'cssls',
         'angularls',
         'jdtls',
@@ -261,23 +260,6 @@ return {
         on_attach = function(client, bufnr) end,
         handlers = handlers,
         capabilities = capabilities,
-      },
-    }
-
-    -- php
-    require('lspconfig').intelephense.setup {
-      capabilities = capabilities,
-      settings = {
-        intelephense = {
-          telemetry = {
-            enabled = false,
-          },
-          environment = {
-            includePaths = {
-              '[...redacted...]/phpunit/vendor/**',
-            },
-          },
-        },
       },
     }
 
