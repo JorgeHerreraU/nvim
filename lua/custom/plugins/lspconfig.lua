@@ -146,6 +146,7 @@ return {
         'rust_analyzer',
         'vtsls',
         'dockerls',
+        'docker_compose_language_service',
         'omnisharp',
       },
     }
@@ -265,6 +266,17 @@ return {
 
     -- docker
     require('lspconfig').dockerls.setup {
+      capabilities = capabilities,
+    }
+    local function set_filetype(pattern, filetype)
+      vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+        pattern = pattern,
+        command = 'set filetype=' .. filetype,
+      })
+    end
+
+    set_filetype({ 'docker-compose.yml' }, 'yaml.docker-compose')
+    require('lspconfig').docker_compose_language_service.setup {
       capabilities = capabilities,
     }
   end,
