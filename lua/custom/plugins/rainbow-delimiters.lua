@@ -14,8 +14,10 @@ return {
         [''] = 110,
         lua = 210,
       },
+      blacklist = {
+        'tsx',
+      },
       highlight = {
-        'RainbowDelimiterYellow',
         'RainbowDelimiterYellow',
         'RainbowDelimiterBlue',
         'RainbowDelimiterOrange',
