@@ -15,7 +15,7 @@ return {
         lua = 210,
       },
       blacklist = {
-        'tsx',
+        'javascript',
       },
       highlight = {
         'RainbowDelimiterYellow',
