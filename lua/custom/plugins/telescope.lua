@@ -83,7 +83,7 @@ return {
       -- },
       -- pickers = {}
       defaults = {
-        file_ignore_patterns = { 'node%_modules/.*', 'bin/.*', 'obj/.*' },
+        file_ignore_patterns = { 'node%_modules/.*', 'bin/.*', 'obj/.*', 'gradle/.*', 'app/build/.*' },
         get_selection_window = custom_get_selection_window,
         layout_strategy = 'horizontal',
         previewer = true,

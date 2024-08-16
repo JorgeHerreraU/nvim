@@ -5,7 +5,7 @@ return {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
   },
   config = function()
-    require('mason-tool-installer').setup({
+    require('mason-tool-installer').setup {
       ensure_installed = {
         'stylua',
         'goimports',
@@ -13,7 +13,7 @@ return {
         'prettier',
         'prettierd',
       },
-    })
+    }
     require('conform').setup {
       notify_on_error = false,
       format_on_save = function(bufnr)
@@ -26,7 +26,7 @@ return {
         -- languages here or re-enable it for the disabled ones.
         -- local disable_filetypes = { c = true, cpp = true }
         return {
-          timeout_ms = 500,
+          timeout_ms = 2000,
           -- lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
         }
       end,
@@ -41,6 +41,7 @@ return {
         typescriptreact = { 'prettierd' },
         json = { 'prettierd' },
         scss = { 'prettierd' },
+        kotlin = { 'ktlint' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --

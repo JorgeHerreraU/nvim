@@ -148,6 +148,7 @@ return {
         'dockerls',
         'docker_compose_language_service',
         'omnisharp',
+        'kotlin_language_server',
       },
     }
     -- LSP servers configuration
@@ -277,6 +278,10 @@ return {
 
     set_filetype({ 'docker-compose.yml' }, 'yaml.docker-compose')
     require('lspconfig').docker_compose_language_service.setup {
+      capabilities = capabilities,
+    }
+
+    require('lspconfig').kotlin_language_server.setup {
       capabilities = capabilities,
     }
   end,
