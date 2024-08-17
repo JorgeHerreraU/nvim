@@ -37,8 +37,7 @@ return {
         diff_text = '#3a4a67',
       },
       highlights = {
-        ['@comment'] = { fg = '$grey' },
-        ['RainbowDelimiterYellow'] = { fg = '#FFDA21' },
+        ['@comment'] = { fg = '$light_grey' },
       },
     }
     require('bamboo').load()
