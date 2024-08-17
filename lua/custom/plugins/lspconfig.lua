@@ -7,13 +7,16 @@ return {
     'williamboman/mason-lspconfig.nvim',
     -- Useful status updates for LSP.
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-    { 'j-hui/fidget.nvim', opts = {
-      notification = {
-        window = {
-          winblend = 0,
+    {
+      'j-hui/fidget.nvim',
+      opts = {
+        notification = {
+          window = {
+            winblend = 0,
+          },
         },
       },
-    } },
+    },
     -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
     { 'folke/neodev.nvim', opts = {} },
@@ -25,6 +28,12 @@ return {
       'simrat39/rust-tools.nvim',
       ft = 'rust',
       dependencies = { 'neovim/nvim-lspconfig' },
+    },
+    {
+      'luckasRanarison/tailwind-tools.nvim',
+      name = 'tailwind-tools',
+      build = ':UpdateRemotePlugins',
+      opts = {}, -- your configuration
     },
   },
   config = function()
@@ -149,6 +158,7 @@ return {
         'docker_compose_language_service',
         'omnisharp',
         'kotlin_language_server',
+        'tailwindcss',
       },
     }
     -- LSP servers configuration
@@ -283,6 +293,17 @@ return {
 
     require('lspconfig').kotlin_language_server.setup {
       capabilities = capabilities,
+    }
+
+    require('lspconfig').cssls.setup {
+      capabilities = capabilities,
+      settings = {
+        css = {
+          lint = {
+            unknownAtRules = 'ignore',
+          },
+        },
+      },
     }
   end,
 }
