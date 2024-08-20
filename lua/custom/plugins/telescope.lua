@@ -95,6 +95,7 @@ return {
           '.git/.*',
           '.vscode/.*',
           '.idea/.*',
+          '.next/.*',
           'gradle/.*',
           'app/build/.*',
           '%.o',
