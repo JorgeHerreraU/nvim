@@ -20,6 +20,7 @@ return {
         FloatBorder = { bg = 'NONE' },
         FloatTitle = { bg = 'NONE' },
         LineNr = { fg = '#c6c6c6' },
+        CursorLine = { bg = 'NONE' },
       },
     }
     vim.cmd.colorscheme 'oldworld'

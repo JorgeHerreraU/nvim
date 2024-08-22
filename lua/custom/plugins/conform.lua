@@ -41,7 +41,6 @@ return {
         typescriptreact = { 'prettierd' },
         json = { 'prettierd' },
         scss = { 'prettierd' },
-        kotlin = { 'ktlint' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
