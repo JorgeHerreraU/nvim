@@ -1,7 +1,7 @@
 return {
   -- Autocompletion
   'hrsh7th/nvim-cmp',
-  event = 'InsertEnter',
+  event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     {
       'Exafunction/codeium.nvim',
@@ -12,10 +12,12 @@ return {
     -- luasnip
     {
       'L3MON4D3/LuaSnip',
+      version = 'v2.*',
       dependencies = {
         'saadparwaiz1/cmp_luasnip',
         'rafamadriz/friendly-snippets',
       },
+      build = 'make install_jsregexp',
     },
     -- Adds other completion capabilities.
     --  nvim-cmp does not ship with all sources by default. They are split
@@ -30,6 +32,10 @@ return {
     require('luasnip.loaders.from_vscode').lazy_load()
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
+    luasnip.filetype_extend('javascript', { 'jsdoc' })
+    luasnip.config.setup {
+      enable_autosnippets = true,
+    }
     local utils = require 'utils'
     -- Register sources
     local sources = {
