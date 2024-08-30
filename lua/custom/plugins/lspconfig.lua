@@ -158,6 +158,7 @@ return {
         'docker_compose_language_service',
         'omnisharp',
         'tailwindcss',
+        'intelephense',
       },
     }
     -- LSP servers configuration
@@ -175,9 +176,6 @@ return {
     -- golsp
     require('lspconfig').gopls.setup {
       capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-      end,
       cmd = { 'gopls', 'serve' },
       settings = {
         gopls = {
@@ -219,9 +217,6 @@ return {
           vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
         end,
       },
-      on_attach = function(client, bufnr)
-        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-      end,
       settings = {
         typescript = {
           suggest = {
@@ -260,15 +255,11 @@ return {
     -- css
     require('lspconfig').cssls.setup {
       capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-      end,
     }
 
     -- rust
     require('rust-tools').setup {
       server = {
-        on_attach = function(client, bufnr) end,
         handlers = handlers,
         capabilities = capabilities,
       },
@@ -299,6 +290,10 @@ return {
           },
         },
       },
+    }
+
+    require('lspconfig').intelephense.setup {
+      capabilities = capabilities,
     }
   end,
 }
