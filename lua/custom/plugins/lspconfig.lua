@@ -166,6 +166,7 @@ return {
     -- lua
     require('lspconfig').lua_ls.setup {
       capabilities = capabilities,
+      handlers = handlers,
     }
 
     -- jsonls
@@ -176,6 +177,7 @@ return {
     -- golsp
     require('lspconfig').gopls.setup {
       capabilities = capabilities,
+      handlers = handlers,
       cmd = { 'gopls', 'serve' },
       settings = {
         gopls = {
@@ -191,6 +193,7 @@ return {
     -- omnisharp
     require('lspconfig').omnisharp.setup {
       capabilities = capabilities,
+      handlers = handlers,
       settings = {
         RoslynExtensionsOptions = {
           EnableImportCompletion = true,
@@ -222,31 +225,10 @@ return {
           suggest = {
             completeFunctionCalls = true,
           },
-          inlayHints = {
-            enumMemberValues = { enabled = true },
-            functionLikeReturnTypes = { enabled = true },
-            parameterNames = { enabled = 'literals' },
-            parameterTypes = { enabled = true },
-            propertyDeclarationTypes = { enabled = true },
-            variableTypes = { enabled = false },
-          },
         },
         javascript = {
           suggest = {
             completeFunctionCalls = true,
-          },
-          inlayHints = {
-            enumMemberValues = { enabled = true },
-            functionLikeReturnTypes = { enabled = true },
-            parameterNames = { enabled = 'literals' },
-            parameterTypes = { enabled = true },
-            propertyDeclarationTypes = { enabled = true },
-            variableTypes = { enabled = false },
-          },
-        },
-        vtsls = {
-          experimental = {
-            maxInlayHintLength = 25,
           },
         },
       },
@@ -255,6 +237,7 @@ return {
     -- css
     require('lspconfig').cssls.setup {
       capabilities = capabilities,
+      handlers = handlers,
     }
 
     -- rust
@@ -268,7 +251,9 @@ return {
     -- docker
     require('lspconfig').dockerls.setup {
       capabilities = capabilities,
+      handlers = handlers,
     }
+
     local function set_filetype(pattern, filetype)
       vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
         pattern = pattern,
@@ -277,12 +262,16 @@ return {
     end
 
     set_filetype({ 'docker-compose.yml' }, 'yaml.docker-compose')
+
     require('lspconfig').docker_compose_language_service.setup {
       capabilities = capabilities,
+      handlers = handlers,
     }
 
+    -- css
     require('lspconfig').cssls.setup {
       capabilities = capabilities,
+      handlers = handlers,
       settings = {
         css = {
           lint = {
@@ -292,8 +281,10 @@ return {
       },
     }
 
+    -- php
     require('lspconfig').intelephense.setup {
       capabilities = capabilities,
+      handlers = handlers,
     }
   end,
 }
