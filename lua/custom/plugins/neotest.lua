@@ -7,10 +7,14 @@ return {
     'antoinemadec/FixCursorHold.nvim',
     'nvim-treesitter/nvim-treesitter',
     'Issafalcon/neotest-dotnet',
+    'marilari88/neotest-vitest',
   },
   config = function()
     require('neotest').setup {
-      adapters = { require 'neotest-dotnet' },
+      adapters = {
+        require 'neotest-dotnet',
+        require 'neotest-vitest',
+      },
     }
     -- neotest
     vim.api.nvim_set_keymap('n', '<leader>mR', ':lua require("neotest").run.run({suite = true})<CR>', { desc = 'Run All Tests', noremap = true, silent = true })
