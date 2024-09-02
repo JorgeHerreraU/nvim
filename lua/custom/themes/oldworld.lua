@@ -38,5 +38,15 @@ return {
       hi TelescopeResultsTitle guibg=NONE ctermbg=NONE guifg=#c6c6c6
       hi TelescopePromptCounter guibg=NONE ctermbg=NONE guifg=#c6c6c6
     ]]
+    vim.defer_fn(function()
+      vim.cmd [[
+        hi lualine_c_inactive guifg=#c6c6c6
+        hi DapUIPlayPauseNC guibg=NONE
+        hi DapUIRestartNC guibg=NONE
+        hi DapUIUnavailableNC guibg=NONE guifg=#c6c6c6
+        hi WinBar guibg=NONE
+        hi WinBarNC guibg=NONE
+      ]]
+    end, 250)
   end,
 }
