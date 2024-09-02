@@ -46,6 +46,11 @@ return {
         hi DapUIUnavailableNC guibg=NONE guifg=#c6c6c6
         hi WinBar guibg=NONE
         hi WinBarNC guibg=NONE
+        hi DapUIStopNC guibg=NONE
+        hi DapUIStepOverNC guibg=NONE
+        hi DapUIStepIntoNC guibg=NONE
+        hi DapUIStepBackNC guibg=NONE
+        hi DapUIStepOutNC guibg=NONE
       ]]
     end, 250)
   end,
