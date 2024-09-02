@@ -19,11 +19,6 @@ return {
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
-    'mxsdev/nvim-dap-vscode-js',
-    {
-      'microsoft/vscode-js-debug',
-      build = 'npm install --legacy-peer-deps --no-save && npx gulp vsDebugServerBundle && rm -rf out && mv dist out',
-    },
   },
   config = function()
     local dap = require 'dap'
@@ -44,6 +39,7 @@ return {
         -- Update this to ensure that you have the debuggers for the langs you want
         'coreclr',
         'delve',
+        'js-debug-adapter',
       },
     }
 
@@ -138,12 +134,25 @@ return {
     }
 
     -- typescript
-    require('dap-vscode-js').setup {
-      debugger_path = vim.fn.resolve(vim.fn.stdpath 'data' .. '/lazy/vscode-js-debug'),
-      adapters = { 'pwa-node' },
+    dap.adapters['pwa-node'] = {
+      type = 'server',
+      host = 'localhost',
+      port = '${port}',
+      executable = {
+        command = 'js-debug-adapter',
+        args = {
+          '${port}',
+        },
+      },
     }
 
-    for _, language in ipairs { 'typescript', 'javascript', 'typescriptreact' } do
+    local js_filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' }
+    local vscode = require 'dap.ext.vscode'
+    vscode.type_to_filetypes['node'] = js_filetypes
+    vscode.type_to_filetypes['pwa-node'] = js_filetypes
+    vscode.load_launchjs(nil, {})
+
+    for _, language in ipairs(js_filetypes) do
       dap.configurations[language] = {
         -- Debug single nodejs file
         {
@@ -152,19 +161,6 @@ return {
           name = 'Launch file',
           program = '${file}',
           cwd = '${workspaceFolder}',
-          runtimeExecutable = 'tsx',
-        },
-        -- Debug nodejs process
-        {
-          type = 'pwa-node',
-          request = 'attach',
-          name = 'Auto Attach',
-          cwd = vim.fn.getcwd(),
-          protocol = 'inspector',
-          resolveSourceMapLocations = {
-            '${workspaceFolder}/**',
-            '!**/node_modules/**',
-          },
         },
       }
     end
