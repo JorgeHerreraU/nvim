@@ -40,6 +40,8 @@ return {
     ]]
     vim.defer_fn(function()
       vim.cmd [[
+        hi lualine_a_inactive guifg=#c6c6c6
+        hi lualine_b_inactive guifg=#c6c6c6
         hi lualine_c_inactive guifg=#c6c6c6
         hi DapUIPlayPauseNC guibg=NONE
         hi DapUIRestartNC guibg=NONE
@@ -52,6 +54,6 @@ return {
         hi DapUIStepBackNC guibg=NONE
         hi DapUIStepOutNC guibg=NONE
       ]]
-    end, 250)
+    end, 1000)
   end,
 }
