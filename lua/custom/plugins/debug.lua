@@ -19,6 +19,12 @@ return {
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
+    'mxsdev/nvim-dap-vscode-js',
+    {
+      'microsoft/vscode-js-debug',
+      opt = true,
+      run = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out',
+    },
   },
   config = function()
     local dap = require 'dap'
@@ -39,7 +45,6 @@ return {
         -- Update this to ensure that you have the debuggers for the langs you want
         'coreclr',
         'delve',
-        'js-debug-adapter',
       },
     }
 
@@ -134,36 +139,55 @@ return {
     }
 
     -- typescript
-    dap.adapters['pwa-node'] = {
-      type = 'server',
-      host = 'localhost',
-      port = '${port}',
-      executable = {
-        command = 'js-debug-adapter',
-        args = {
-          '${port}',
+    require('dap-vscode-js').setup {
+      debugger_path = vim.fn.stdpath 'data' .. '/lazy/vscode-js-debug', -- Path to vscode-js-debug installation.
+      adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
+      log_file_path = vim.fn.stdpath 'cache' .. '/dap_vscode_js.log', -- Path for file logging
+      log_file_level = vim.log.levels.DEBUG, -- Logging level for output to file. Set to false to disable file logging.
+    }
+    dap.configurations.typescript = {
+      {
+        type = 'pwa-node',
+        request = 'launch',
+        name = 'Launch TypeScript File (ts-node installed locally)',
+        runtimeArgs = { '--require', 'ts-node/register' },
+        runtimeExecutable = 'node',
+        args = { '${file}' },
+        cwd = '${workspaceFolder}',
+        sourceMaps = true,
+        resolveSourceMapLocations = {
+          '${workspaceFolder}/**',
+          '!**/node_modules/.pnpm/**',
+        },
+      },
+      {
+        type = 'pwa-node',
+        request = 'launch',
+        name = 'Launch TypeScript File (tsx installed locally)',
+        runtimeExecutable = '${workspaceFolder}/node_modules/.bin/tsx',
+        args = { '${file}' },
+        cwd = '${workspaceFolder}',
+        sourceMaps = true,
+        resolveSourceMapLocations = {
+          '${workspaceFolder}/**',
+          '!**/node_modules/.pnpm/**',
+        },
+      },
+      {
+        type = 'pwa-node',
+        request = 'launch',
+        name = 'Launch TypeScript File (swc-node installed locally)',
+        runtimeExecutable = 'node',
+        runtimeArgs = { '--require', '@swc-node/register' },
+        args = { '${file}' },
+        cwd = '${workspaceFolder}',
+        sourceMaps = true,
+        resolveSourceMapLocations = {
+          '${workspaceFolder}/**',
+          '!**/node_modules/.pnpm/**',
         },
       },
     }
-
-    local js_filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' }
-    local vscode = require 'dap.ext.vscode'
-    vscode.type_to_filetypes['node'] = js_filetypes
-    vscode.type_to_filetypes['pwa-node'] = js_filetypes
-    vscode.load_launchjs(nil, {})
-
-    for _, language in ipairs(js_filetypes) do
-      dap.configurations[language] = {
-        -- Debug single nodejs file
-        {
-          type = 'pwa-node',
-          request = 'launch',
-          name = 'Launch file',
-          program = '${file}',
-          cwd = '${workspaceFolder}',
-        },
-      }
-    end
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
@@ -174,6 +198,41 @@ return {
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
       controls = {
         enabled = true,
+      },
+      layouts = {
+        {
+          elements = {
+            {
+              id = 'scopes',
+              size = 0.40, -- Increased from 0.25 to 0.40
+            },
+            {
+              id = 'breakpoints',
+              size = 0.20, -- Adjusted to maintain total of 1.0
+            },
+            {
+              id = 'stacks',
+              size = 0.20, -- Adjusted to maintain total of 1.0
+            },
+            {
+              id = 'watches',
+              size = 0.20, -- Adjusted to maintain total of 1.0
+            },
+          },
+          position = 'left',
+          size = 40,
+        },
+        {
+          elements = { {
+            id = 'repl',
+            size = 0.5,
+          }, {
+            id = 'console',
+            size = 0.5,
+          } },
+          position = 'bottom',
+          size = 10,
+        },
       },
     }
 
