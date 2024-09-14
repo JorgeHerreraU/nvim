@@ -24,7 +24,9 @@ return {
         section_separators = { left = '', right = '' },
         component_separators = { left = '', right = '' },
         globalstatus = false,
-        disabled_filetypes = { statusline = { 'NvimTree', 'alpha' } },
+        disabled_filetypes = {
+          statusline = { 'NvimTree', 'alpha', 'dap-repl', 'dapui_console', 'dapui_watches', 'dapui_stacks', 'dapui_breakpoints', 'dapui_scopes' },
+        },
       },
       sections = {
         lualine_a = { { 'mode', icon = '' } },

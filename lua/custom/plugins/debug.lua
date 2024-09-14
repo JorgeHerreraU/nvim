@@ -211,27 +211,12 @@ return {
               size = 0.20, -- Adjusted to maintain total of 1.0
             },
             {
-              id = 'stacks',
-              size = 0.20, -- Adjusted to maintain total of 1.0
-            },
-            {
               id = 'watches',
               size = 0.20, -- Adjusted to maintain total of 1.0
             },
           },
           position = 'left',
           size = 40,
-        },
-        {
-          elements = { {
-            id = 'repl',
-            size = 0.5,
-          }, {
-            id = 'console',
-            size = 0.5,
-          } },
-          position = 'bottom',
-          size = 10,
         },
       },
     }
