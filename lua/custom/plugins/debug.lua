@@ -25,6 +25,12 @@ return {
       opt = true,
       build = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out',
     },
+    {
+      'folke/neodev.nvim',
+      opts = {
+        library = { plugins = { 'nvim-dap-ui' }, types = true },
+      },
+    },
   },
   config = function()
     local dap = require 'dap'
