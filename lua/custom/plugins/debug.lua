@@ -23,7 +23,7 @@ return {
     {
       'microsoft/vscode-js-debug',
       opt = true,
-      run = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out',
+      build = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out',
     },
   },
   config = function()
@@ -204,7 +204,7 @@ return {
           elements = {
             {
               id = 'scopes',
-              size = 0.40, -- Increased from 0.25 to 0.40
+              size = 0.60, -- Increased from 0.25 to 0.40
             },
             {
               id = 'breakpoints',
