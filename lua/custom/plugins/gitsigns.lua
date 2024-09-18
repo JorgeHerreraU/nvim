@@ -16,15 +16,15 @@ return {
         local wk = require 'which-key'
         wk.add({
           -- Actions
-          { '<leader>gs', '<cmd>Gitsigns stage_hunk<CR>', desc = 'Stage hunk', mode = { 'n', 'v' } },
-          { '<leader>gr', '<cmd>Gitsigns reset_hunk<CR>', desc = 'Reset hunk', mode = { 'n', 'v' } },
-          { '<leader>gS', '<cmd>Gitsigns stage_buffer<CR>', desc = 'Stage buffer' },
-          { '<leader>gu', '<cmd>Gitsigns undo_stage_hunk<CR>', desc = 'Undo stage hunk' },
-          { '<leader>gR', '<cmd>Gitsigns reset_buffer<CR>', desc = 'Reset buffer' },
-          { '<leader>gp', '<cmd>Gitsigns preview_hunk<CR>', desc = 'Preview hunk' },
-          { '<leader>gb', '<cmd>Gitsigns blame_line{full=true}<CR>', desc = 'Blame line' },
-          { '<leader>gB', '<cmd>Gitsigns toggle_current_line_blame<CR>', desc = 'Toggle line blame' },
-          { '<leader>gd', "<cmd>lua require('gitsigns').diffthis() vim.api.nvim_command('wincmd h')<CR>", desc = 'Diff view' },
+          { '<leader>hs', '<cmd>Gitsigns stage_hunk<CR>', desc = 'Stage hunk', mode = { 'n', 'v' } },
+          { '<leader>hr', '<cmd>Gitsigns reset_hunk<CR>', desc = 'Reset hunk', mode = { 'n', 'v' } },
+          { '<leader>hS', '<cmd>Gitsigns stage_buffer<CR>', desc = 'Stage buffer' },
+          { '<leader>hu', '<cmd>Gitsigns undo_stage_hunk<CR>', desc = 'Undo stage hunk' },
+          { '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>', desc = 'Reset buffer' },
+          { '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>', desc = 'Preview hunk' },
+          { '<leader>hb', '<cmd>Gitsigns blame_line{full=true}<CR>', desc = 'Blame line' },
+          { '<leader>hB', '<cmd>Gitsigns toggle_current_line_blame<CR>', desc = 'Toggle line blame' },
+          { '<leader>hd', "<cmd>lua require('gitsigns').diffthis() vim.api.nvim_command('wincmd h')<CR>", desc = 'Diff view' },
         }, { buffer = bufnr })
       end,
     }
