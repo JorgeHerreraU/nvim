@@ -25,7 +25,12 @@ return {
       { '<leader>f', group = 'Find' },
       { '<leader>l', group = 'Code Actions' },
       { '<leader>m', group = 'Testing' },
-      { '<leader>g', group = 'Git' },
+      { '<leader>h', group = 'Git' },
+      { '<leader>o', group = 'Grapple', icon = '󰛢' },
+      { '<leader>a', icon = { icon = '', color = 'blue' } },
+      { '<leader>c', icon = { icon = '', color = 'orange' } },
+      { '<leader>x', icon = { icon = '󰅙', color = 'orange' } },
+      { '<leader>e', icon = { icon = '', color = 'azure' } },
     }
     wk.setup {
       preset = 'modern',
