@@ -9,7 +9,6 @@ return {
     require('mason-tool-installer').setup {
       ensure_installed = {
         'eslint',
-        'ktlint',
       },
     }
     local null_ls = require 'null-ls'
