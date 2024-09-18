@@ -61,3 +61,9 @@ vim.keymap.set('n', '<F4>', utils.toggle_autoformat, { noremap = true, silent = 
 
 -- Quit
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Quit' })
+
+-- Next buffer
+vim.keymap.set('n', '<leader>a', ':bnext<CR>', { desc = 'Next Buffer' })
+
+-- Close all buffers except current
+vim.keymap.set('n', '<leader>c', ':%bd|e#|bd#<CR>', { desc = 'Close all other buffers' })
