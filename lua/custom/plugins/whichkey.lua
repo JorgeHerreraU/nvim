@@ -25,6 +25,7 @@ return {
       { '<leader>f', group = 'Find' },
       { '<leader>l', group = 'Code Actions' },
       { '<leader>m', group = 'Testing' },
+      { '<leader>g', group = 'Git' },
     }
     wk.setup {
       preset = 'modern',
