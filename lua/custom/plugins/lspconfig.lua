@@ -31,6 +31,7 @@ return {
     },
     {
       'luckasRanarison/tailwind-tools.nvim',
+      ft = { 'html', 'css', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
       name = 'tailwind-tools',
       build = ':UpdateRemotePlugins',
       opts = {}, -- your configuration

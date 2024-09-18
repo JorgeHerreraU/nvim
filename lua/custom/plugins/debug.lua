@@ -26,9 +26,32 @@ return {
       },
     },
   },
+  lazy = true,
+  event = 'VeryLazy',
   config = function()
     local dap = require 'dap'
-    local dapui = require 'dapui'
+    local dapui
+
+    local function setup_dapui()
+      if not dapui then
+        dapui = require 'dapui'
+        dapui.setup {
+          icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
+          controls = { enabled = true },
+          layouts = {
+            {
+              elements = {
+                { id = 'scopes', size = 0.60 },
+                { id = 'breakpoints', size = 0.20 },
+                { id = 'watches', size = 0.20 },
+              },
+              position = 'left',
+              size = 40,
+            },
+          },
+        }
+      end
+    end
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
@@ -60,8 +83,11 @@ return {
     vim.keymap.set('n', '<leader>dB', function()
       dap.set_breakpoint(vim.fn.input 'Debug: Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint' })
-    -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-    vim.keymap.set('n', '<leader>di', dapui.toggle, { desc = 'Debug: Toggle Interface' })
+    -- Toggle dapui
+    vim.keymap.set('n', '<leader>di', function()
+      setup_dapui()
+      dapui.toggle()
+    end, { desc = 'Debug: Toggle Interface' })
 
     -- c#
     dap.adapters.coreclr = {
@@ -195,38 +221,6 @@ return {
       },
     }
 
-    -- Dap UI setup
-    -- For more information, see |:help nvim-dap-ui|
-    dapui.setup {
-      -- Set icons to characters that are more likely to work in every terminal.
-      --    Feel free to remove or use ones that you like more! :)
-      --    Don't feel like these are good choices.
-      icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-      controls = {
-        enabled = true,
-      },
-      layouts = {
-        {
-          elements = {
-            {
-              id = 'scopes',
-              size = 0.60, -- Increased from 0.25 to 0.40
-            },
-            {
-              id = 'breakpoints',
-              size = 0.20, -- Adjusted to maintain total of 1.0
-            },
-            {
-              id = 'watches',
-              size = 0.20, -- Adjusted to maintain total of 1.0
-            },
-          },
-          position = 'left',
-          size = 40,
-        },
-      },
-    }
-
     vim.fn.sign_define('DapBreakpoint', {
       text = '',
       texthl = 'DapBreakpoint',
@@ -255,8 +249,20 @@ return {
       numhl = 'DapStopped',
     })
 
-    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    -- DAP UI open/close based on events
+    dap.listeners.after.event_initialized['dapui_config'] = function()
+      setup_dapui()
+      dapui.open()
+    end
+    dap.listeners.before.event_terminated['dapui_config'] = function()
+      if dapui then
+        dapui.close()
+      end
+    end
+    dap.listeners.before.event_exited['dapui_config'] = function()
+      if dapui then
+        dapui.close()
+      end
+    end
   end,
 }
