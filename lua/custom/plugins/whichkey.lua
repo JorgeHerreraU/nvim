@@ -31,6 +31,7 @@ return {
       { '<leader>c', icon = { icon = '', color = 'orange' } },
       { '<leader>x', icon = { icon = '󰅙', color = 'orange' } },
       { '<leader>e', icon = { icon = '', color = 'azure' } },
+      { '<leader>t', group = 'Features', icon = { icon = '', color = 'yellow' } },
     }
     wk.setup {
       preset = 'modern',

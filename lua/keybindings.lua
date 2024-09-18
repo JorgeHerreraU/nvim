@@ -56,8 +56,8 @@ vim.keymap.set('n', '<esc>', ':noh<cr>', { desc = 'No highlight', silent = true 
 vim.keymap.set('n', '<C-Right>', ':vertical resize +5<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Left>', ':vertical resize -5<CR>', { noremap = true, silent = true })
 
--- Keybinding to disable autoformatting
-vim.keymap.set('n', '<F4>', utils.toggle_autoformat, { noremap = true, silent = true })
+-- Keybinding to toggle autoformatting
+vim.keymap.set('n', '<leader>ta', utils.toggle_autoformat, { desc = 'Toggle autoformat', noremap = true, silent = true })
 
 -- Quit
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Quit' })

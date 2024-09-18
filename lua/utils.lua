@@ -76,7 +76,12 @@ end
 
 function M.setup_cmp_sources(sources)
   M.cmp_sources = sources
-  vim.api.nvim_set_keymap('n', '<F5>', '<cmd>lua require("utils").toggle_codeium()<CR>', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap(
+    'n',
+    '<leader>tm',
+    '<cmd>lua require("utils").toggle_codeium()<CR>',
+    { desc = 'Toggle ML completions', noremap = true, silent = true }
+  )
 end
 
 -- check wsl
