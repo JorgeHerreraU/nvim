@@ -66,7 +66,7 @@ vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Quit' })
 vim.keymap.set('n', '<leader>a', ':bnext<CR>', { desc = 'Next Buffer' })
 
 -- Close all buffers except current
-vim.keymap.set('n', '<leader>c', ':%bd|e#|bd#<CR>', { desc = 'Close all other buffers' })
+vim.api.nvim_set_keymap('n', '<leader>c', [[:%bd|e#|bd#<CR>|'"`]], { noremap = true, silent = true, desc = 'Close all other buffers' })
 
 -- Close current buffer
 vim.api.nvim_set_keymap('n', '<leader>x', ':bd<CR>', { noremap = true, silent = true, desc = 'Close current buffer' })
