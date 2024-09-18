@@ -116,7 +116,6 @@ return {
         -- Accept ([y]es) the completion.
         --  This will auto-import if your LSP supports it.
         --  This will expand snippets if the LSP sent a snippet.
-        ['<C-y>'] = cmp.mapping.confirm { select = true },
         ['<CR>'] = cmp.mapping(function(fallback)
           if cmp.visible() and cmp.get_active_entry() then
             cmp.confirm { select = true }
