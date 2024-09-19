@@ -70,3 +70,6 @@ vim.api.nvim_set_keymap('n', '<leader>c', [[:%bd|e#|bd#<CR>|'"`]], { noremap = t
 
 -- Close current buffer
 vim.api.nvim_set_keymap('n', '<leader>x', ':bd<CR>', { noremap = true, silent = true, desc = 'Close current buffer' })
+
+-- Delete without yank
+vim.keymap.set('n', '<leader>d', '"_d', { desc = 'Delete without yank' })

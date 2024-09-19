@@ -20,7 +20,7 @@ return {
   config = function() -- This is the function that runs, AFTER loading
     local wk = require 'which-key'
     wk.add {
-      { '<leader>d', group = 'Debug' },
+      { '<leader>b', group = 'Debug' },
       { '<leader>e', group = 'File Explorer' },
       { '<leader>f', group = 'Find' },
       { '<leader>l', group = 'Code Actions' },
@@ -31,6 +31,7 @@ return {
       { '<leader>c', icon = { icon = '', color = 'orange' } },
       { '<leader>x', icon = { icon = '󰅙', color = 'orange' } },
       { '<leader>e', icon = { icon = '', color = 'azure' } },
+      { '<leader>d', icon = { icon = '', color = 'cyan' } },
       { '<leader>t', group = 'Features', icon = { icon = '', color = 'yellow' } },
     }
     wk.setup {

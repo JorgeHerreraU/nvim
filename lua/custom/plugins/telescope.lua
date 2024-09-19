@@ -1,8 +1,6 @@
 -- The dependencies are proper plugin specifications as well - anything
 -- you do for a plugin at the top level, you can do for a dependency.
---
 -- Use the `dependencies` key to specify the dependencies of a particular plugin
-
 return {
   -- Fuzzy Finder (files, lsp, etc)
   'nvim-telescope/telescope.nvim',
@@ -123,40 +121,44 @@ return {
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find Help' })
-    vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find Keymaps' })
-    vim.keymap.set('n', '<leader>ff', function()
-      builtin.find_files { hidden = true, no_ignore = true, no_ignore_parent = true }
-    end, { desc = 'Find Files' })
-    vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = 'Find Select Telescope' })
-    vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'Find Current Word' })
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Find by Grep' })
-    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find Diagnostics' })
-    vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Find Resume' })
-    vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Find Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find opened buffers' })
 
-    -- Slightly advanced example of overriding default behavior and theme
-    vim.keymap.set('n', '<leader>/', function()
+    -- Keys
+    -- Helper keymaps functions
+    local find_files = function()
+      builtin.find_files { hidden = true, no_ignore = true, no_ignore_parent = true }
+    end
+    local find_buffer = function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
         winblend = 0,
         previewer = false,
       })
-    end, { desc = 'Find in buffer' })
-
-    -- It's also possible to pass additional configuration options.
-    --  See `:help telescope.builtin.live_grep()` for information about particular keys
-    vim.keymap.set('n', '<leader>f/', function()
+    end
+    local grep_open_files = function()
+      -- It's also possible to pass additional configuration options.
+      --  See `:help telescope.builtin.live_grep()` for information about particular keys
       builtin.live_grep {
         grep_open_files = true,
         prompt_title = 'Live Grep in Open Files',
       }
-    end, { desc = 'Find in Open Files' })
-
-    -- Shortcut for searching your Neovim configuration files
-    vim.keymap.set('n', '<leader>fn', function()
+    end
+    local find_nvim_files = function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
-    end, { desc = 'Find Neovim files' })
+    end
+    -- Keybindings
+    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find Help' })
+    vim.keymap.set('n', '<leader>fs', builtin.search_history, { desc = 'Find History' })
+    vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find Keymaps' })
+    vim.keymap.set('n', '<leader>ff', find_files, { desc = 'Find Files' })
+    vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = 'Find Select Telescope' })
+    vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'Find Current Word' })
+    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Find by Grep' })
+    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find Diagnostics' })
+    vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Find Resume' })
+    vim.keymap.set('n', '<leader>fn', find_nvim_files, { desc = 'Find Neovim files' })
+    vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Find Recent Files ("." for repeat)' })
+    vim.keymap.set('n', '<leader>f/', grep_open_files, { desc = 'Find in Open Files' })
+    vim.keymap.set('n', '<leader>/', find_buffer, { desc = 'Find in buffer' })
+    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find Opened Buffers' })
   end,
 }
