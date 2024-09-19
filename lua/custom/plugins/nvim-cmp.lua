@@ -3,6 +3,7 @@ return {
   'hrsh7th/nvim-cmp',
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
+    -- codeium ML completions
     {
       'Exafunction/codeium.nvim',
       cmd = 'Codeium',
@@ -18,25 +19,28 @@ return {
         'rafamadriz/friendly-snippets',
       },
       build = 'make install_jsregexp',
+      config = function()
+        require('luasnip.loaders.from_vscode').lazy_load()
+      end,
     },
-    -- Adds other completion capabilities.
-    --  nvim-cmp does not ship with all sources by default. They are split
-    --  into multiple repos for maintenance purposes.
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-path',
-    -- lsp icons
-    'onsails/lspkind.nvim',
+    { 'hrsh7th/cmp-nvim-lsp', event = 'InsertEnter' },
+    { 'hrsh7th/cmp-path', event = 'InsertEnter' },
+    { 'onsails/lspkind.nvim', event = 'InsertEnter' },
   },
   config = function()
     -- See `:help cmp`
-    require('luasnip.loaders.from_vscode').lazy_load()
+
     local cmp = require 'cmp'
+    -- Autopairs
+    local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+    -- Luasnip
     local luasnip = require 'luasnip'
     luasnip.filetype_extend('javascript', { 'jsdoc' })
-    luasnip.config.setup {
-      enable_autosnippets = true,
-    }
+    luasnip.config.setup { enable_autosnippets = true }
+    -- Utils
     local utils = require 'utils'
+
     -- Register sources
     local sources = {
       { name = 'lazydev', group_index = 0 },
@@ -44,6 +48,7 @@ return {
       { name = 'luasnip' },
       { name = 'path' },
     }
+
     -- Pass sources to utils setup for additional resources configuration
     utils.setup_cmp_sources(sources)
     cmp.setup {
@@ -65,6 +70,7 @@ return {
         },
       },
 
+      -- Codeium cmp display format
       ---@diagnostic disable-next-line: missing-fields
       formatting = {
         fields = { 'kind', 'abbr', 'menu' },
@@ -86,8 +92,11 @@ return {
           return kind
         end,
       },
+
       preselect = 'None',
       completion = { completeopt = 'menu,menuone,noinsert,noselect' },
+
+      -- Keybindings
       -- For an understanding of why these mappings were
       -- chosen, you will need to read `:help ins-completion`
       -- No, but seriously. Please read `:help ins-completion`, it is really good!
@@ -145,6 +154,8 @@ return {
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
+
+      -- Sources
       sources = cmp.config.sources(sources),
     }
   end,
