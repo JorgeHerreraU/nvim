@@ -17,9 +17,19 @@ return {
         },
       },
     },
-    -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-    -- used for completion, annotations and signatures of Neovim apis
-    { 'folke/neodev.nvim', opts = {} },
+    -- Lua completion, annotations and signatures of Neovim apis
+    {
+      'folke/lazydev.nvim',
+      dependencies = {
+        { 'Bilal2453/luvit-meta', lazy = true }, -- optional `vim.uv` typings
+      },
+      ft = 'lua', -- only load on lua files
+      opts = {
+        library = {
+          { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+        },
+      },
+    },
     -- omnisharp (go-to definitions)
     'Hoffs/omnisharp-extended-lsp.nvim',
     -- 'Decodetalkers/csharpls-extended-lsp.nvim',
@@ -37,6 +47,7 @@ return {
       opts = {}, -- your configuration
     },
   },
+
   config = function()
     --  This function gets run when an LSP attaches to a particular buffer.
     --    That is to say, every time a new file is opened that is associated with
@@ -170,8 +181,22 @@ return {
       handlers = handlers,
       settings = {
         Lua = {
+          runtime = {
+            version = 'LuaJIT',
+            path = vim.split(package.path, ';'),
+          },
           diagnostics = {
-            globals = { 'vim' },
+            globals = { 'vim', 'use' },
+          },
+          workspace = {
+            library = vim.api.nvim_get_runtime_file('', true),
+            checkThirdParty = false,
+          },
+          telemetry = {
+            enable = false,
+          },
+          completion = {
+            callSnippet = 'Replace',
           },
         },
       },

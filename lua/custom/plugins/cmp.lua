@@ -39,24 +39,10 @@ return {
     local utils = require 'utils'
     -- Register sources
     local sources = {
+      { name = 'lazydev', group_index = 0 },
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
       { name = 'path' },
-      {
-        name = 'html-css',
-        option = {
-          enable_on = {
-            'html',
-            'javascript',
-            'typescriptreact',
-          },
-          file_extensions = { 'css', 'sass', 'less' },
-          style_sheets = {
-            -- example of remote styles, only css no js for now
-            'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
-          },
-        },
-      },
     }
     -- Pass sources to utils setup for additional resources configuration
     utils.setup_cmp_sources(sources)

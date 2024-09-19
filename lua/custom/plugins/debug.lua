@@ -19,12 +19,6 @@ return {
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
-    {
-      'folke/neodev.nvim',
-      opts = {
-        library = { plugins = { 'nvim-dap-ui' }, types = true },
-      },
-    },
   },
   lazy = true,
   event = 'VeryLazy',
