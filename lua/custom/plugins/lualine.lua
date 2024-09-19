@@ -30,7 +30,7 @@ return {
       },
       sections = {
         lualine_a = { { 'mode', icon = '' } },
-        lualine_b = { { '', icon = '', color = { bg = 'none' } } },
+        lualine_b = {},
         lualine_c = {
           {
             'diagnostics',
@@ -60,20 +60,19 @@ return {
           { 'diff', color = { bg = 'none' } },
         },
         lualine_y = {
-          -- {
-          --   'progress',
-          -- },
-          -- {
-          --   'location',
-          --   color = utils.get_hlgroup 'Boolean',
-          -- },
+          {
+            'branch',
+            separator = { left = '', right = '' },
+            padding = { left = 1, right = 1 },
+            fmt = function(str)
+              if str:len() > 12 then
+                return str:sub(1, 10) .. '...'
+              end
+              return str
+            end,
+          },
         },
-        lualine_z = {
-          -- {
-          --   'datetime',
-          --   style = '  %X',
-          -- },
-        },
+        lualine_z = {},
       },
       extensions = { 'lazy', 'toggleterm', 'mason' },
     }
