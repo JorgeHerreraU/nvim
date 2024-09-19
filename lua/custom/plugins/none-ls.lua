@@ -16,7 +16,6 @@ return {
 
     null_ls.setup {
       sources = {
-        null_ls.builtins.diagnostics.ktlint,
         eslint_utils.root_has_file {
           '.eslintrc.js',
           '.eslintrc.json',
