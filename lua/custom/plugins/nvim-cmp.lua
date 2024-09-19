@@ -57,6 +57,7 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
+      -- Visual settings
       window = {
         completion = {
           border = 'rounded',
@@ -70,7 +71,7 @@ return {
         },
       },
 
-      -- Codeium cmp display format
+      -- Codeium display format
       ---@diagnostic disable-next-line: missing-fields
       formatting = {
         fields = { 'kind', 'abbr', 'menu' },
@@ -93,6 +94,7 @@ return {
         end,
       },
 
+      -- General completion settings
       preselect = 'None',
       completion = { completeopt = 'menu,menuone,noinsert,noselect' },
 
@@ -101,6 +103,10 @@ return {
       -- chosen, you will need to read `:help ins-completion`
       -- No, but seriously. Please read `:help ins-completion`, it is really good!
       mapping = cmp.mapping.preset.insert {
+        -- Manually trigger a completion from nvim-cmp.
+        --  Generally you don't need this, because nvim-cmp will display
+        --  completions whenever it has completion options available.
+        ['<C-Space>'] = cmp.mapping.complete {},
         -- Select the [n]ext item
         ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
         -- Select the [p]revious item
@@ -111,6 +117,7 @@ return {
         -- Accept ([y]es) the completion.
         --  This will auto-import if your LSP supports it.
         --  This will expand snippets if the LSP sent a snippet.
+        -- Enter key
         ['<CR>'] = cmp.mapping(function(fallback)
           if cmp.visible() and cmp.get_active_entry() then
             cmp.confirm { select = true }
@@ -118,13 +125,7 @@ return {
             fallback()
           end
         end, { 'i', 's' }),
-        -- Manually trigger a completion from nvim-cmp.
-        --  Generally you don't need this, because nvim-cmp will display
-        --  completions whenever it has completion options available.
-        ['<C-Space>'] = cmp.mapping.complete {},
-        -- Accept ([y]es) the completion.
-        --  This will auto-import if your LSP supports it.
-        --  This will expand snippets if the LSP sent a snippet.
+        -- Tab key
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.confirm { select = true }
@@ -132,12 +133,12 @@ return {
             fallback()
           end
         end, { 'i', 's' }),
+        -- Move across snippets
         -- Think of <c-l> as moving to the right of your snippet expansion.
         --  So if you have a snippet that's like:
         --  function $name($args)
         --    $body
         --  end
-        --
         -- <c-l> will move you to the right of each of the expansion locations.
         -- <c-h> is similar, except moving you backwards.
         ['<C-l>'] = cmp.mapping(function()
@@ -150,7 +151,6 @@ return {
             luasnip.jump(-1)
           end
         end, { 'i', 's' }),
-
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
