@@ -133,6 +133,22 @@ return {
             fallback()
           end
         end, { 'i', 's' }),
+        -- Select first snippet
+        ['<C-k>'] = cmp.mapping(function()
+          if cmp.visible() then
+            local entries = cmp.get_entries()
+            for i, entry in ipairs(entries) do
+              if entry.source.name == 'luasnip' then
+                cmp.select_next_item { behavior = cmp.SelectBehavior.Select, count = 1 }
+                for _ = 2, i do
+                  cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+                end
+                cmp.confirm { select = true }
+                return
+              end
+            end
+          end
+        end, { 'i', 's' }),
         -- Move across snippets
         -- Think of <c-l> as moving to the right of your snippet expansion.
         --  So if you have a snippet that's like:
