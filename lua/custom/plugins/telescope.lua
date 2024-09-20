@@ -145,13 +145,22 @@ return {
     local find_nvim_files = function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
     end
+    local grep_string_under_cursor = function()
+      builtin.grep_string {
+        search = vim.fn.expand '<cword>',
+        word_match = '-w',
+        only_sort_text = true,
+        search_dirs = { 'src/', 'lib/' },
+        file_ignore_patterns = { '*.min.js', '*.min.css' }, -- Ignore minified files
+      }
+    end
     -- Keybindings
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find Help' })
     vim.keymap.set('n', '<leader>fs', builtin.search_history, { desc = 'Find History' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find Keymaps' })
     vim.keymap.set('n', '<leader>ff', find_files, { desc = 'Find Files' })
     vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = 'Find Select Telescope' })
-    vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'Find Current Word' })
+    vim.keymap.set('n', '<leader>fw', grep_string_under_cursor, { desc = 'Find Current Word' })
     vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Find by Grep' })
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find Diagnostics' })
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Find Resume' })
