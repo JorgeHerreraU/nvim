@@ -107,6 +107,7 @@ return {
         get_selection_window = custom_get_selection_window,
         layout_strategy = 'horizontal',
         previewer = true,
+        path_display = { 'smart' },
       },
       extensions = {
         ['ui-select'] = {

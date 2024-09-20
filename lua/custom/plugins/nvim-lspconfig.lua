@@ -71,7 +71,9 @@ return {
         end
 
         -- Find references for the word under your cursor.
-        map('gr', require('telescope.builtin').lsp_references, 'Goto References')
+        map('gr', function()
+          require('telescope.builtin').lsp_references { path_display = { 'smart' }, show_line = false }
+        end, 'Goto References')
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
