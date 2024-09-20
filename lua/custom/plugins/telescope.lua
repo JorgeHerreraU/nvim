@@ -147,12 +147,12 @@ return {
     end
     local grep_string_under_cursor = function()
       local word = vim.fn.expand '<cWORD>'
-      word = word:match 'className="([%w%-_]+)"'
-      if not word then
-        word = word:match '[%w%-_]+'
+      local search_term = word:match 'className="([%w%-_]+)"'
+      if not search_term then
+        search_term = word:match '[%w%-_]+'
       end
       builtin.grep_string {
-        search = word,
+        search = search_term,
         only_sort_text = true,
         search_dirs = { 'src/', 'lib/' },
         file_ignore_patterns = { '*.min.js', '*.min.css' },
