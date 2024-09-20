@@ -15,6 +15,20 @@ return {
         end
       end
     end
+    -- Line endings
+    local function line_ending()
+      local format = vim.bo.fileformat
+      local symbols = { unix = 'LF', dos = 'CRLF', mac = 'CR' }
+      return symbols[format] or format
+    end
+    -- Spacing info
+    local function spacing_info()
+      if vim.bo.expandtab then
+        return 'Spaces: ' .. vim.bo.shiftwidth
+      else
+        return 'Tabs: ' .. vim.bo.tabstop
+      end
+    end
 
     -- Apply transparent background to all theme sections
     set_bg_none(custom_theme)
@@ -72,7 +86,18 @@ return {
             end,
           },
         },
-        lualine_z = {},
+        lualine_z = {
+          {
+            line_ending,
+            separator = { left = '', right = '' },
+            color = utils.get_hlgroup 'String',
+          },
+          {
+            spacing_info,
+            separator = { left = '', right = '' },
+            color = utils.get_hlgroup 'Comment',
+          },
+        },
       },
       extensions = { 'lazy', 'toggleterm', 'mason' },
     }
