@@ -62,6 +62,10 @@ return {
       filter_rules = {
         autoselect_one = true,
         include_current_win = true,
+        bo = {
+          filetype = { 'NvimTree', 'neo-tree', 'notify', 'fidget' },
+          buftype = { 'terminal' },
+        },
       },
     }
 
