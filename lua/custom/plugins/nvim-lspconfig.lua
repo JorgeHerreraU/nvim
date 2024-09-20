@@ -72,7 +72,7 @@ return {
 
         -- Find references for the word under your cursor.
         map('gr', function()
-          require('telescope.builtin').lsp_references { path_display = { 'smart' }, show_line = false }
+          require('telescope.builtin').lsp_references { path_display = { 'smart' } }
         end, 'Goto References')
 
         -- Jump to the implementation of the word under your cursor.
