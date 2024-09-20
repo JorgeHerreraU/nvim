@@ -130,3 +130,21 @@ vim.o.foldcolumn = '0'
 
 -- Keep folds open unless they are deep
 vim.o.foldlevel = 99
+
+vim.opt.shortmess = vim.opt.shortmess
+  + {
+    c = true, -- Do not show completion messages in command line
+    F = true, -- Do not show file info when editing a file, in the command line
+    W = true, -- Do not show "written" in command line when writing
+    I = true, -- Do not show intro message when starting Vim
+  }
+
+-- Set noruler
+vim.o.ruler = false
+-- Terminal gui colors
+vim.opt.termguicolors = true
+-- Wrap lines
+vim.opt.wrap = true
+vim.opt.linebreak = true
+-- Matching brackets
+vim.opt.showmatch = true
