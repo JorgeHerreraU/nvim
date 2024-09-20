@@ -147,7 +147,7 @@ return {
     end
     local grep_string_under_cursor = function()
       local word = vim.fn.expand '<cWORD>'
-      local clean_word = word:match '[%w-]+'
+      local clean_word = word:match '[%w_-]+'
       builtin.grep_string {
         search = clean_word,
         only_sort_text = true,
