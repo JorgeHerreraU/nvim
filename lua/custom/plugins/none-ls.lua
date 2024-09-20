@@ -9,6 +9,7 @@ return {
     require('mason-tool-installer').setup {
       ensure_installed = {
         'eslint',
+        'stylelint',
       },
     }
     local null_ls = require 'null-ls'
@@ -24,6 +25,7 @@ return {
           '.eslintrc.yaml',
           'eslint.config.mjs',
         } and require 'none-ls.diagnostics.eslint' or nil,
+        null_ls.builtins.diagnostics.stylelint,
       },
     }
   end,
