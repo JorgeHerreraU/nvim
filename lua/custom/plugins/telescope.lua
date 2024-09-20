@@ -146,12 +146,13 @@ return {
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
     end
     local grep_string_under_cursor = function()
+      local word = vim.fn.expand '<cWORD>'
+      local clean_word = word:match '[%w-]+'
       builtin.grep_string {
-        search = vim.fn.expand '<cword>',
-        word_match = '-w',
+        search = clean_word,
         only_sort_text = true,
         search_dirs = { 'src/', 'lib/' },
-        file_ignore_patterns = { '*.min.js', '*.min.css' }, -- Ignore minified files
+        file_ignore_patterns = { '*.min.js', '*.min.css' },
       }
     end
     -- Keybindings
