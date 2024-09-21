@@ -269,12 +269,6 @@ return {
       },
     }
 
-    -- css
-    require('lspconfig').cssls.setup {
-      capabilities = capabilities,
-      handlers = handlers,
-    }
-
     -- rust
     require('rust-tools').setup {
       server = {
