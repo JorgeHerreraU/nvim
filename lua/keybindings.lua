@@ -30,7 +30,7 @@ vim.keymap.set('n', '<C-s>', ':w!<CR>', { desc = 'Save file' })
 vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>l', { desc = 'Save file' })
 
 -- nvimtree
-vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'Nvimtree toggle window' })
+vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle explorer' })
 
 -- fterm
 vim.keymap.set('n', '<c-y>', '<CMD>lua require("FTerm").toggle()<CR>')
