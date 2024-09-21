@@ -5,6 +5,6 @@ return {
   },
   config = function(_, opts)
     require('tsw').setup(opts)
-    vim.keymap.set('n', '<leader>lt', '<cmd>Tsw show_variables=true<CR>', { desc = 'Typedrocks Live Results' })
+    vim.keymap.set('n', '<leader>lt', '<cmd>Tsw show_variables=true<CR>', { desc = 'Typescript Live Results' })
   end,
 }

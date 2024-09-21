@@ -56,14 +56,14 @@ return {
             },
             color = { bg = 'none' },
           },
-          {
-            'filetype',
-            icon_only = true,
-            separator = '',
-            padding = { left = 1, right = 0 },
-            color = { bg = 'none' },
-          },
-          { 'filename', padding = { left = 1, right = 0 }, color = { bg = 'none' } },
+          -- {
+          --   'filetype',
+          --   icon_only = true,
+          --   separator = '',
+          --   padding = { left = 1, right = 0 },
+          --   color = { bg = 'none' },
+          -- },
+          -- { 'filename', padding = { left = 1, right = 0 }, color = { bg = 'none' } },
         },
         lualine_x = {
           {
