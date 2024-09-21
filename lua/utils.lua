@@ -58,7 +58,7 @@ function M.toggle_codeium()
 
   if buffer_source_enabled then
     table.insert(M.cmp_sources, { name = 'codeium' })
-    vim.notify('ML Completion enabled', 'Info', { title = 'Status' })
+    vim.notify('ML Completion enabled', vim.log.levels.INFO, { title = 'Status' })
   else
     for index, source in ipairs(M.cmp_sources) do
       if source.name == 'codeium' then
@@ -66,7 +66,7 @@ function M.toggle_codeium()
         break
       end
     end
-    vim.notify('ML Completion disabled', 'Info', { title = 'Status' })
+    vim.notify('ML Completion disabled', vim.log.levels.INFO, { title = 'Status' })
   end
 
   require('cmp').setup {
