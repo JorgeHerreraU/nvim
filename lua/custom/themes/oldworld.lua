@@ -21,6 +21,7 @@ return {
         FloatTitle = { bg = 'NONE' },
         LineNr = { fg = '#c6c6c6' },
         CursorLine = { bg = 'NONE' },
+        Visual = { bg = '#141a60' },
       },
     }
     vim.cmd.colorscheme 'oldworld'
@@ -37,6 +38,7 @@ return {
       hi TelescopeResultsBorder guibg=NONE ctermbg=NONE guifg=#c6c6c6
       hi TelescopeResultsTitle guibg=NONE ctermbg=NONE guifg=#c6c6c6
       hi TelescopePromptCounter guibg=NONE ctermbg=NONE guifg=#c6c6c6
+      hi ModeMsg guibg=NONE ctermbg=NONE guifg=#c6c6c6
     ]]
     vim.defer_fn(function()
       vim.cmd [[
