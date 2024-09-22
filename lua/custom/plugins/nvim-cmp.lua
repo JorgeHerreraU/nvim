@@ -25,6 +25,7 @@ return {
     },
     { 'hrsh7th/cmp-nvim-lsp', event = 'InsertEnter' },
     { 'hrsh7th/cmp-path', event = 'InsertEnter' },
+    { 'hrsh7th/cmp-cmdline', event = 'CmdlineEnter' },
     { 'onsails/lspkind.nvim', event = 'InsertEnter' },
   },
   config = function()
@@ -38,6 +39,20 @@ return {
     local luasnip = require 'luasnip'
     luasnip.filetype_extend('javascript', { 'jsdoc' })
     luasnip.config.setup { enable_autosnippets = true }
+    -- CMD
+    cmp.setup.cmdline(':', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        { name = 'path' },
+      }, {
+        {
+          name = 'cmdline',
+          option = {
+            ignore_cmds = { 'Man', '!' },
+          },
+        },
+      }),
+    })
     -- Utils
     local utils = require 'utils'
 
