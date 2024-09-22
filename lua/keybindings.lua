@@ -73,3 +73,6 @@ vim.api.nvim_set_keymap('n', '<leader>x', ':bd<CR>', { noremap = true, silent = 
 
 -- Delete without yank
 vim.keymap.set('n', '<leader>d', '"_d', { desc = 'Delete without yank' })
+
+-- Remap visual block mode
+vim.keymap.set('n', '<C-q>', '<C-v>')
