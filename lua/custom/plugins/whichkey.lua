@@ -42,6 +42,7 @@ return {
         width = { min = 40, max = 40 },
         spacing = 6,
       },
+      debug = true,
     }
   end,
 }

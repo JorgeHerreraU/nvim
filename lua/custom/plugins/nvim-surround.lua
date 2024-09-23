@@ -17,5 +17,27 @@ return {
         change = 'gzc',
       },
     }
+    local wk = require 'which-key'
+    wk.add {
+      { 'gz', group = 'Surround', icon = '󰅪' },
+      { 'gzi', icon = '󰅪', desc = 'inside' },
+      { 'gziw', icon = '󰅪', desc = 'inner word' },
+      { 'gziW', icon = '󰅪', desc = 'inner WORD' },
+      { 'gzib', icon = '󰅪', desc = 'inner []' },
+      { 'gziB', icon = '󰅪', desc = 'inner {}' },
+      { 'gzii', icon = '󰅪', desc = 'Object scope' },
+      { 'gzip', icon = '󰅪', desc = 'inner paragraph' },
+      { 'gzis', icon = '󰅪', desc = 'inner sentence' },
+      { 'gzit', icon = '󰅪', desc = 'inner tag block' },
+      { 'gziW', icon = '󰅪', desc = 'inner WORD' },
+      { 'gzi(', icon = '󰅪', desc = 'inner ()' },
+      { 'gzi)', icon = '󰅪', desc = 'inner ()' },
+      { 'gzi[', icon = '󰅪', desc = 'inner []' },
+      { 'gzi]', icon = '󰅪', desc = 'inner []' },
+      { 'gzi{', icon = '󰅪', desc = 'inner {}' },
+      { 'gzi}', icon = '󰅪', desc = 'inner {}' },
+      { 'gzi<', icon = '󰅪', desc = 'inner <>' },
+      { 'gzi>', icon = '󰅪', desc = 'inner <>' },
+    }
   end,
 }
