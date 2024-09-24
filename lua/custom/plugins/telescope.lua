@@ -28,6 +28,7 @@ return {
       event = 'VeryLazy',
       version = '2.*',
     },
+    'debugloop/telescope-undo.nvim',
   },
   config = function()
     -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -110,6 +111,7 @@ return {
         previewer = true,
       },
       extensions = {
+        undo = {},
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
@@ -119,6 +121,7 @@ return {
     -- Enable Telescope extensions if they are installed
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
+    pcall(require('telescope').load_extension, 'undo')
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
@@ -169,6 +172,7 @@ return {
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find Diagnostics' })
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Find Resume' })
     vim.keymap.set('n', '<leader>fn', find_nvim_files, { desc = 'Find Neovim files' })
+    vim.keymap.set('n', '<leader>fu', '<cmd>Telescope undo<cr>', { desc = 'Telescope Undo Tree' })
     vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Find Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader>f/', grep_open_files, { desc = 'Find in Open Files' })
     vim.keymap.set('n', '<leader>/', find_buffer, { desc = 'Find in buffer' })
