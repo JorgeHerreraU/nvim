@@ -20,7 +20,13 @@ return {
           { '<leader>hr', gitsigns.reset_hunk, desc = 'Reset hunk', mode = { 'n', 'v' } },
           { '<leader>hR', gitsigns.reset_buffer, desc = 'Restore' },
           { '<leader>hp', gitsigns.preview_hunk, desc = 'Preview hunk' },
-          { '<leader>hb', gitsigns.blame_line { full = true }, desc = 'Blame line' },
+          {
+            '<leader>hb',
+            function()
+              gitsigns.blame_line { full = true }
+            end,
+            desc = 'Blame line',
+          },
           { '<leader>hB', gitsigns.toggle_current_line_blame, desc = 'Toggle line blame' },
           { '<leader>hd', "<cmd>lua require('gitsigns').diffthis() vim.api.nvim_command('wincmd h')<CR>", desc = 'Diff view' },
         }, { buffer = bufnr })
