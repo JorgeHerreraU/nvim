@@ -76,3 +76,9 @@ vim.keymap.set('n', '<leader>d', '"_d', { desc = 'Delete without yank' })
 
 -- Remap visual block mode
 vim.keymap.set('n', '<C-q>', '<C-v>')
+
+-- Line pseudo-text objects (https://gist.github.com/romainl/c0a8b57a36aec71a986f1120e1931f20#file-pseudo-text-objects-vim-L13)
+vim.keymap.set('x', 'il', 'g_o^', { desc = 'Inner line text object' })
+vim.keymap.set('o', 'il', ':<C-u>normal vil<CR>', { desc = 'Inner line text object' })
+vim.keymap.set('x', 'al', '$o0', { desc = 'Around line text object' })
+vim.keymap.set('o', 'al', ':<C-u>normal val<CR>', { desc = 'Around line text object' })
