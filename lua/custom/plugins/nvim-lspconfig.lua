@@ -255,18 +255,6 @@ return {
           vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
         end,
       },
-      settings = {
-        typescript = {
-          suggest = {
-            completeFunctionCalls = true,
-          },
-        },
-        javascript = {
-          suggest = {
-            completeFunctionCalls = true,
-          },
-        },
-      },
     }
 
     -- rust
