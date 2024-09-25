@@ -20,7 +20,7 @@ return {
     end)
 
     -- Jump to the next word under cursor but do not add a cursor.
-    vim.keymap.set({ 'n', 'v' }, '<c-s>', function()
+    vim.keymap.set({ 'n', 'v' }, '<c-i>', function()
       mc.skipCursor '*'
     end)
 
@@ -49,6 +49,7 @@ return {
         mc.enableCursors()
       elseif mc.hasCursors() then
         mc.clearCursors()
+        vim.cmd 'nohl'
       else
         -- Default <esc> handler.
       end
