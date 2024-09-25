@@ -51,7 +51,7 @@ return {
         mc.clearCursors()
         vim.cmd 'nohl'
       else
-        -- Default <esc> handler.
+        vim.cmd 'nohl'
       end
     end)
 
