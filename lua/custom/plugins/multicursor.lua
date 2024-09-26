@@ -29,7 +29,7 @@ return {
     vim.keymap.set({ 'n', 'v' }, '<right>', mc.prevCursor)
 
     -- Delete the main cursor.
-    vim.keymap.set({ 'n', 'v' }, '<leader>x', mc.deleteCursor)
+    -- vim.keymap.set({ 'n', 'v' }, '<leader>x', mc.deleteCursor)
 
     -- Add and remove cursors with control + left click.
     vim.keymap.set('n', '<c-leftmouse>', mc.handleMouse)
