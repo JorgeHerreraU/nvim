@@ -82,3 +82,6 @@ vim.keymap.set('x', 'il', 'g_o^', { desc = 'Inner line text object' })
 vim.keymap.set('o', 'il', ':<C-u>normal vil<CR>', { desc = 'Inner line text object' })
 vim.keymap.set('x', 'al', '$o0', { desc = 'Around line text object' })
 vim.keymap.set('o', 'al', ':<C-u>normal val<CR>', { desc = 'Around line text object' })
+
+-- Toggle supermaven
+vim.keymap.set('n', '<leader>tm', utils.toggle_supermaven, { desc = 'Toggle supermaven' })

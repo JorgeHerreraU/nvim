@@ -112,4 +112,13 @@ function M.parse_hex(int_color)
   return string.format('#%x', int_color)
 end
 
+local supermaven_enabled = false
+--- Toggle supermaven
+M.toggle_supermaven = function()
+  local api = require 'supermaven-nvim.api'
+  supermaven_enabled = not supermaven_enabled
+  api.toggle()
+  print('Supermaven ' .. (supermaven_enabled and 'enabled' or 'disabled'))
+end
+
 return M

@@ -5,6 +5,9 @@ return {
       keymaps = {
         accept_suggestion = '<c-y>',
       },
+      condition = function()
+        return true
+      end,
     }
   end,
 }
