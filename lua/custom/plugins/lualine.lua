@@ -97,7 +97,7 @@ return {
           {
             buffer_list,
             padding = { left = 1, right = 1 },
-            color = { fg = '#dbd593', bg = 'none' },
+            color = { fg = '#dbbdd5', bg = 'none' },
           },
           {
             function()
