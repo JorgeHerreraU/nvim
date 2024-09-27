@@ -4,8 +4,6 @@ return {
   opts = {},
   config = function(_, opts)
     opts.hint_prefix = ''
-    opts.toggle_key = '<C-t>'
-    opts.toggle_key_flip_floatwin_setting = true
     opts.hint_enable = false
     opts.floating_window = false
     require('lsp_signature').setup(opts)

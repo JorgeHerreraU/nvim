@@ -43,6 +43,22 @@ return {
       end
       return table.concat(output, ' ')
     end
+    -- Function signature
+    local current_signature = function(width)
+      local sig = require('lsp_signature').status_line(width)
+      if not sig.label or sig.label == '' then
+        return ''
+      end
+
+      -- Find the position of the first '('
+      local start_pos = sig.label:find '%('
+      if start_pos then
+        -- Return everything from '(' onwards
+        return '󰊕' .. sig.label:sub(start_pos)
+      else
+        return ''
+      end
+    end
 
     -- Apply transparent background to all theme sections
     set_bg_none(custom_theme)
@@ -77,9 +93,16 @@ return {
             padding = { left = 1, right = 0 },
             color = { bg = 'none' },
           },
-          { 'filename', padding = { left = 1, right = 6 }, color = { bg = 'none' }, separator = { right = '󰓹' } },
+          { 'filename', padding = { left = 1, right = 1 }, color = { bg = 'none' }, separator = { right = '󰓹' } },
           {
             buffer_list,
+            padding = { left = 1, right = 1 },
+          },
+          {
+            function()
+              return current_signature(75)
+            end,
+            color = { fg = utils.get_hlgroup('Function').fg, bg = 'none' },
           },
         },
         lualine_x = {
