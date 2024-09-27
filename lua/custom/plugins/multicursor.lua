@@ -20,7 +20,7 @@ return {
     end)
 
     -- Jump to the next word under cursor but do not add a cursor.
-    vim.keymap.set({ 'n', 'v' }, '<c-i>', function()
+    vim.keymap.set({ 'n', 'v' }, '<c-g>', function()
       mc.skipCursor '*'
     end)
 

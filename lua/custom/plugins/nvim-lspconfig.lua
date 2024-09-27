@@ -173,12 +173,15 @@ return {
         'omnisharp',
         'tailwindcss',
         'intelephense',
+        'emmet_language_server',
       },
     }
     -- LSP servers configuration
 
+    local lspconfig = require 'lspconfig'
+
     -- lua
-    require('lspconfig').lua_ls.setup {
+    lspconfig.lua_ls.setup {
       capabilities = capabilities,
       handlers = handlers,
       settings = {
@@ -205,12 +208,12 @@ return {
     }
 
     -- jsonls
-    require('lspconfig').jsonls.setup {
+    lspconfig.jsonls.setup {
       capabilities = capabilities,
     }
 
     -- golsp
-    require('lspconfig').gopls.setup {
+    lspconfig.gopls.setup {
       capabilities = capabilities,
       handlers = handlers,
       cmd = { 'gopls', 'serve' },
@@ -226,7 +229,7 @@ return {
     }
 
     -- omnisharp
-    require('lspconfig').omnisharp.setup {
+    lspconfig.omnisharp.setup {
       capabilities = capabilities,
       handlers = handlers,
       settings = {
@@ -237,7 +240,7 @@ return {
     }
 
     -- typescript
-    require('lspconfig').vtsls.setup {
+    lspconfig.vtsls.setup {
       capabilities = capabilities,
       handlers = {
         ['textDocument/publishDiagnostics'] = function(_, result, ctx, config)
@@ -266,7 +269,7 @@ return {
     }
 
     -- docker
-    require('lspconfig').dockerls.setup {
+    lspconfig.dockerls.setup {
       capabilities = capabilities,
       handlers = handlers,
     }
@@ -280,13 +283,13 @@ return {
 
     set_filetype({ 'docker-compose.yml' }, 'yaml.docker-compose')
 
-    require('lspconfig').docker_compose_language_service.setup {
+    lspconfig.docker_compose_language_service.setup {
       capabilities = capabilities,
       handlers = handlers,
     }
 
     -- css
-    require('lspconfig').cssls.setup {
+    lspconfig.cssls.setup {
       capabilities = capabilities,
       handlers = handlers,
       settings = {
@@ -299,9 +302,12 @@ return {
     }
 
     -- php
-    require('lspconfig').intelephense.setup {
+    lspconfig.intelephense.setup {
       capabilities = capabilities,
       handlers = handlers,
     }
+
+    -- emmet-ls
+    lspconfig.emmet_language_server.setup { capabilities = capabilities }
   end,
 }
