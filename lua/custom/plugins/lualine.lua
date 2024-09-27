@@ -29,6 +29,20 @@ return {
         return 'Tabs: ' .. vim.bo.tabstop
       end
     end
+    -- Buffers
+    local function buffer_list()
+      local output = {}
+      local buffers = vim.fn.getbufinfo { buflisted = 1 }
+      local current = vim.fn.bufnr '%'
+      for i, buf in ipairs(buffers) do
+        if buf.bufnr == current then
+          table.insert(output, string.format('[%d]', i))
+        else
+          table.insert(output, tostring(i))
+        end
+      end
+      return table.concat(output, ' ')
+    end
 
     -- Apply transparent background to all theme sections
     set_bg_none(custom_theme)
@@ -63,7 +77,10 @@ return {
             padding = { left = 1, right = 0 },
             color = { bg = 'none' },
           },
-          { 'filename', padding = { left = 1, right = 0 }, color = { bg = 'none' } },
+          { 'filename', padding = { left = 1, right = 6 }, color = { bg = 'none' }, separator = { right = '󰓹' } },
+          {
+            buffer_list,
+          },
         },
         lualine_x = {
           {
