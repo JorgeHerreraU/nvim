@@ -65,7 +65,7 @@ return {
     require('lualine').setup {
       options = {
         theme = custom_theme,
-        section_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
         component_separators = { left = '', right = '' },
         globalstatus = false,
         disabled_filetypes = {
@@ -73,7 +73,7 @@ return {
         },
       },
       sections = {
-        lualine_a = { { 'mode', icon = '' } },
+        lualine_a = { { 'mode' } },
         lualine_b = {},
         lualine_c = {
           {
@@ -97,6 +97,7 @@ return {
           {
             buffer_list,
             padding = { left = 1, right = 1 },
+            color = { fg = '#dbd593', bg = 'none' },
           },
           {
             function()
@@ -136,6 +137,12 @@ return {
             spacing_info,
             separator = { left = '', right = '' },
             color = utils.get_hlgroup 'Comment',
+          },
+          {
+            function()
+              return ''
+            end,
+            color = { fg = '#008000', bg = 'none' },
           },
         },
       },
