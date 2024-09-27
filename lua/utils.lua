@@ -50,40 +50,6 @@ function M.lazy(keys)
   end
 end
 
--- Toggle Codeium completions
-local buffer_source_enabled = false
-function M.toggle_codeium()
-  buffer_source_enabled = not buffer_source_enabled
-  vim.g.codeium_enabled = buffer_source_enabled
-
-  if buffer_source_enabled then
-    table.insert(M.cmp_sources, { name = 'codeium' })
-    vim.notify('ML Completion enabled', vim.log.levels.INFO, { title = 'Status' })
-  else
-    for index, source in ipairs(M.cmp_sources) do
-      if source.name == 'codeium' then
-        table.remove(M.cmp_sources, index)
-        break
-      end
-    end
-    vim.notify('ML Completion disabled', vim.log.levels.INFO, { title = 'Status' })
-  end
-
-  require('cmp').setup {
-    sources = require('cmp').config.sources(M.cmp_sources),
-  }
-end
-
-function M.setup_cmp_sources(sources)
-  M.cmp_sources = sources
-  vim.api.nvim_set_keymap(
-    'n',
-    '<leader>tm',
-    '<cmd>lua require("utils").toggle_codeium()<CR>',
-    { desc = 'Toggle ML completions', noremap = true, silent = true }
-  )
-end
-
 -- check wsl
 function M.is_wsl()
   local output = vim.fn.systemlist 'uname -r'

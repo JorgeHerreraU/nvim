@@ -3,13 +3,6 @@ return {
   'hrsh7th/nvim-cmp',
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
-    -- codeium ML completions
-    {
-      'Exafunction/codeium.nvim',
-      cmd = 'Codeium',
-      build = ':Codeium Auth',
-      opts = {},
-    },
     -- luasnip
     {
       'L3MON4D3/LuaSnip',
@@ -84,29 +77,6 @@ return {
           border = 'rounded',
           winhighlight = 'Normal:NormalFloat,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None',
         },
-      },
-
-      -- Codeium display format
-      ---@diagnostic disable-next-line: missing-fields
-      formatting = {
-        fields = { 'kind', 'abbr', 'menu' },
-        format = function(entry, vim_item)
-          local lspkind = require 'lspkind'
-          local kind = lspkind.cmp_format { mode = 'symbol_text', maxwidth = 50 }(entry, vim_item)
-          local strings = vim.split(kind.kind, '%s', { trimempty = true })
-
-          if entry.source.name == 'codeium' then
-            kind.kind = ' 󰘦'
-            kind.menu = '    (Codeium)'
-            vim.cmd [[highlight CustomCmpCodeium guifg=#A08DBF]]
-            kind.kind_hl_group = 'CustomCmpCodeium'
-          else
-            kind.kind = ' ' .. (strings[1] or '') .. ' '
-            kind.menu = '    (' .. (strings[2] or '') .. ')'
-          end
-
-          return kind
-        end,
       },
 
       -- General completion settings

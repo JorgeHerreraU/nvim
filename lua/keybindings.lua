@@ -33,8 +33,8 @@ vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>l', { desc = 'Save file' })
 vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'Explorer' })
 
 -- fterm
-vim.keymap.set('n', '<c-y>', '<CMD>lua require("FTerm").toggle()<CR>')
-vim.keymap.set('t', '<c-y>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
+vim.keymap.set('n', '<c-e>', '<CMD>lua require("FTerm").toggle()<CR>')
+vim.keymap.set('t', '<c-e>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 
 --[[ vim.keymap.set({ 'n' }, '<C-k>', function()
   require('lsp_signature').toggle_float_win()
