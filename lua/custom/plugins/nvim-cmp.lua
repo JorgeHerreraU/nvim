@@ -57,9 +57,8 @@ return {
       { name = 'path' },
     }
 
-    -- Pass sources to utils setup for additional resources configuration
-    utils.setup_cmp_sources(sources)
     cmp.setup {
+      sources = cmp.config.sources(sources),
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -155,9 +154,6 @@ return {
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
-
-      -- Sources
-      sources = cmp.config.sources(sources),
     }
   end,
 }
