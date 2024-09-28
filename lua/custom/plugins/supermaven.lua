@@ -3,7 +3,7 @@ return {
   config = function()
     require('supermaven-nvim').setup {
       keymaps = {
-        accept_suggestion = '<c-y>',
+        accept_suggestion = '<c-l>',
       },
       condition = function()
         vim.defer_fn(function()
