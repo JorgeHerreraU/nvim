@@ -1,6 +1,18 @@
 return {
   'nvim-lualine/lualine.nvim',
   event = 'VeryLazy',
+  dependencies = {
+    {
+      'will-lynas/grapple-line.nvim',
+      version = '1.x',
+      opts = {
+        colors = {
+          active = 'PmenuSel',
+          inactive = 'CursorLine',
+        },
+      },
+    },
+  },
   config = function()
     local utils = require 'utils'
     local custom_theme = require 'lualine.themes.auto'
@@ -74,17 +86,20 @@ return {
     require('lualine').setup {
       options = {
         theme = custom_theme,
-        section_separators = { left = '', right = '' },
-        component_separators = { left = '', right = '' },
+        -- section_separators = { left = '', right = '' },
+        -- component_separators = { left = '', right = '' },
         globalstatus = false,
         disabled_filetypes = {
           statusline = { 'NvimTree', 'alpha', 'dap-repl', 'dapui_console', 'dapui_watches', 'dapui_stacks', 'dapui_breakpoints', 'dapui_scopes' },
         },
       },
       sections = {
-        lualine_a = { { 'mode' } },
+        lualine_a = { 'mode' },
         lualine_b = {},
         lualine_c = {
+          require('grapple-line').lualine,
+        },
+        lualine_x = {
           {
             'diagnostics',
             symbols = {
@@ -93,29 +108,9 @@ return {
               info = ' ',
               hint = '󰝶 ',
             },
-            color = { bg = 'none' },
-          },
-          {
-            'filetype',
-            icon_only = true,
             separator = '',
-            padding = { left = 1, right = 0 },
-            color = { bg = 'none' },
+            padding = { right = 3 },
           },
-          { 'filename', padding = { left = 1, right = 1 }, color = { bg = 'none' }, separator = { right = '󰓹' } },
-          {
-            buffer_list,
-            padding = { left = 1, right = 1 },
-            color = { fg = '#dbbdd5', bg = 'none' },
-          },
-          {
-            function()
-              return current_signature(75)
-            end,
-            color = { fg = utils.get_hlgroup('Function').fg, bg = 'none' },
-          },
-        },
-        lualine_x = {
           {
             search_custom,
             color = { fg = utils.get_hlgroup('Function').fg },
@@ -132,18 +127,7 @@ return {
             color = { bg = 'none' },
           },
         },
-        lualine_y = {
-          {
-            separator = { left = '', right = '' },
-            padding = { left = 1, right = 1 },
-            fmt = function(str)
-              if str:len() > 12 then
-                return str:sub(1, 10) .. '...'
-              end
-              return str
-            end,
-          },
-        },
+        lualine_y = {},
         lualine_z = {
           {
             line_ending,

@@ -44,7 +44,7 @@ return {
     ]]
     vim.defer_fn(function()
       vim.cmd [[
-        hi lualine_a_inactive guifg=#c6c6c6
+        hi lualine_a_inactive guifg=#8f8e7b
         hi lualine_b_inactive guifg=#c6c6c6
         hi lualine_c_inactive guifg=#c6c6c6
         hi DapUIPlayPauseNC guibg=NONE
