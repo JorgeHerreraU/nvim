@@ -59,6 +59,15 @@ return {
         return ''
       end
     end
+    -- Search custom
+    local search_custom = function()
+      local search = vim.fn.searchcount()
+      if search.total > 0 and vim.v.hlsearch == 1 then
+        return ' ' .. search.current .. '/' .. search.total
+      else
+        return ''
+      end
+    end
 
     -- Apply transparent background to all theme sections
     set_bg_none(custom_theme)
@@ -108,15 +117,23 @@ return {
         },
         lualine_x = {
           {
+            search_custom,
+            color = { fg = utils.get_hlgroup('Function').fg },
+            padding = { right = 3 },
+          },
+          {
             require('lazy.status').updates,
             cond = require('lazy.status').has_updates,
             color = utils.get_hlgroup 'String',
           },
-          { 'diff', color = { bg = 'none' } },
+          {
+            'diff',
+            separator = { left = '' },
+            color = { bg = 'none' },
+          },
         },
         lualine_y = {
           {
-            'branch',
             separator = { left = '', right = '' },
             padding = { left = 1, right = 1 },
             fmt = function(str)
@@ -137,6 +154,10 @@ return {
             spacing_info,
             separator = { left = '', right = '' },
             color = utils.get_hlgroup 'Comment',
+          },
+          {
+            'encoding',
+            color = { fg = utils.get_hlgroup('Function').fg, bg = 'none' },
           },
           {
             function()

@@ -26,8 +26,8 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- save file
-vim.keymap.set('n', '<C-s>', ':w!<CR>', { desc = 'Save file' })
-vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>l', { desc = 'Save file' })
+vim.keymap.set('n', '<C-s>', ':w!<CR>', { desc = 'Save file', silent = true })
+vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>l', { desc = 'Save file', silent = true })
 
 -- nvimtree
 vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'Explorer' })
