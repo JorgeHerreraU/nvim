@@ -169,7 +169,7 @@ return {
     vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = 'Find Select Telescope' })
     vim.keymap.set('n', '<leader>fw', grep_string_under_cursor, { desc = 'Find Current Word' })
     vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Find by Grep' })
-    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find Diagnostics' })
+    vim.keymap.set('n', '<leader>fd', builtin.git_status, { desc = 'Find Git Diff' })
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Find Resume' })
     vim.keymap.set('n', '<leader>fn', find_nvim_files, { desc = 'Find Neovim files' })
     vim.keymap.set('n', '<leader>fu', '<cmd>Telescope undo<cr>', { desc = 'Telescope Undo Tree' })
