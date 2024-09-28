@@ -29,6 +29,8 @@ return {
           },
           { '<leader>hB', gitsigns.toggle_current_line_blame, desc = 'Toggle line blame' },
           { '<leader>hd', "<cmd>lua require('gitsigns').diffthis() vim.api.nvim_command('wincmd h')<CR>", desc = 'Diff view' },
+          { ']c', gitsigns.next_hunk, desc = 'Go to next hunk' },
+          { '[c', gitsigns.prev_hunk, desc = 'Go to previous hunk' },
         }, { buffer = bufnr })
       end,
     }
