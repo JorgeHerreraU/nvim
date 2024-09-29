@@ -21,7 +21,7 @@ return {
         FloatTitle = { bg = 'NONE' },
         LineNr = { fg = '#c6c6c6' },
         CursorLine = { bg = 'NONE' },
-        Visual = { bg = '#141a60' },
+        Visual = { bg = '#214283' },
         PmenuSel = { bg = '#82ffac', fg = '#000000' },
         CmpBorder = { fg = '#c6c6c6' },
       },
