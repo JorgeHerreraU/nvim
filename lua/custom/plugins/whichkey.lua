@@ -27,11 +27,9 @@ return {
       { '<leader>m', group = 'Testing', icon = { icon = '', color = 'green' } },
       { '<leader>h', group = 'Git', icon = { icon = '󰊢', color = 'red' } },
       { '<leader>o', group = 'Grapple', icon = '󰛢' },
-      { '<leader>a', icon = { icon = '', color = 'blue' } },
       { '<leader>c', icon = { icon = '', color = 'orange' } },
       { '<leader>x', icon = { icon = '󰅙', color = 'orange' } },
       { '<leader>e', icon = { icon = '', color = 'azure' } },
-      { '<leader>d', icon = { icon = '', color = 'cyan' } },
       { '<leader>t', group = 'Features', icon = { icon = '', color = 'yellow' } },
     }
     wk.setup {
