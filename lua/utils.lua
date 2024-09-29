@@ -118,6 +118,11 @@ M.toggle_supermaven = function()
   local api = require 'supermaven-nvim.api'
   supermaven_enabled = not supermaven_enabled
   api.toggle()
+  if supermaven_enabled then
+    api.start()
+  else
+    api.stop()
+  end
   print('Supermaven ' .. (supermaven_enabled and 'enabled' or 'disabled'))
 end
 
