@@ -93,4 +93,4 @@ vim.keymap.set('n', '[b', ':bprevious<CR>', { desc = 'Previous buffer' })
 vim.keymap.set('n', ']b', ':bnext<CR>', { desc = 'Next buffer' })
 
 -- Copy previous line till the end of line
-vim.api.nvim_set_keymap('i', '<c-y>', '<Esc>kly$jp', { noremap = true, silent = true })
+vim.keymap.set('i', '<c-y>', utils.copy_line_above, { noremap = true, silent = true })

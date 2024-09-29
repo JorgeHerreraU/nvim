@@ -112,8 +112,8 @@ function M.parse_hex(int_color)
   return string.format('#%x', int_color)
 end
 
-local supermaven_enabled = false
 --- Toggle supermaven
+local supermaven_enabled = false
 M.toggle_supermaven = function()
   local api = require 'supermaven-nvim.api'
   supermaven_enabled = not supermaven_enabled
@@ -124,6 +124,13 @@ M.toggle_supermaven = function()
     api.stop()
   end
   print('Supermaven ' .. (supermaven_enabled and 'enabled' or 'disabled'))
+end
+
+-- Copy line above
+M.copy_line_above = function()
+  if vim.fn.col '.' > 1 then
+    vim.cmd 'normal! ky$jp'
+  end
 end
 
 return M
