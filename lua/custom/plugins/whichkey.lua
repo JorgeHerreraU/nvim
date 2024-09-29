@@ -20,6 +20,7 @@ return {
   config = function() -- This is the function that runs, AFTER loading
     local wk = require 'which-key'
     wk.add {
+      { '<leader>s', group = 'Surround', icon = { icon = '󰘦', color = 'azure' } },
       { '<leader>b', group = 'Debug' },
       { '<leader>f', group = 'Find' },
       { '<leader>l', group = 'Code Actions' },
