@@ -7,8 +7,8 @@ return {
       version = '1.x',
       opts = {
         colors = {
-          active = 'PmenuSel',
-          inactive = 'CursorLine',
+          active = 'Special',
+          inactive = 'SpecialComment',
         },
       },
     },
@@ -86,8 +86,6 @@ return {
     require('lualine').setup {
       options = {
         theme = custom_theme,
-        -- section_separators = { left = '', right = '' },
-        -- component_separators = { left = '', right = '' },
         globalstatus = false,
         disabled_filetypes = {
           statusline = { 'NvimTree', 'alpha', 'dap-repl', 'dapui_console', 'dapui_watches', 'dapui_stacks', 'dapui_breakpoints', 'dapui_scopes' },
