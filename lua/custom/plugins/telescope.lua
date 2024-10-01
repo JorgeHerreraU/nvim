@@ -29,6 +29,24 @@ return {
       version = '2.*',
     },
     'debugloop/telescope-undo.nvim',
+    {
+      'tomasky/bookmarks.nvim',
+      event = 'VimEnter',
+      config = function()
+        require('bookmarks').setup {
+          on_attach = function()
+            local bm = require 'bookmarks'
+            vim.keymap.set('n', '<leader>bb', bm.bookmark_toggle, { desc = 'Bookmark: Toggle' }) -- add or remove bookmark at current line
+            vim.keymap.set('n', '<leader>be', bm.bookmark_ann, { desc = 'Bookmark: Edit' }) -- add or edit mark annotation at current line
+            vim.keymap.set('n', '<leader>bc', bm.bookmark_clean, { desc = 'Bookmark: Clean' }) -- clean all marks in local buffer
+            vim.keymap.set('n', '<leader>bn', bm.bookmark_next, { desc = 'Bookmark: Next' }) -- jump to next mark in local buffer
+            vim.keymap.set('n', '<leader>bp', bm.bookmark_prev, { desc = 'Bookmark: Prev' }) -- jump to previous mark in local buffer
+            vim.keymap.set('n', '<leader>bs', bm.bookmark_list, { desc = 'Bookmark: List' }) -- show marked file list in quickfix window
+            vim.keymap.set('n', '<leader>bd', bm.bookmark_clear_all, { desc = 'Bookmark: Delete all' }) -- removes all bookmarks
+          end,
+        }
+      end,
+    },
   },
   config = function()
     -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -112,6 +130,7 @@ return {
       },
       extensions = {
         undo = {},
+        bookmarks = {},
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
@@ -122,6 +141,7 @@ return {
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
     pcall(require('telescope').load_extension, 'undo')
+    pcall(require('telescope').load_extension, 'bookmarks')
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
@@ -165,10 +185,11 @@ return {
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find Help' })
     vim.keymap.set('n', '<leader>fs', builtin.search_history, { desc = 'Find History' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find Keymaps' })
+    vim.keymap.set('n', '<leader>fb', '<cmd>Telescope bookmarks list<cr>', { desc = 'Find Keymaps' })
     vim.keymap.set('n', '<leader>ff', find_files, { desc = 'Find Files' })
     vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = 'Find Select Telescope' })
     vim.keymap.set('n', '<leader>fw', grep_string_under_cursor, { desc = 'Find Current Word' })
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Find by Grep' })
+    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Find Grep' })
     vim.keymap.set('n', '<leader>fd', builtin.git_status, { desc = 'Find Git Diff' })
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Find Resume' })
     vim.keymap.set('n', '<leader>fn', find_nvim_files, { desc = 'Find Neovim files' })

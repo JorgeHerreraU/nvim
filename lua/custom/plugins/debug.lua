@@ -75,13 +75,13 @@ return {
       dapui.toggle()
     end
     -- Keymaps
-    vim.keymap.set('n', '<leader>bc', dap.continue, { desc = 'Debug: Start/Continue' })
-    vim.keymap.set('n', '<leader>bn', dap.step_over, { desc = 'Debug: Step Over' })
-    vim.keymap.set('n', '<leader>bs', dap.close, { desc = 'Debug: Stop' })
-    vim.keymap.set('n', '<leader>bt', dap.terminate, { desc = 'Debug: Terminate' })
-    vim.keymap.set('n', '<leader>bb', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
-    vim.keymap.set('n', '<leader>bB', breakpoint_condition, { desc = 'Debug: Set Breakpoint' })
-    vim.keymap.set('n', '<leader>bi', toggle_dap_ui, { desc = 'Debug: Toggle Interface' })
+    vim.keymap.set('n', '<leader>dc', dap.continue, { desc = 'Debug: Start/Continue' })
+    vim.keymap.set('n', '<leader>dn', dap.step_over, { desc = 'Debug: Step Over' })
+    vim.keymap.set('n', '<leader>ds', dap.close, { desc = 'Debug: Stop' })
+    vim.keymap.set('n', '<leader>dt', dap.terminate, { desc = 'Debug: Terminate' })
+    vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
+    vim.keymap.set('n', '<leader>dB', breakpoint_condition, { desc = 'Debug: Set Breakpoint' })
+    vim.keymap.set('n', '<leader>di', toggle_dap_ui, { desc = 'Debug: Toggle Interface' })
 
     -- Debuggers Setup
     -- c#

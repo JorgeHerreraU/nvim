@@ -21,7 +21,8 @@ return {
     local wk = require 'which-key'
     wk.add {
       { '<leader>s', group = 'Surround', icon = { icon = '󰘦', color = 'azure' } },
-      { '<leader>b', group = 'Debug' },
+      { '<leader>d', group = 'Debug' },
+      { '<leader>b', group = 'Bookmark', icon = { icon = '', color = 'orange' } },
       { '<leader>f', group = 'Find' },
       { '<leader>l', group = 'Code Actions' },
       { '<leader>m', group = 'Testing', icon = { icon = '', color = 'green' } },
