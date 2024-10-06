@@ -30,15 +30,6 @@ return {
         },
       },
     },
-    -- omnisharp (go-to definitions)
-    'Hoffs/omnisharp-extended-lsp.nvim',
-    -- 'Decodetalkers/csharpls-extended-lsp.nvim',
-    -- rust
-    {
-      'simrat39/rust-tools.nvim',
-      ft = 'rust',
-      dependencies = { 'neovim/nvim-lspconfig' },
-    },
     {
       'luckasRanarison/tailwind-tools.nvim',
       ft = { 'html', 'css', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
@@ -164,15 +155,11 @@ return {
         'html',
         'cssls',
         'angularls',
-        'jdtls',
         'jsonls',
-        'rust_analyzer',
         'vtsls',
         'dockerls',
         'docker_compose_language_service',
-        'omnisharp',
         'tailwindcss',
-        'intelephense',
         'emmet_language_server',
       },
     }
@@ -228,17 +215,6 @@ return {
       },
     }
 
-    -- omnisharp
-    lspconfig.omnisharp.setup {
-      capabilities = capabilities,
-      handlers = handlers,
-      settings = {
-        RoslynExtensionsOptions = {
-          EnableImportCompletion = true,
-        },
-      },
-    }
-
     -- typescript
     lspconfig.vtsls.setup {
       capabilities = capabilities,
@@ -257,14 +233,6 @@ return {
           end
           vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
         end,
-      },
-    }
-
-    -- rust
-    require('rust-tools').setup {
-      server = {
-        handlers = handlers,
-        capabilities = capabilities,
       },
     }
 
@@ -299,12 +267,6 @@ return {
           },
         },
       },
-    }
-
-    -- php
-    lspconfig.intelephense.setup {
-      capabilities = capabilities,
-      handlers = handlers,
     }
 
     -- emmet-ls

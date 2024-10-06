@@ -67,5 +67,3 @@ require('lazy').setup({
     },
   },
 })
--- ftplugin
-vim.cmd [[filetype plugin on]]
