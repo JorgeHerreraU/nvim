@@ -9,7 +9,6 @@ return {
       ensure_installed = {
         'stylua',
         'goimports',
-        'csharpier',
         'prettier',
         'prettierd',
       },
