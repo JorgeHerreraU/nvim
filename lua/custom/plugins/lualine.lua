@@ -6,6 +6,7 @@ return {
       'will-lynas/grapple-line.nvim',
       version = '1.x',
       opts = {
+        number_of_files = 5,
         colors = {
           active = 'Special',
           inactive = 'SpecialComment',
@@ -92,9 +93,7 @@ return {
         },
       },
       sections = {
-        lualine_a = {
-          {},
-        },
+        lualine_a = {},
         lualine_b = {},
         lualine_c = {
           require('grapple-line').lualine,
