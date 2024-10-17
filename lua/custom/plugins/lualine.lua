@@ -1,19 +1,6 @@
 return {
   'nvim-lualine/lualine.nvim',
   event = 'VeryLazy',
-  dependencies = {
-    {
-      'will-lynas/grapple-line.nvim',
-      version = '1.x',
-      opts = {
-        number_of_files = 5,
-        colors = {
-          active = 'Special',
-          inactive = 'SpecialComment',
-        },
-      },
-    },
-  },
   config = function()
     local utils = require 'utils'
     local custom_theme = require 'lualine.themes.auto'
@@ -95,9 +82,7 @@ return {
       sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = {
-          require('grapple-line').lualine,
-        },
+        lualine_c = {},
         lualine_x = {
           {
             'diagnostics',

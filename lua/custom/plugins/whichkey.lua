@@ -27,7 +27,6 @@ return {
       { '<leader>l', group = 'Code Actions' },
       { '<leader>m', group = 'Testing', icon = { icon = '', color = 'green' } },
       { '<leader>h', group = 'Git', icon = { icon = '󰊢', color = 'red' } },
-      { '<leader>o', group = 'Grapple', icon = '󰛢' },
       { '<leader>c', icon = { icon = '', color = 'orange' } },
       { '<leader>x', icon = { icon = '󰅙', color = 'orange' } },
       { '<leader>e', icon = { icon = '', color = 'azure' } },
