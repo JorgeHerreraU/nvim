@@ -92,7 +92,9 @@ return {
         },
       },
       sections = {
-        lualine_a = { 'mode' },
+        lualine_a = {
+          {},
+        },
         lualine_b = {},
         lualine_c = {
           require('grapple-line').lualine,
@@ -106,6 +108,12 @@ return {
               info = ' ',
               hint = '󰝶 ',
             },
+            diagnostics_color = {
+              error = 'Comment', -- Changes diagnostics' error color.
+              warn = 'Comment', -- Changes diagnostics' warn color.
+              info = 'Comment', -- Changes diagnostics' info color.
+              hint = 'Comment', -- Changes diagnostics' hint color.
+            },
             separator = '',
             padding = { right = 3 },
           },
@@ -117,12 +125,7 @@ return {
           {
             require('lazy.status').updates,
             cond = require('lazy.status').has_updates,
-            color = utils.get_hlgroup 'String',
-          },
-          {
-            'diff',
-            separator = { left = '' },
-            color = { bg = 'none' },
+            color = utils.get_hlgroup 'Comment',
           },
         },
         lualine_y = {},
@@ -130,7 +133,7 @@ return {
           {
             line_ending,
             separator = { left = '', right = '' },
-            color = utils.get_hlgroup 'String',
+            color = utils.get_hlgroup 'Comment',
           },
           {
             spacing_info,
@@ -139,13 +142,8 @@ return {
           },
           {
             'encoding',
-            color = { fg = utils.get_hlgroup('Function').fg, bg = 'none' },
-          },
-          {
-            function()
-              return ''
-            end,
-            color = { fg = '#008000', bg = 'none' },
+            color = utils.get_hlgroup 'Comment',
+            padding = { right = 2 },
           },
         },
       },
