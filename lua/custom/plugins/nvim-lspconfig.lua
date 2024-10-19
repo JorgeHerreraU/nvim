@@ -30,13 +30,6 @@ return {
         },
       },
     },
-    {
-      'luckasRanarison/tailwind-tools.nvim',
-      ft = { 'html', 'css', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
-      name = 'tailwind-tools',
-      build = ':UpdateRemotePlugins',
-      opts = {}, -- your configuration
-    },
   },
 
   config = function()
@@ -159,7 +152,6 @@ return {
         'vtsls',
         'dockerls',
         'docker_compose_language_service',
-        'tailwindcss',
         'emmet_language_server',
       },
     }
