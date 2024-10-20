@@ -25,9 +25,6 @@ return {
     -- See `:help cmp`
 
     local cmp = require 'cmp'
-    -- Autopairs
-    local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
-    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
     -- Luasnip
     local luasnip = require 'luasnip'
     luasnip.filetype_extend('javascript', { 'jsdoc' })
