@@ -30,6 +30,7 @@ return {
         },
       },
     },
+    'Hoffs/omnisharp-extended-lsp.nvim',
   },
 
   config = function()
@@ -156,6 +157,7 @@ return {
         'dockerls',
         'docker_compose_language_service',
         'emmet_language_server',
+        'omnisharp',
       },
     }
     -- LSP servers configuration
@@ -266,5 +268,16 @@ return {
 
     -- emmet-ls
     lspconfig.emmet_language_server.setup { capabilities = capabilities }
+
+    -- omnisharp
+    lspconfig.omnisharp.setup {
+      capabilities = capabilities,
+      handlers = handlers,
+      settings = {
+        RoslynExtensionsOptions = {
+          EnableImportCompletion = true,
+        },
+      },
+    }
   end,
 }
