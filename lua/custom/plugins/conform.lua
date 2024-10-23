@@ -11,6 +11,7 @@ return {
         'goimports',
         'prettier',
         'prettierd',
+        'csharpier',
       },
     }
     require('conform').setup {

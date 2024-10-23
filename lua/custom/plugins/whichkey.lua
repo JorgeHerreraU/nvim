@@ -20,18 +20,21 @@ return {
   config = function() -- This is the function that runs, AFTER loading
     local wk = require 'which-key'
     wk.add {
-      { '<leader>s', group = 'Surround', icon = { icon = '󰘦', color = 'azure' } },
-      { '<leader>d', group = 'Debug' },
-      { '<leader>b', group = 'Bookmark', icon = { icon = '', color = 'orange' } },
-      { '<leader>f', group = 'Find' },
-      { '<leader>l', group = 'Code Actions' },
-      { '<leader>m', group = 'Testing', icon = { icon = '', color = 'green' } },
-      { '<leader>h', group = 'Git', icon = { icon = '󰊢', color = 'red' } },
-      { '<leader>c', icon = { icon = '', color = 'orange' } },
-      { '<leader>x', icon = { icon = '󰅙', color = 'orange' } },
-      { '<leader>e', icon = { icon = '', color = 'azure' } },
-      { '<leader>z', icon = { icon = '', color = 'azure' } },
-      { '<leader>t', group = 'Features', icon = { icon = '', color = 'yellow' } },
+      { '<leader>c', icon = { icon = '󰅙', color = 'orange' } },
+      { '<leader>x', icon = { icon = '󰅚', color = 'orange' } },
+      { '<leader>q', icon = { icon = '󰈆', color = 'orange' } },
+      { '<leader>e', icon = { icon = '', color = 'orange' } },
+      { '<leader>z', icon = { icon = '', color = 'orange' } },
+      { '<leader>b', group = 'Bookmark', icon = { icon = '', color = 'grey' } },
+      { '<leader>d', group = 'Debug', icon = { icon = '', color = 'grey' } },
+      { '<leader>t', group = 'Features', icon = { icon = '', color = 'grey' } },
+      { '<leader>f', group = 'Find', icon = { icon = '', color = 'grey' } },
+      { '<leader>h', group = 'Git', icon = { icon = '󰊢', color = 'grey' } },
+      { '<leader>l', group = 'LSP', icon = { icon = '', color = 'grey' } },
+      { '<leader>m', group = 'Testing', icon = { icon = '', color = 'grey' } },
+
+      { '<leader>/', hidden = true },
+      { '<leader><leader>', hidden = true },
     }
     wk.setup {
       preset = 'modern',
@@ -42,6 +45,7 @@ return {
         width = { min = 40, max = 40 },
         spacing = 6,
       },
+      sort = { 'manual' },
     }
   end,
 }

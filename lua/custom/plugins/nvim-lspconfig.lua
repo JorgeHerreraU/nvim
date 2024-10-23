@@ -41,63 +41,91 @@ return {
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('lsp-attach-group', { clear = true }),
       callback = function(event)
-        -- local function to make keybindings mapping easier
-        local map = function(keys, func, desc)
-          vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-        end
-
         -- NOTE: ftplugin overrides go-to-definition keybinding
         local buffer_filetype = vim.api.nvim_get_option_value('filetype', { buf = event.buf })
         if buffer_filetype ~= 'cs' and buffer_filetype ~= 'java' then -- Skip for filetypes
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
+          vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, {
+            buffer = event.buf,
+            desc = 'LSP: Goto Definition',
+          })
         end
 
         -- Find references for the word under your cursor.
-        map('gr', function()
+        vim.keymap.set('n', 'gr', function()
           require('telescope.builtin').lsp_references {
             path_display = { 'smart' },
             show_line = false,
           }
-        end, 'Goto References')
+        end, {
+          buffer = event.buf,
+          desc = 'LSP: Goto References',
+        })
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
-        map('gI', require('telescope.builtin').lsp_implementations, 'Goto Implementation')
+        vim.keymap.set('n', 'gI', require('telescope.builtin').lsp_implementations, {
+          buffer = event.buf,
+          desc = 'LSP: Goto Implementation',
+        })
 
         -- Jump to the type of the word under your cursor.
         --  Useful when you're not sure what type a variable is and you want to see
         --  the definition of its *type*, not where it was *defined*.
-        -- map('<leader>ld', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+        -- vim.keymap.set('n', '<leader>ld', require('telescope.builtin').lsp_type_definitions, {
+        --   buffer = event.buf,
+        --   desc = 'LSP: Type Definition'
+        -- })
 
         -- Show diagnostic message
-        map('<leader>ld', vim.diagnostic.open_float, 'Diagnostic messages')
+        vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, {
+          buffer = event.buf,
+          desc = 'LSP: Diagnostic messages',
+        })
+
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
-        -- map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+        -- vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, {
+        --   buffer = event.buf,
+        --   desc = 'LSP: Document Symbols'
+        -- })
 
         -- Fuzzy find all the symbols in your current workspace.
         --  Similar to document symbols, except searches over your entire project.
-        -- map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+        -- vim.keymap.set('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, {
+        --   buffer = event.buf,
+        --   desc = 'LSP: Workspace Symbols'
+        -- })
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
-        map('<leader>lr', vim.lsp.buf.rename, 'Rename')
+        vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, {
+          buffer = event.buf,
+          desc = 'LSP: Rename',
+        })
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
-        map('<leader>la', vim.lsp.buf.code_action, 'Code Action')
+        vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, {
+          buffer = event.buf,
+          desc = 'LSP: Code Action',
+        })
 
         -- Opens a popup that displays documentation about the word under your cursor
         --  See `:help K` for why this keymap.
-        map('K', vim.lsp.buf.hover, 'Hover Documentation')
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, {
+          buffer = event.buf,
+          desc = 'LSP: Hover Documentation',
+        })
 
         -- This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header.
-
-        -- map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+        -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, {
+        --   buffer = event.buf,
+        --   desc = 'LSP: Goto Declaration'
+        -- })
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.

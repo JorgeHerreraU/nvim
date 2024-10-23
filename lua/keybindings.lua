@@ -52,10 +52,10 @@ vim.keymap.set('n', '<leader>ta', utils.toggle_autoformat, { desc = 'Toggle auto
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Quit' })
 
 -- close all buffers except current
-vim.api.nvim_set_keymap('n', '<leader>c', [[:%bd|e#|bd#<CR>|'"`]], { noremap = true, silent = true, desc = 'Close all other buffers' })
+vim.api.nvim_set_keymap('n', '<leader>c', [[:%bd|e#|bd#<CR>|'"`]], { noremap = true, silent = true, desc = 'Buffer: Keep' })
 
 -- close current buffer
-vim.api.nvim_set_keymap('n', '<leader>x', ':bd<CR>', { noremap = true, silent = true, desc = 'Close current buffer' })
+vim.api.nvim_set_keymap('n', '<leader>x', ':bd<CR>', { noremap = true, silent = true, desc = 'Buffer: Close' })
 
 -- remap visual block mode
 vim.keymap.set('n', '<A-v>', '<C-v>')
