@@ -35,7 +35,7 @@ return {
       'n',
       '<leader>mo',
       ':lua require("neotest").output.open({ enter = true })<CR>',
-      { desc = 'Open Test Output', noremap = true, silent = true }
+      { desc = 'Test: Open Test Output', noremap = true, silent = true }
     )
   end,
 }
