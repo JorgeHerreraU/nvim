@@ -1,12 +1,8 @@
 return {
-  -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
   dependencies = {
-    -- Automatically install LSPs and related tools to stdpath for Neovim
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
-    -- Useful status updates for LSP.
-    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     {
       'j-hui/fidget.nvim',
       opts = {
@@ -17,7 +13,7 @@ return {
         },
       },
     },
-    -- Lua completion, annotations and signatures of Neovim apis
+    -- lua
     {
       'folke/lazydev.nvim',
       dependencies = {
@@ -30,7 +26,11 @@ return {
         },
       },
     },
-    'Hoffs/omnisharp-extended-lsp.nvim',
+    -- csharp
+    {
+      'Hoffs/omnisharp-extended-lsp.nvim',
+      ft = 'cs',
+    },
   },
 
   config = function()
@@ -41,19 +41,13 @@ return {
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('lsp-attach-group', { clear = true }),
       callback = function(event)
-        -- NOTE: ftplugin overrides go-to-definition keybinding
-        local buffer_filetype = vim.api.nvim_get_option_value('filetype', { buf = event.buf })
-        if buffer_filetype ~= 'cs' and buffer_filetype ~= 'java' then -- Skip for filetypes
-          -- Jump to the definition of the word under your cursor.
-          --  This is where a variable was first declared, or where a function is defined, etc.
-          --  To jump back, press <C-t>.
-          vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, {
-            buffer = event.buf,
-            desc = 'LSP: Goto Definition',
-          })
-        end
+        -- keybindings
 
-        -- Find references for the word under your cursor.
+        vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, {
+          buffer = event.buf,
+          desc = 'LSP: Goto Definition',
+        })
+
         vim.keymap.set('n', 'gr', function()
           require('telescope.builtin').lsp_references {
             path_display = { 'smart' },
@@ -99,22 +93,16 @@ return {
         --   desc = 'LSP: Workspace Symbols'
         -- })
 
-        -- Rename the variable under your cursor.
-        --  Most Language Servers support renaming across files, etc.
         vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, {
           buffer = event.buf,
           desc = 'LSP: Rename',
         })
 
-        -- Execute a code action, usually your cursor needs to be on top of an error
-        -- or a suggestion from your LSP for this to activate.
         vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, {
           buffer = event.buf,
           desc = 'LSP: Code Action',
         })
 
-        -- Opens a popup that displays documentation about the word under your cursor
-        --  See `:help K` for why this keymap.
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, {
           buffer = event.buf,
           desc = 'LSP: Hover Documentation',
@@ -149,17 +137,16 @@ return {
     --  By default, Neovim doesn't support everything that is in the LSP specification.
     --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
     --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+    local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
     local handlers = {
-      -- Buffer diagnostics
       ['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
         virtual_text = { severity = vim.diagnostic.severity.ERROR },
         underline = { severity = vim.diagnostic.severity.ERROR },
         signs = { severity = { min = vim.diagnostic.severity.INFO } },
       }),
     }
+
     local signs = {
       { name = 'DiagnosticSignError', text = '' }, -- Replace '!' with your error icon
       { name = 'DiagnosticSignWarn', text = '' }, -- Replace '⚠️' with your warning icon
@@ -172,7 +159,7 @@ return {
     end
 
     require('mason').setup {}
-    -- lsp installation list
+
     require('mason-lspconfig').setup {
       ensure_installed = {
         'gopls',
@@ -188,7 +175,6 @@ return {
         'omnisharp',
       },
     }
-    -- LSP servers configuration
 
     local lspconfig = require 'lspconfig'
 
@@ -241,20 +227,17 @@ return {
     }
 
     -- typescript
+    local IGNORED_DIAGNOSTIC_CODES = {
+      [80001] = true, -- File is a commonjs module
+    }
     lspconfig.vtsls.setup {
       capabilities = capabilities,
       handlers = {
         ['textDocument/publishDiagnostics'] = function(_, result, ctx, config)
-          if result.diagnostics ~= nil then
-            local idx = 1
-            while idx <= #result.diagnostics do
-              -- 8001 File is a commonjs module
-              if result.diagnostics[idx].code == 80001 then
-                table.remove(result.diagnostics, idx)
-              else
-                idx = idx + 1
-              end
-            end
+          if result.diagnostics then
+            result.diagnostics = vim.tbl_filter(function(diagnostic)
+              return not IGNORED_DIAGNOSTIC_CODES[diagnostic.code]
+            end, result.diagnostics)
           end
           vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
         end,
@@ -306,6 +289,18 @@ return {
           EnableImportCompletion = true,
         },
       },
+      on_attach = function(client, bufnr)
+        vim.bo[bufnr].shiftwidth = 4
+        vim.bo[bufnr].tabstop = 4
+        vim.bo[bufnr].expandtab = true
+        -- set go to definition keybinding for omnisharp
+        vim.keymap.set('n', 'gd', function()
+          require('omnisharp_extended').telescope_lsp_definitions {}
+        end, {
+          buffer = bufnr,
+          desc = 'LSP: Goto Definition',
+        })
+      end,
     }
   end,
 }
