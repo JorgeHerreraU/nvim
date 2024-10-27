@@ -20,11 +20,16 @@ return {
   config = function() -- This is the function that runs, AFTER loading
     local wk = require 'which-key'
     wk.add {
+      mode = { 'n', 'v' },
+      {
+        { '<leader>y', icon = { icon = '', color = 'orange' } },
+        { '<leader>p', icon = { icon = '', color = 'orange' } },
+      },
       { '<leader>c', icon = { icon = '󰅙', color = 'orange' } },
       { '<leader>x', icon = { icon = '󰅚', color = 'orange' } },
-      { '<leader>q', icon = { icon = '󰈆', color = 'orange' } },
       { '<leader>e', icon = { icon = '', color = 'orange' } },
       { '<leader>z', icon = { icon = '', color = 'orange' } },
+      { '<leader>q', icon = { icon = '󰈆', color = 'orange' } },
       { '<leader>b', group = 'Bookmark', icon = { icon = '', color = 'grey' } },
       { '<leader>d', group = 'Debug', icon = { icon = '', color = 'grey' } },
       { '<leader>t', group = 'Features', icon = { icon = '', color = 'grey' } },
@@ -32,7 +37,6 @@ return {
       { '<leader>h', group = 'Git', icon = { icon = '󰊢', color = 'grey' } },
       { '<leader>l', group = 'LSP', icon = { icon = '', color = 'grey' } },
       { '<leader>m', group = 'Testing', icon = { icon = '', color = 'grey' } },
-
       { '<leader>/', hidden = true },
       { '<leader><leader>', hidden = true },
     }
