@@ -73,6 +73,13 @@ return {
         --   desc = 'LSP: Type Definition'
         -- })
 
+        vim.keymap.set('n', '<leader>lf', function()
+          vim.lsp.buf.format { async = true }
+        end, {
+          buffer = event.buf,
+          desc = 'LSP: Format buffer',
+        })
+
         -- Show diagnostic message
         vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, {
           buffer = event.buf,
