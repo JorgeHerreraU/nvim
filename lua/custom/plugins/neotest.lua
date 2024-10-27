@@ -17,10 +17,20 @@ return {
       },
     }
     -- neotest
-    vim.api.nvim_set_keymap('n', '<leader>mR', ':lua require("neotest").run.run({suite = true})<CR>', { desc = 'Run All Tests', noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '<leader>mr', ':lua require("neotest").run.run()<CR>', { desc = 'Run Tests', noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '<leader>mt', ':lua require("neotest").summary.toggle()<CR>', { desc = 'Toggle Test Summary', noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '<leader>ms', ':lua require("neotest").run.stop()<CR>', { desc = 'Stop Test', noremap = true, silent = true })
+    vim.api.nvim_set_keymap(
+      'n',
+      '<leader>mR',
+      ':lua require("neotest").run.run({suite = true})<CR>',
+      { desc = 'Test: Run All Tests', noremap = true, silent = true }
+    )
+    vim.api.nvim_set_keymap('n', '<leader>mr', ':lua require("neotest").run.run()<CR>', { desc = 'Test: Run Tests', noremap = true, silent = true })
+    vim.api.nvim_set_keymap(
+      'n',
+      '<leader>mt',
+      ':lua require("neotest").summary.toggle()<CR>',
+      { desc = 'Test: Toggle Test Summary', noremap = true, silent = true }
+    )
+    vim.api.nvim_set_keymap('n', '<leader>ms', ':lua require("neotest").run.stop()<CR>', { desc = 'Test: Stop Test', noremap = true, silent = true })
     vim.api.nvim_set_keymap(
       'n',
       '<leader>mo',
