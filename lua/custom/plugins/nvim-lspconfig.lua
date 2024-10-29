@@ -13,6 +13,8 @@ return {
         },
       },
     },
+    -- json
+    'b0o/schemastore.nvim',
     -- lua
     {
       'folke/lazydev.nvim',
@@ -122,10 +124,7 @@ return {
         --   desc = 'LSP: Goto Declaration'
         -- })
 
-        -- The following two autocommands are used to highlight references of the
-        -- word under your cursor when your cursor rests there for a little while.
-        --    See `:help CursorHold` for information about when this is executed
-        -- When you move your cursor, the highlights will be cleared (the second autocommand).
+        -- Highlight word under cursor
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -145,6 +144,7 @@ return {
     --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
     --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
 
     local handlers = {
       ['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -197,6 +197,7 @@ return {
           },
           diagnostics = {
             globals = { 'vim', 'use' },
+            disable = { 'missing-parameter' },
           },
           workspace = {
             library = vim.api.nvim_get_runtime_file('', true),
@@ -215,6 +216,13 @@ return {
     -- jsonls
     lspconfig.jsonls.setup {
       capabilities = capabilities,
+      handlers = handlers,
+      settings = {
+        json = {
+          schemas = require('schemastore').json.schemas(),
+          validate = { enable = true },
+        },
+      },
     }
 
     -- golsp
@@ -236,19 +244,20 @@ return {
     -- typescript
     local IGNORED_DIAGNOSTIC_CODES = {
       [80001] = true, -- File is a commonjs module
+      [80006] = true, -- This can be converted to an ES module
     }
     lspconfig.vtsls.setup {
       capabilities = capabilities,
-      handlers = {
+      handlers = vim.tbl_extend('force', handlers, {
         ['textDocument/publishDiagnostics'] = function(_, result, ctx, config)
           if result.diagnostics then
             result.diagnostics = vim.tbl_filter(function(diagnostic)
               return not IGNORED_DIAGNOSTIC_CODES[diagnostic.code]
             end, result.diagnostics)
           end
-          vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+          handlers['textDocument/publishDiagnostics'](_, result, ctx, config)
         end,
-      },
+      }),
     }
 
     -- docker
