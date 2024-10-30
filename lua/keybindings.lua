@@ -41,6 +41,11 @@ vim.keymap.set('n', '<c-d>', utils.lazy '<c-d>zz', { desc = 'Scroll down half sc
 -- expand curly braces c# style
 vim.keymap.set('n', '<C-m>', utils.expand_braces, { desc = 'Expand curly braces' })
 
+-- insert semicolon at the end of the line
+vim.keymap.set('i', '<M-;>', function()
+  return '<Esc>A;<CR>'
+end, { expr = true, desc = 'Add semicolon and new line' })
+
 -- resize
 vim.keymap.set('n', '<C-Right>', ':vertical resize +5<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Left>', ':vertical resize -5<CR>', { noremap = true, silent = true })
