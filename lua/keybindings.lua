@@ -78,5 +78,10 @@ vim.keymap.set('n', ']b', ':bnext<CR>', { desc = 'Next buffer' })
 -- copy previous line till the end of line
 vim.keymap.set('i', '<c-y>', utils.copy_line_above, { noremap = true, silent = true })
 
+-- copy and paste from sysclipboard
 vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y', { desc = 'Yank' })
-vim.keymap.set({ 'n', 'x' }, '<leader>p', '"+p', { desc = 'Paste' })
+vim.keymap.set({ 'n', 'x' }, '<leader>p', function()
+  local cleaned = vim.fn.substitute(vim.fn.getreg '+', '\r', '', 'g')
+  vim.fn.setreg('+', cleaned)
+  return '"+p'
+end, { expr = true, desc = 'Paste' })

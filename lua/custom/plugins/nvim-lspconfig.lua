@@ -258,6 +258,13 @@ return {
           handlers['textDocument/publishDiagnostics'](_, result, ctx, config)
         end,
       }),
+      settings = {
+        javascript = {
+          preferences = {
+            importModuleSpecifierEnding = 'js',
+          },
+        },
+      },
     }
 
     -- docker
