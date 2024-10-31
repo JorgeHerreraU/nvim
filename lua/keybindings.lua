@@ -93,3 +93,6 @@ vim.keymap.set({ 'n', 'x' }, '<leader>p', function()
   vim.fn.setreg('+', cleaned)
   return '"+p'
 end, { expr = true, desc = 'Paste' })
+
+-- save session
+vim.keymap.set({ 'n', 'x' }, '<leader>s', ':SessionSave<CR>', { desc = 'Save Session' })

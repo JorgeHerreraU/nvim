@@ -29,6 +29,7 @@ return {
       { '<leader>x', icon = { icon = '󰅚', color = 'orange' } },
       { '<leader>e', icon = { icon = '', color = 'orange' } },
       { '<leader>z', icon = { icon = '', color = 'orange' } },
+      { '<leader>s', icon = { icon = '', color = 'orange' } },
       { '<leader>q', icon = { icon = '󰈆', color = 'orange' } },
       { '<leader>b', group = 'Bookmark', icon = { icon = '', color = 'grey' } },
       { '<leader>d', group = 'Debug', icon = { icon = '', color = 'grey' } },
