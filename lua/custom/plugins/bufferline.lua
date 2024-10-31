@@ -13,5 +13,7 @@ return {
     vim.keymap.set('n', '<A-w>', '<cmd>BufferLineGoToBuffer 2<CR>', { desc = 'Switch to buffer 2', silent = true })
     vim.keymap.set('n', '<A-e>', '<cmd>BufferLineGoToBuffer 3<CR>', { desc = 'Switch to buffer 3', silent = true })
     vim.keymap.set('n', '<A-r>', '<cmd>BufferLineGoToBuffer 4<CR>', { desc = 'Switch to buffer 4', silent = true })
+    vim.keymap.set('n', '<A-Left>', '<cmd>BufferLineMovePrev<CR>', { desc = 'Move buffer left', silent = true })
+    vim.keymap.set('n', '<A-Right>', '<cmd>BufferLineMoveNext<CR>', { desc = 'Move buffer right', silent = true })
   end,
 }
