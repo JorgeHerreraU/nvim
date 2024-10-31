@@ -28,6 +28,11 @@ return {
         },
       },
     },
+    -- omnisharp
+    {
+      'seblj/roslyn.nvim',
+      ft = { 'cs', 'axaml.cs' },
+    },
   },
 
   config = function()
@@ -291,6 +296,29 @@ return {
             unknownAtRules = 'ignore',
           },
         },
+      },
+    }
+
+    -- csharp
+    require('roslyn').setup {
+      config = {
+        settings = {
+          editor = {
+            tabSize = 4,
+            insertSpaces = true,
+          },
+          capabilities = capabilities,
+        },
+        on_attach = function(client, bufnr)
+          vim.api.nvim_create_autocmd('BufEnter', {
+            buffer = bufnr,
+            callback = function()
+              local first_line = vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)
+              vim.api.nvim_buf_set_lines(bufnr, 0, 1, false, first_line)
+              vim.cmd 'silent! write'
+            end,
+          })
+        end,
       },
     }
 
