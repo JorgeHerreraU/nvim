@@ -84,49 +84,6 @@ return {
     vim.keymap.set('n', '<leader>di', toggle_dap_ui, { desc = 'Debug: Toggle Interface' })
 
     -- Debuggers Setup
-    -- c#
-    dap.adapters.coreclr = {
-      type = 'executable',
-      command = vim.fn.stdpath 'data' .. '/mason/bin/netcoredbg',
-      args = { '--interpreter=vscode' },
-      options = {
-        detached = false,
-      },
-    }
-
-    dap.configurations.cs = {
-      {
-        type = 'coreclr',
-        name = 'console - netcoredbg',
-        request = 'launch',
-        program = function()
-          return vim.fn.input('Entry point: ', vim.fn.getcwd() .. '/', 'file')
-        end,
-      },
-      {
-        type = 'coreclr',
-        name = 'aspnetcore - netcoredbg',
-        request = 'launch',
-        program = function()
-          return vim.fn.input('Entry Point: ', vim.fn.getcwd() .. '/', 'file')
-        end,
-        env = {
-          ASPNETCORE_ENVIRONMENT = function()
-            -- todo: request input from ui
-            return 'Development'
-          end,
-          ASPNETCORE_URLS = function()
-            -- todo: request input from ui
-            return 'http://localhost:5283'
-          end,
-        },
-        cwd = function()
-          return vim.fn.input('appsettings.json: ', vim.fn.getcwd() .. '/', 'file')
-        end,
-      },
-    }
-
-    -- go
     dap.adapters.go = {
       type = 'server',
       port = '${port}',
