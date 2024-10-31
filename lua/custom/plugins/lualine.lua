@@ -83,7 +83,13 @@ return {
         lualine_a = {},
         lualine_b = {},
         lualine_c = {},
-        lualine_x = {
+        lualine_x = {},
+        lualine_y = {
+          {
+            search_custom,
+            separator = { left = '', right = '' },
+            color = { fg = utils.get_hlgroup('Function').fg },
+          },
           {
             'diagnostics',
             symbols = {
@@ -98,21 +104,22 @@ return {
               info = 'Comment', -- Changes diagnostics' info color.
               hint = 'Comment', -- Changes diagnostics' hint color.
             },
-            separator = '',
-            padding = { right = 3 },
+            separator = { left = '', right = '' },
           },
           {
-            search_custom,
-            color = { fg = utils.get_hlgroup('Function').fg },
-            padding = { right = 3 },
+            'filename',
+            path = 1,
+            shorting_target = 20,
+            separator = { left = '', right = '' },
+            color = utils.get_hlgroup 'Comment',
           },
           {
             require('lazy.status').updates,
             cond = require('lazy.status').has_updates,
+            separator = { left = '', right = '' },
             color = utils.get_hlgroup 'Comment',
           },
         },
-        lualine_y = {},
         lualine_z = {
           {
             line_ending,
@@ -127,7 +134,6 @@ return {
           {
             'encoding',
             color = utils.get_hlgroup 'Comment',
-            padding = { right = 2 },
           },
         },
       },
