@@ -153,14 +153,6 @@ return {
     local find_files = function()
       builtin.find_files { hidden = true, no_ignore = true, no_ignore_parent = true }
     end
-    local find_gitignored = function()
-      builtin.find_files {
-        hidden = true,
-        no_ignore = true,
-        respect_gitignore = false,
-        find_command = { 'git', 'ls-files', '--ignored', '--exclude-standard', '--others' },
-      }
-    end
     local find_buffer = function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -192,7 +184,6 @@ return {
       }
     end
     -- Keybindings
-    vim.keymap.set('n', '<leader>fa', find_gitignored, { desc = 'Find: Git Ignored' })
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find: Help' })
     vim.keymap.set('n', '<leader>fs', builtin.search_history, { desc = 'Find: History' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find: Keymaps' })
