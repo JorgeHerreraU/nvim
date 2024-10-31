@@ -30,8 +30,11 @@ return {
     },
     -- csharp
     {
-      'Hoffs/omnisharp-extended-lsp.nvim',
+      'seblj/roslyn.nvim',
       ft = 'cs',
+      opts = {
+        -- your configuration comes here; leave empty for default settings
+      },
     },
   },
 
@@ -179,7 +182,6 @@ return {
         'dockerls',
         'docker_compose_language_service',
         'emmet_language_server',
-        'omnisharp',
       },
     }
 
@@ -302,28 +304,5 @@ return {
 
     -- emmet-ls
     lspconfig.emmet_language_server.setup { capabilities = capabilities }
-
-    -- omnisharp
-    lspconfig.omnisharp.setup {
-      capabilities = capabilities,
-      handlers = handlers,
-      settings = {
-        RoslynExtensionsOptions = {
-          EnableImportCompletion = true,
-        },
-      },
-      on_attach = function(client, bufnr)
-        vim.bo[bufnr].shiftwidth = 4
-        vim.bo[bufnr].tabstop = 4
-        vim.bo[bufnr].expandtab = true
-        -- set go to definition keybinding for omnisharp
-        vim.keymap.set('n', 'gd', function()
-          require('omnisharp_extended').telescope_lsp_definitions {}
-        end, {
-          buffer = bufnr,
-          desc = 'LSP: Goto Definition',
-        })
-      end,
-    }
   end,
 }
