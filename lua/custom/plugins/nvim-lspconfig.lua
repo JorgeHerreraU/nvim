@@ -310,6 +310,10 @@ return {
           capabilities = capabilities,
         },
         on_attach = function(client, bufnr)
+          vim.bo[bufnr].tabstop = 4
+          vim.bo[bufnr].shiftwidth = 4
+          vim.bo[bufnr].expandtab = true
+          vim.bo[bufnr].softtabstop = 4
           vim.api.nvim_create_autocmd('BufEnter', {
             buffer = bufnr,
             callback = function()
