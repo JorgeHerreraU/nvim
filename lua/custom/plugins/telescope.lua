@@ -196,10 +196,17 @@ return {
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Find: Resume' })
     vim.keymap.set('n', '<leader>fn', find_nvim_files, { desc = 'Find: Neovim files' })
     vim.keymap.set('n', '<leader>fu', '<cmd>Telescope undo<cr>', { desc = 'Telescope Undo Tree' })
-    vim.keymap.set('n', '<leader>fm', '<cmd>Telescope persisted<cr>', { desc = 'Telescope Persisted' })
     vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Find: Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader>f/', grep_open_files, { desc = 'Find: In Open Files' })
     vim.keymap.set('n', '<leader>/', find_buffer, { desc = 'Find: In buffer' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find: Opened Buffers' })
+
+    -- Tmux Keybindings
+    vim.keymap.set(
+      'n',
+      '<leader>tt',
+      "<cmd>lua require('telescope').extensions.tmux.switch_session({ list_sessions = 'simple'})<cr>",
+      { desc = 'Tmux: Navigate' }
+    )
   end,
 }
