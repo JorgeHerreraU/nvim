@@ -200,13 +200,5 @@ return {
     vim.keymap.set('n', '<leader>f/', grep_open_files, { desc = 'Find: In Open Files' })
     vim.keymap.set('n', '<leader>/', find_buffer, { desc = 'Find: In buffer' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find: Opened Buffers' })
-
-    -- Tmux Keybindings
-    vim.keymap.set(
-      'n',
-      '<leader>tt',
-      "<cmd>lua require('telescope').extensions.tmux.switch_session({ list_sessions = 'simple'})<cr>",
-      { desc = 'Tmux: Navigate' }
-    )
   end,
 }

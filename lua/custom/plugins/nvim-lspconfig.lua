@@ -88,20 +88,6 @@ return {
           desc = 'LSP: Diagnostic messages',
         })
 
-        -- Fuzzy find all the symbols in your current document.
-        --  Symbols are things like variables, functions, types, etc.
-        -- vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, {
-        --   buffer = event.buf,
-        --   desc = 'LSP: Document Symbols'
-        -- })
-
-        -- Fuzzy find all the symbols in your current workspace.
-        --  Similar to document symbols, except searches over your entire project.
-        -- vim.keymap.set('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, {
-        --   buffer = event.buf,
-        --   desc = 'LSP: Workspace Symbols'
-        -- })
-
         vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, {
           buffer = event.buf,
           desc = 'LSP: Rename',
