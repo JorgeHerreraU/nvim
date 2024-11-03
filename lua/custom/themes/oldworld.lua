@@ -10,6 +10,7 @@ return {
         telescope = true,
       },
       styles = {
+        booleans = { italic = false },
         comments = { italic = false },
         keywords = { italic = false },
         functions = { italic = false },
@@ -32,15 +33,22 @@ return {
         Visual = { bg = '#214283' },
         PmenuSel = { bg = '#82ffac', fg = '#000000' },
         CmpBorder = { fg = '#c6c6c6' },
-        Comment = { fg = '#4E5163' },
-        Type = { fg = '#c6c6c6' },
+        Comment = { fg = '#4E5163', italic = false },
+        Type = { fg = '#c6c6c6', italic = false },
 
         -- Virtual text colors (shown inline)
         DiagnosticVirtualTextError = { fg = '#ff9ea8' },
         DiagnosticUnnecessary = { fg = '#696969' },
         DiagnosticSignHint = { fg = '#c6c6c6' },
 
-        ['@boolean'] = { fg = '#E29ECA' },
+        ['@boolean'] = { fg = '#E29ECA', italic = false },
+        Keyword = { italic = false },
+        Function = { italic = false },
+        ['@keyword'] = { italic = false },
+        ['@function'] = { italic = false },
+        ['@parameter'] = { italic = false },
+        ['@variable'] = { italic = false },
+        ['@text.emphasis'] = { italic = false },
       },
     }
     vim.cmd.colorscheme 'oldworld'
