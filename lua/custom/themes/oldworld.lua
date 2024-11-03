@@ -42,6 +42,7 @@ return {
         DiagnosticSignHint = { fg = '#c6c6c6' },
 
         ['@boolean'] = { fg = '#E29ECA', italic = false },
+        ['@tag.attribute'] = { fg = '#d7c6f7' },
       },
     }
     vim.cmd.colorscheme 'oldworld'
