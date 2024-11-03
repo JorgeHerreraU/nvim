@@ -74,9 +74,6 @@ vim.keymap.set('o', 'al', ':<C-u>normal val<CR>', { desc = 'Around line text obj
 -- toggle supermaven
 vim.keymap.set('n', '<leader>tm', utils.toggle_supermaven, { desc = 'Toggle supermaven' })
 
--- start supermaven
-vim.keymap.set('n', '<leader>ts', ':SupermavenStart<CR>', { desc = 'Start supermaven', noremap = true, silent = true })
-
 -- previous buffer
 vim.keymap.set('n', '[b', ':bprevious<CR>', { desc = 'Previous buffer' })
 

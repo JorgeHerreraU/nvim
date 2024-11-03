@@ -333,12 +333,16 @@ return {
     require('roslyn').setup {
       config = {
         capabilities = capabilities,
+        handlers = handlers,
         on_attach = function(client, bufnr)
-          utils.semantick_tokens(client)
+          vim.lsp.set_log_level 'DEBUG'
           vim.bo[bufnr].tabstop = 4
           vim.bo[bufnr].shiftwidth = 4
           vim.bo[bufnr].expandtab = true
           vim.bo[bufnr].softtabstop = 4
+          client.handlers['textDocument/diagnostic'] = vim.lsp.with(vim.lsp.diagnostic.on_diagnostic, {
+            virtual_text = { severity = vim.diagnostic.severity.ERROR },
+          })
           vim.api.nvim_create_autocmd('BufEnter', {
             buffer = bufnr,
             callback = function()
