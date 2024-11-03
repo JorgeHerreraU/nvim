@@ -9,6 +9,14 @@ return {
         neo_tree = true,
         telescope = true,
       },
+      styles = {
+        comments = { italic = false },
+        keywords = { italic = false },
+        functions = { italic = false },
+        strings = { italic = false },
+        variables = { italic = false },
+        types = { italic = false },
+      },
       highlight_overrides = {
         Normal = { bg = 'NONE' },
         NormalFloat = { bg = 'NONE' },
