@@ -29,7 +29,7 @@ return {
 
         -- Virtual text colors (shown inline)
         DiagnosticVirtualTextError = { fg = '#ff9ea8' },
-        DiagnosticUnnecessary = { fg = '#585B70' },
+        DiagnosticUnnecessary = { fg = '#696969' },
         DiagnosticSignHint = { fg = '#c6c6c6' },
 
         ['@boolean'] = { fg = '#E29ECA' },
