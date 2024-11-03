@@ -31,6 +31,8 @@ return {
         DiagnosticVirtualTextError = { fg = '#ff9ea8' },
         DiagnosticUnnecessary = { fg = '#585B70' },
         DiagnosticSignHint = { fg = '#c6c6c6' },
+
+        ['@boolean'] = { fg = '#E29ECA' },
       },
     }
     vim.cmd.colorscheme 'oldworld'
