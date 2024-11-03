@@ -331,6 +331,7 @@ return {
 
     -- csharp
     require('roslyn').setup {
+      ---@diagnostic disable-next-line: missing-fields
       config = {
         capabilities = capabilities,
         handlers = handlers,

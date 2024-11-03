@@ -176,11 +176,18 @@ return {
       local quoted_text = word:match '["\']([^"\']+)["\']'
       local cleaned_word = word:match '[%w%-_]+'
       local search_term = quoted_text or cleaned_word
-      builtin.grep_string {
-        search = search_term,
+      builtin.live_grep {
+        default_text = search_term,
         only_sort_text = true,
-        search_dirs = { 'src/', 'lib/', 'api/' },
-        file_ignore_patterns = { '*.min.js', '*.min.css' },
+        file_ignore_patterns = {
+          'node_modules/.*',
+          '%.git/.*',
+          '%.min.js',
+          '%.min.css',
+          'dist/.*',
+          'build/.*',
+          'vendor/.*',
+        },
       }
     end
     -- Keybindings
