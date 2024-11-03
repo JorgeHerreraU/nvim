@@ -42,13 +42,6 @@ return {
         DiagnosticSignHint = { fg = '#c6c6c6' },
 
         ['@boolean'] = { fg = '#E29ECA', italic = false },
-        Keyword = { italic = false },
-        Function = { italic = false },
-        ['@keyword'] = { italic = false },
-        ['@function'] = { italic = false },
-        ['@parameter'] = { italic = false },
-        ['@variable'] = { italic = false },
-        ['@text.emphasis'] = { italic = false },
       },
     }
     vim.cmd.colorscheme 'oldworld'
