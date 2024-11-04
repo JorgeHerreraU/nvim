@@ -75,10 +75,10 @@ vim.keymap.set('o', 'al', ':<C-u>normal val<CR>', { desc = 'Around line text obj
 vim.keymap.set('n', '<leader>tm', utils.toggle_supermaven, { desc = 'Toggle supermaven' })
 
 -- previous buffer
-vim.keymap.set('n', '[b', ':bprevious<CR>', { desc = 'Previous buffer' })
+vim.keymap.set('n', '[b', ':BufferLineCyclePrev<CR>', { desc = 'Previous buffer' })
 
--- pext buffer
-vim.keymap.set('n', ']b', ':bnext<CR>', { desc = 'Next buffer' })
+-- next buffer
+vim.keymap.set('n', ']b', ':BufferLineCycleNext<CR>', { desc = 'Next buffer' })
 
 -- copy previous line till the end of line
 vim.keymap.set('i', '<c-y>', utils.copy_line_above, { noremap = true, silent = true })
