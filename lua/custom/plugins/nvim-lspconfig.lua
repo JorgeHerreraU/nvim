@@ -177,6 +177,7 @@ return {
         'dockerls',
         'docker_compose_language_service',
         'emmet_language_server',
+        'bashls',
       },
     }
 
@@ -328,5 +329,12 @@ return {
 
     -- emmet-ls
     lspconfig.emmet_language_server.setup { capabilities = capabilities }
+
+    -- bashls
+    lspconfig.bashls.setup {
+      capabilities = capabilities,
+      handlers = handlers,
+      filetypes = { 'sh', 'bash', 'zsh' },
+    }
   end,
 }

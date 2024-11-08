@@ -12,6 +12,7 @@ return {
         'prettier',
         'prettierd',
         'csharpier',
+        'shfmt',
       },
     }
     require('conform').setup {
@@ -41,6 +42,9 @@ return {
         typescriptreact = { 'prettierd' },
         json = { 'prettierd' },
         scss = { 'prettierd' },
+        sh = { 'shfmt' },
+        bash = { 'shfmt' },
+        zsh = { 'shfmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
