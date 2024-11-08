@@ -122,49 +122,6 @@ return {
             callback = vim.lsp.buf.clear_references,
           })
         end
-        vim.api.nvim_create_user_command('DumpTokens', function()
-          local bufnr = vim.api.nvim_get_current_buf()
-
-          -- Get current client
-          local client = vim.lsp.get_active_clients({ bufnr = bufnr })[1]
-          if not client then
-            print 'No active LSP client found'
-            return
-          end
-
-          -- Print semantic token capabilities
-          print('Semantic token capabilities:', vim.inspect(client.server_capabilities.semanticTokensProvider))
-
-          -- Request semantic tokens
-          client.request('textDocument/semanticTokens/full', {
-            textDocument = vim.lsp.util.make_text_document_params(),
-          }, function(err, result)
-            if err then
-              print('Error getting semantic tokens:', vim.inspect(err))
-              return
-            end
-
-            -- Create new buffer to show results
-            vim.cmd 'vnew'
-            local temp_bufnr = vim.api.nvim_get_current_buf()
-
-            -- Add the legend information
-            local legend = client.server_capabilities.semanticTokensProvider.legend
-            local lines = {
-              'Token Types:',
-              vim.inspect(legend.tokenTypes),
-              '',
-              'Token Modifiers:',
-              vim.inspect(legend.tokenModifiers),
-              '',
-              'Token Data:',
-              vim.inspect(result),
-            }
-
-            vim.api.nvim_buf_set_lines(temp_bufnr, 0, -1, false, lines)
-            vim.bo[temp_bufnr].modifiable = false
-          end, bufnr)
-        end, {})
       end,
     })
 
@@ -175,11 +132,23 @@ return {
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
     capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+    -- Add semantic tokens support
+    capabilities.textDocument.semanticTokens = {
+      dynamicRegistration = false,
+      tokenTypes = { 'variable' },
+      tokenModifiers = { 'deprecated' },
+      formats = { 'relative' },
+    }
+
     local handlers = {
       ['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = { severity = vim.diagnostic.severity.ERROR },
-        underline = { severity = vim.diagnostic.severity.ERROR },
-        signs = { severity = { min = vim.diagnostic.severity.INFO } },
+        virtual_text = {
+          severity = vim.diagnostic.severity.ERROR,
+          spacing = 4,
+        },
+        signs = true,
+        severity_sort = true,
+        update_in_insert = false,
       }),
     }
 
@@ -212,12 +181,10 @@ return {
     }
 
     local lspconfig = require 'lspconfig'
-    local utils = require 'utils'
 
     -- lua
     lspconfig.lua_ls.setup {
       capabilities = capabilities,
-      handlers = handlers,
       settings = {
         Lua = {
           runtime = {
