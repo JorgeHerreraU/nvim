@@ -93,10 +93,10 @@ return {
           {
             'diagnostics',
             symbols = {
-              error = ' ',
-              warn = ' ',
-              info = ' ',
-              hint = '󰝶 ',
+              error = ' ',
+              warn = ' ',
+              hint = ' ',
+              info = ' ',
             },
             diagnostics_color = {
               error = 'Comment', -- Changes diagnostics' error color.

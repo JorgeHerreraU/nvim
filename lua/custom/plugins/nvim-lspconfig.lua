@@ -153,10 +153,10 @@ return {
     }
 
     local signs = {
-      { name = 'DiagnosticSignError', text = '' }, -- Replace '!' with your error icon
+      { name = 'DiagnosticSignError', text = '' }, -- Replace '!' with your error icon
       { name = 'DiagnosticSignWarn', text = '' }, -- Replace '⚠️' with your warning icon
       { name = 'DiagnosticSignHint', text = '' }, -- Replace '' with your hint icon
-      { name = 'DiagnosticSignInfo', text = '󰋽' }, -- Replace 'ℹ️' with your info icon
+      { name = 'DiagnosticSignInfo', text = '' }, -- Replace 'ℹ️' with your info icon
     }
 
     for _, sign in ipairs(signs) do
@@ -300,7 +300,7 @@ return {
     require('roslyn').setup {
       ---@diagnostic disable-next-line: missing-fields
       config = {
-        capabilities = capabilities,
+        capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
         handlers = handlers,
         on_attach = function(client, bufnr)
           vim.lsp.set_log_level 'DEBUG'
