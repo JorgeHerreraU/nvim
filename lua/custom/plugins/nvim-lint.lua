@@ -1,6 +1,15 @@
 return {
   'mfussenegger/nvim-lint',
+  dependencies = {
+    'williamboman/mason.nvim',
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+  },
   config = function()
+    require('mason-tool-installer').setup {
+      ensure_installed = {
+        'shellcheck',
+      },
+    }
     require('lint').linters_by_ft = {
       sh = { 'shellcheck' },
       bash = { 'shellcheck' },
