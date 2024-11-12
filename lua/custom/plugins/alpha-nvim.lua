@@ -37,7 +37,7 @@ return {
       dashboard.button('SPC f f', ' ' .. ' Find file'),
       dashboard.button('SPC f .', ' ' .. ' Recent files'),
       dashboard.button('SPC f g', ' ' .. ' Grep text'),
-      dashboard.button('SPC e  ', '' .. '  Explorer'),
+      dashboard.button('SPC e  ', '󱏒' .. '  Explorer'),
     }
     dashboard.section.header.opts.hl = {
       {

@@ -27,7 +27,7 @@ return {
       },
       { '<leader>c', icon = { icon = '󰅙', color = 'orange' } },
       { '<leader>x', icon = { icon = '󰅚', color = 'orange' } },
-      { '<leader>e', icon = { icon = '', color = 'orange' } },
+      { '<leader>e', icon = { icon = '󱏒', color = 'orange' } },
       { '<leader>z', icon = { icon = '', color = 'orange' } },
       { '<leader>q', icon = { icon = '󰈆', color = 'orange' } },
       { '<leader>b', group = 'Bookmark', icon = { icon = '', color = 'grey' } },
