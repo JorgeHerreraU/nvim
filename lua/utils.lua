@@ -176,4 +176,8 @@ M.semantick_tokens = function(client)
   end
 end
 
+M.is_dotnet_installed = function()
+  return vim.fn.executable 'dotnet' == 1
+end
+
 return M
