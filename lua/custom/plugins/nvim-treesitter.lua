@@ -3,7 +3,7 @@ return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   opts = {
-    ensure_installed = { 'bash', 'c', 'css', 'html', 'lua', 'markdown', 'markdown_inline', 'vim', 'vimdoc', 'javascript', 'typescript', 'go', 'tsx' },
+    ensure_installed = { 'bash', 'c', 'css', 'html', 'lua', 'markdown', 'markdown_inline', 'vim', 'vimdoc', 'javascript', 'typescript', 'go', 'tsx', 'xml' },
     -- Autoinstall languages that are not installed
     auto_install = true,
     highlight = {
@@ -29,6 +29,12 @@ return {
 
     ---@diagnostic disable-next-line: missing-fields
     require('nvim-treesitter.configs').setup(opts)
+    vim.treesitter.language.register('xml', 'axaml')
+    vim.filetype.add {
+      extension = {
+        axaml = 'axaml',
+      },
+    }
 
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:

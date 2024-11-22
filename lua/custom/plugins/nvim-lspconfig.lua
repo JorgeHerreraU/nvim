@@ -221,6 +221,18 @@ return {
     }
 
     local lspconfig = require 'lspconfig'
+    local configs = require 'lspconfig.configs'
+
+    if not configs.avalonia then
+      configs.avalonia = {
+        default_config = {
+          cmd = { 'dotnet', vim.fn.expand '~/.local/share/avalonia-ls/extension/avaloniaServer/AvaloniaLanguageServer.dll' },
+          filetypes = { 'axaml', 'xaml' },
+          root_dir = vim.fn.getcwd(),
+          settings = {},
+        },
+      }
+    end
 
     -- lua
     lspconfig.lua_ls.setup {
@@ -374,6 +386,12 @@ return {
       capabilities = capabilities,
       handlers = handlers,
       filetypes = { 'sh', 'bash', 'zsh' },
+    }
+
+    lspconfig.avalonia.setup {
+      capabilities = capabilities,
+      handlers = handlers,
+      filetypes = { 'axaml', 'xaml' },
     }
   end,
 }
