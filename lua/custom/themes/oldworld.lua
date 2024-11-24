@@ -43,6 +43,9 @@ return {
 
         ['@boolean'] = { fg = '#E29ECA', italic = false },
         ['@tag.attribute'] = { fg = '#d7c6f7' },
+
+        ['@lsp.type.class.dart'] = { fg = '#e29eca', bold = true }, -- or your preferred style
+        ['@lsp.mod.constructor.dart'] = { fg = '#c6c6c6' },
       },
     }
     vim.cmd.colorscheme 'oldworld'
