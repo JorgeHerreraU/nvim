@@ -2,6 +2,7 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
+local utils = require 'utils'
 return {
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
@@ -10,6 +11,7 @@ return {
     'numToStr/FTerm.nvim',
     opts = {
       border = 'rounded',
+      cmd = utils.is_wsl() and 'zsh' or 'pwsh',
     },
   },
 }

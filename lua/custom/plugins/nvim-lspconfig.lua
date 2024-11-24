@@ -28,11 +28,13 @@ return {
         },
       },
     },
-    -- omnisharp
+    -- c#
     {
       'seblj/roslyn.nvim',
       ft = { 'cs', 'axaml.cs' },
     },
+    -- flutter
+    'nvim-flutter/flutter-tools.nvim',
   },
 
   config = function()
@@ -173,6 +175,12 @@ return {
         'defaultLibrary',
       },
       formats = { 'relative' },
+      requests = {
+        range = true,
+        full = {
+          delta = true,
+        },
+      },
       overlappingTokenSupport = true,
       multilineTokenSupport = true,
       serverCancelSupport = true,
@@ -392,6 +400,25 @@ return {
       capabilities = capabilities,
       handlers = handlers,
       filetypes = { 'axaml', 'xaml' },
+    }
+
+    -- dart
+    require('flutter-tools').setup {
+      lsp = {
+        capabilities = capabilities,
+        handlers = handlers,
+        settings = {
+          enableSnippets = true,
+          enableSemantic = true,
+          analysisExcludedFolders = {
+            vim.fn.expand '$HOME/.pub-cache',
+            vim.fn.expand '$HOME/fvm',
+          },
+          completionBudgetMilliseconds = 1000,
+          diagnosticsBudgetMilliseconds = 1000,
+          navigationBudgetMilliseconds = 1000,
+        },
+      },
     }
   end,
 }
