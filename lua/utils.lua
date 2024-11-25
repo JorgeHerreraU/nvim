@@ -180,4 +180,24 @@ M.is_dotnet_installed = function()
   return vim.fn.executable 'dotnet' == 1
 end
 
+M.pick_file = function(glob_pattern, ignore_patterns)
+  return coroutine.create(function(dap_run_co)
+    require('telescope.builtin').find_files {
+      cwd = vim.fn.getcwd(),
+      file_ignore_patterns = ignore_patterns or {},
+      find_command = { 'rg', '--files', '--glob', glob_pattern },
+      respect_gitignore = false,
+      previewer = false,
+      attach_mappings = function(_, map)
+        map('i', '<CR>', function(prompt_bufnr)
+          local selection = require('telescope.actions.state').get_selected_entry()
+          require('telescope.actions').close(prompt_bufnr)
+          coroutine.resume(dap_run_co, selection.value)
+        end)
+        return true
+      end,
+    }
+  end)
+end
+
 return M

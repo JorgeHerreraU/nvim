@@ -25,6 +25,7 @@ return {
   config = function()
     local dap = require 'dap'
     local dapui
+    local utils = require 'utils'
 
     local function setup_dapui()
       if not dapui then
@@ -99,7 +100,7 @@ return {
         name = 'console - netcoredbg',
         request = 'launch',
         program = function()
-          return vim.fn.input('Entry point: ', vim.fn.getcwd() .. '/', 'file')
+          return utils.pick_file('*.dll', { 'obj/.*' })
         end,
       },
       {
@@ -120,7 +121,7 @@ return {
           end,
         },
         cwd = function()
-          return vim.fn.input('appsettings.json: ', vim.fn.getcwd() .. '/', 'file')
+          return utils.pick_file('*.json', { 'obj/.*' })
         end,
       },
     }
