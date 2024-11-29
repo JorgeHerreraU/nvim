@@ -1,151 +1,103 @@
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
+    'b0o/schemastore.nvim',
+    'nvim-flutter/flutter-tools.nvim',
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
-    {
-      'j-hui/fidget.nvim',
-      opts = {
-        notification = {
-          window = {
-            winblend = 0,
-          },
-        },
-      },
-    },
-    -- json
-    'b0o/schemastore.nvim',
-    -- lua
+    { 'j-hui/fidget.nvim', opts = { notification = { window = { winblend = 0 } } } },
+    { 'seblj/roslyn.nvim', ft = { 'cs', 'axaml.cs' } },
     {
       'folke/lazydev.nvim',
-      dependencies = {
-        { 'Bilal2453/luvit-meta', lazy = true }, -- optional `vim.uv` typings
-      },
-      ft = 'lua', -- only load on lua files
-      opts = {
-        library = {
-          { path = 'luvit-meta/library', words = { 'vim%.uv' } },
-        },
-      },
+      dependencies = { 'Bilal2453/luvit-meta', lazy = true },
+      ft = 'lua',
+      opts = { library = { { path = 'luvit-meta/library', words = { 'vim%.uv' } } } },
     },
-    -- c#
-    {
-      'seblj/roslyn.nvim',
-      ft = { 'cs', 'axaml.cs' },
-    },
-    -- flutter
-    'nvim-flutter/flutter-tools.nvim',
   },
 
   config = function()
-    vim.api.nvim_create_autocmd('LspAttach', {
-      group = vim.api.nvim_create_augroup('lsp-attach-group', { clear = true }),
-      callback = function(event)
-        vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, {
-          buffer = event.buf,
-          desc = 'LSP: Goto Definition',
-        })
-
-        vim.keymap.set('n', 'gr', function()
-          require('telescope.builtin').lsp_references {
-            path_display = { 'smart' },
-            show_line = false,
-          }
-        end, {
-          buffer = event.buf,
-          desc = 'LSP: Goto References',
-        })
-
-        vim.keymap.set('n', 'gI', require('telescope.builtin').lsp_implementations, {
-          buffer = event.buf,
-          desc = 'LSP: Goto Implementation',
-        })
-
-        vim.keymap.set('n', '<leader>lf', function()
-          vim.lsp.buf.format { async = true }
-        end, {
-          buffer = event.buf,
-          desc = 'LSP: Format buffer',
-        })
-
-        vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, {
-          buffer = event.buf,
-          desc = 'LSP: Diagnostic messages',
-        })
-
-        vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, {
-          buffer = event.buf,
-          desc = 'LSP: Rename',
-        })
-
-        vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, {
-          buffer = event.buf,
-          desc = 'LSP: Code Action',
-        })
-
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, {
-          buffer = event.buf,
-          desc = 'LSP: Hover Documentation',
-        })
-
-        -- Highlight word under cursor
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client.server_capabilities.documentHighlightProvider then
-          vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            buffer = event.buf,
-            callback = vim.lsp.buf.document_highlight,
-          })
-          vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-            buffer = event.buf,
-            callback = vim.lsp.buf.clear_references,
-          })
-        end
-      end,
-    })
-
+    -- Capabilities
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
     capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+    -- Handlers
+    local handlers = {
+      ['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = {
+          severity = vim.diagnostic.severity.ERROR,
+          spacing = 4,
+        },
+        signs = true,
+        severity_sort = true,
+        update_in_insert = false,
+      }),
+    }
+
+    -- Diagnostics signs
+    local signs = {
+      { name = 'DiagnosticSignError', text = '' }, -- Replace '!' with your error icon
+      { name = 'DiagnosticSignWarn', text = '' }, -- Replace '⚠️' with your warning icon
+      { name = 'DiagnosticSignHint', text = '' }, -- Replace '' with your hint icon
+      { name = 'DiagnosticSignInfo', text = '' }, -- Replace 'ℹ️' with your info icon
+    }
+
+    for _, sign in ipairs(signs) do
+      vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
+    end
+
+    -- Keymaps
+    local function setup_lsp_keymaps(bufnr)
+      local builtin = require 'telescope.builtin'
+      local opts = { buffer = bufnr }
+      local function goto_references()
+        require('telescope.builtin').lsp_references { path_display = { 'smart' }, show_line = false }
+      end
+      local function format_buffer()
+        vim.lsp.buf.format { async = true }
+      end
+
+      vim.keymap.set('n', 'gd', builtin.lsp_definitions, vim.tbl_extend('force', opts, { desc = 'LSP: Goto Definition' }))
+      vim.keymap.set('n', 'gr', goto_references, vim.tbl_extend('force', opts, { desc = 'LSP: Goto References' }))
+      vim.keymap.set('n', 'gI', builtin.lsp_implementations, vim.tbl_extend('force', opts, { desc = 'LSP: Goto Implementation' }))
+      vim.keymap.set('n', '<leader>lf', format_buffer, vim.tbl_extend('force', opts, { desc = 'LSP: Format buffer' }))
+      vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, vim.tbl_extend('force', opts, { desc = 'LSP: Diagnostic messages' }))
+      vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, vim.tbl_extend('force', opts, { desc = 'LSP: Rename' }))
+      vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, vim.tbl_extend('force', opts, { desc = 'LSP: Code Action' }))
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, vim.tbl_extend('force', opts, { desc = 'LSP: Hover Documentation' }))
+    end
+
+    -- Document highlight
+    local function setup_document_highlight(client, bufnr)
+      if client.server_capabilities.documentHighlightProvider then
+        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+          buffer = bufnr,
+          callback = vim.lsp.buf.document_highlight,
+        })
+        vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+          buffer = bufnr,
+          callback = vim.lsp.buf.clear_references,
+        })
+      end
+    end
+
+    -- LSP attach
+    vim.api.nvim_create_autocmd('LspAttach', {
+      group = vim.api.nvim_create_augroup('lsp-attach-group', { clear = true }),
+      callback = function(event)
+        setup_lsp_keymaps(event.buf)
+        setup_document_highlight(vim.lsp.get_client_by_id(event.data.client_id), event.buf)
+      end,
+    })
+
     -- Add semantic tokens support
+    -- stylua: ignore
+    local tokenTypes = { 'namespace', 'type', 'class', 'enum', 'interface', 'struct', 'typeParameter', 'parameter', 'variable', 'property', 'enumMember', 'event', 'function', 'method', 'macro', 'keyword', 'modifier', 'comment', 'string', 'number', 'regexp', 'operator', 'decorator' }
+    -- stylua: ignore
+    local tokenModifiers = { 'declaration', 'definition', 'readonly', 'static', 'deprecated', 'abstract', 'async', 'modification', 'documentation', 'defaultLibrary' }
     capabilities.textDocument.semanticTokens = {
       dynamicRegistration = true,
-      tokenTypes = {
-        'namespace',
-        'type',
-        'class',
-        'enum',
-        'interface',
-        'struct',
-        'typeParameter',
-        'parameter',
-        'variable',
-        'property',
-        'enumMember',
-        'event',
-        'function',
-        'method',
-        'macro',
-        'keyword',
-        'modifier',
-        'comment',
-        'string',
-        'number',
-        'regexp',
-        'operator',
-        'decorator',
-      },
-      tokenModifiers = {
-        'declaration',
-        'definition',
-        'readonly',
-        'static',
-        'deprecated',
-        'abstract',
-        'async',
-        'modification',
-        'documentation',
-        'defaultLibrary',
-      },
+      tokenTypes = tokenTypes,
+      tokenModifiers = tokenModifiers,
       formats = { 'relative' },
       requests = {
         range = true,
@@ -159,31 +111,8 @@ return {
       augmentsSyntaxTokens = true,
     }
 
-    local handlers = {
-      ['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = {
-          severity = vim.diagnostic.severity.ERROR,
-          spacing = 4,
-        },
-        signs = true,
-        severity_sort = true,
-        update_in_insert = false,
-      }),
-    }
-
-    local signs = {
-      { name = 'DiagnosticSignError', text = '' }, -- Replace '!' with your error icon
-      { name = 'DiagnosticSignWarn', text = '' }, -- Replace '⚠️' with your warning icon
-      { name = 'DiagnosticSignHint', text = '' }, -- Replace '' with your hint icon
-      { name = 'DiagnosticSignInfo', text = '' }, -- Replace 'ℹ️' with your info icon
-    }
-
-    for _, sign in ipairs(signs) do
-      vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
-    end
-
+    -- Mason
     require('mason').setup {}
-
     require('mason-lspconfig').setup {
       ensure_installed = {
         'gopls',
