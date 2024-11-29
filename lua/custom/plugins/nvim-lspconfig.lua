@@ -38,15 +38,9 @@ return {
   },
 
   config = function()
-    --  This function gets run when an LSP attaches to a particular buffer.
-    --    That is to say, every time a new file is opened that is associated with
-    --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-    --    function will be executed to configure the current buffer
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('lsp-attach-group', { clear = true }),
       callback = function(event)
-        -- keybindings
-
         vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, {
           buffer = event.buf,
           desc = 'LSP: Goto Definition',
@@ -62,20 +56,10 @@ return {
           desc = 'LSP: Goto References',
         })
 
-        -- Jump to the implementation of the word under your cursor.
-        --  Useful when your language has ways of declaring types without an actual implementation.
         vim.keymap.set('n', 'gI', require('telescope.builtin').lsp_implementations, {
           buffer = event.buf,
           desc = 'LSP: Goto Implementation',
         })
-
-        -- Jump to the type of the word under your cursor.
-        --  Useful when you're not sure what type a variable is and you want to see
-        --  the definition of its *type*, not where it was *defined*.
-        -- vim.keymap.set('n', '<leader>ld', require('telescope.builtin').lsp_type_definitions, {
-        --   buffer = event.buf,
-        --   desc = 'LSP: Type Definition'
-        -- })
 
         vim.keymap.set('n', '<leader>lf', function()
           vim.lsp.buf.format { async = true }
@@ -84,7 +68,6 @@ return {
           desc = 'LSP: Format buffer',
         })
 
-        -- Show diagnostic message
         vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, {
           buffer = event.buf,
           desc = 'LSP: Diagnostic messages',
@@ -105,13 +88,6 @@ return {
           desc = 'LSP: Hover Documentation',
         })
 
-        -- This is not Goto Definition, this is Goto Declaration.
-        --  For example, in C this would take you to the header.
-        -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, {
-        --   buffer = event.buf,
-        --   desc = 'LSP: Goto Declaration'
-        -- })
-
         -- Highlight word under cursor
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client.server_capabilities.documentHighlightProvider then
@@ -127,10 +103,6 @@ return {
       end,
     })
 
-    -- LSP servers and clients are able to communicate to each other what features they support.
-    --  By default, Neovim doesn't support everything that is in the LSP specification.
-    --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-    --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
     capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -225,6 +197,7 @@ return {
         'docker_compose_language_service',
         'emmet_language_server',
         'bashls',
+        'jdtls',
       },
     }
 
@@ -419,6 +392,84 @@ return {
           navigationBudgetMilliseconds = 1000,
         },
       },
+    }
+
+    -- jdtls
+    -- Path configurations
+    local home = os.getenv 'HOME'
+    local mason_path = home .. '/.local/share/nvim/mason'
+    local jdtls_path = mason_path .. '/packages/jdtls'
+
+    -- Workspace configuration
+    local function get_workspace_dir()
+      local workspace_path = home .. '/.local/share/nvim/jdtls-workspace/'
+      local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+      return workspace_path .. project_name
+    end
+
+    -- JVM arguments
+    local function get_jvm_args()
+      return {
+        '-noverify',
+        '-Xmx1G',
+        '-XX:+UseG1GC',
+        '-XX:+UseStringDeduplication',
+        '--add-modules=ALL-SYSTEM',
+        '--add-opens',
+        'java.base/java.util=ALL-UNNAMED',
+        '--add-opens',
+        'java.base/java.lang=ALL-UNNAMED',
+      }
+    end
+
+    -- JDTLS specific arguments
+    local function get_jdtls_args()
+      return {
+        '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+        '-Dosgi.bundles.defaultStartLevel=4',
+        '-Declipse.product=org.eclipse.jdt.ls.core.product',
+        '-Dlog.protocol=true',
+        '-Dlog.level=ALL',
+      }
+    end
+
+    -- Java settings
+    local java_settings = {
+      java = {
+        maven = {
+          downloadSources = true,
+        },
+        referencesCodeLens = {
+          enabled = true,
+        },
+        references = {
+          includeDecompiledSources = true,
+        },
+        inlayHints = {
+          parameterNames = {
+            enabled = 'all', -- literals, all, none
+          },
+        },
+      },
+    }
+
+    -- Main configuration
+    lspconfig.jdtls.setup {
+      capabilities = capabilities,
+      handlers = handlers,
+      cmd = {
+        'java',
+        unpack(get_jdtls_args()),
+        unpack(get_jvm_args()),
+        '-javaagent:' .. jdtls_path .. '/lombok.jar',
+        '-jar',
+        vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar'),
+        '-configuration',
+        jdtls_path .. '/config_linux',
+        '-data',
+        get_workspace_dir(),
+      },
+      settings = java_settings,
     }
   end,
 }
