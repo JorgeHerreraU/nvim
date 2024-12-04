@@ -13,6 +13,7 @@ return {
       'prettier',
       'prettierd',
       'shfmt',
+      'npm-groovy-lint',
     }
 
     if utils.is_dotnet_installed() then
@@ -36,6 +37,7 @@ return {
       sh = { 'shfmt' },
       bash = { 'shfmt' },
       zsh = { 'shfmt' },
+      groovy = { 'npm-groovy-lint' },
     }
 
     if utils.is_dotnet_installed() then
@@ -49,7 +51,7 @@ return {
           return
         end
         return {
-          timeout_ms = 2000,
+          timeout_ms = 15000,
         }
       end,
       formatters_by_ft = formatters_by_ft,
