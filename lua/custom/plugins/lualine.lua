@@ -82,7 +82,13 @@ return {
       sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = {},
+        lualine_c = {
+          {
+            'grapple',
+            draw_empty = true,
+            padding = { left = math.floor(vim.o.columns / 2) - 10, right = 0 },
+          },
+        },
         lualine_x = {},
         lualine_y = {
           {
