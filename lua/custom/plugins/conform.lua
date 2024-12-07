@@ -44,10 +44,19 @@ return {
       formatters_by_ft.cs = { 'csharpier' }
     end
 
-    require('conform').setup {
+    local conform = require 'conform'
+
+    conform.setup {
       notify_on_error = false,
       format_on_save = function(bufnr)
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+          return
+        end
+        if #conform.list_formatters(bufnr) == 0 then
+          vim.lsp.buf.format {
+            timeout_ms = 15000,
+            bufnr = bufnr,
+          }
           return
         end
         return {
