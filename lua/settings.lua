@@ -124,7 +124,7 @@ vim.o.ruler = false
 vim.opt.termguicolors = true
 
 -- Wrap lines
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.linebreak = true
 
 -- Matching brackets
