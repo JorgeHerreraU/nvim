@@ -131,6 +131,7 @@ return {
         'groovyls',
         'cucumber_language_server',
         'eslint',
+        'intelephense',
       },
     }
 
@@ -346,6 +347,12 @@ return {
 
     -- eslint
     lspconfig.eslint.setup {
+      handlers = handlers,
+      capabilities = capabilities,
+    }
+
+    -- php
+    lspconfig.intelephense.setup {
       handlers = handlers,
       capabilities = capabilities,
     }

@@ -14,6 +14,7 @@ return {
       'prettierd',
       'shfmt',
       'npm-groovy-lint',
+      'php-cs-fixer',
     }
 
     if utils.is_dotnet_installed() then
@@ -38,6 +39,7 @@ return {
       bash = { 'shfmt' },
       zsh = { 'shfmt' },
       groovy = { 'npm-groovy-lint' },
+      php = { 'php_cs_fixer' },
     }
 
     if utils.is_dotnet_installed() then
