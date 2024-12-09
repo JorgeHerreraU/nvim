@@ -120,6 +120,14 @@ return {
             color = utils.get_hlgroup 'Comment',
           },
           {
+            'filetype',
+            colored = false,
+            icon_only = true,
+            separator = { left = '', right = '' },
+            color = utils.get_hlgroup 'Comment',
+            padding = { right = 0 },
+          },
+          {
             require('lazy.status').updates,
             cond = require('lazy.status').has_updates,
             separator = { left = '', right = '' },
