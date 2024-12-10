@@ -66,6 +66,14 @@ return {
       vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, vim.tbl_extend('force', opts, { desc = 'LSP: Code Action' }))
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, vim.tbl_extend('force', opts, { desc = 'LSP: Hover Documentation' }))
       vim.keymap.set('i', '<M-k>', vim.lsp.buf.signature_help, { buffer = bufnr })
+      vim.keymap.set('v', '<leader>la', function()
+        vim.lsp.buf.code_action {
+          range = {
+            ['start'] = vim.api.nvim_buf_get_mark(0, '<'),
+            ['end'] = vim.api.nvim_buf_get_mark(0, '>'),
+          },
+        }
+      end, vim.tbl_extend('force', opts, { desc = 'LSP: Range Code Action' }))
     end
 
     -- Document highlight
