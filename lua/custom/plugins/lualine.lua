@@ -77,13 +77,21 @@ return {
         disabled_filetypes = {
           statusline = { 'NvimTree', 'alpha', 'dap-repl', 'dapui_console', 'dapui_watches', 'dapui_stacks', 'dapui_breakpoints', 'dapui_scopes' },
         },
+        section_separators = { left = '', right = '' },
+        component_separators = { left = '', right = '' },
       },
       sections = {
         lualine_a = {},
         lualine_b = {
           {
+            'branch',
+            separator = { left = '', right = '' },
+            color = utils.get_hlgroup 'Comment',
+          },
+          {
             'grapple',
             draw_empty = true,
+            separator = { left = '', right = '' },
           },
         },
         lualine_c = {
@@ -93,14 +101,12 @@ return {
             path = 1,
             shorting_target = 20,
             separator = { left = '', right = '' },
-            color = utils.get_hlgroup 'Comment',
           },
           {
             'filetype',
             colored = false,
             icon_only = true,
             separator = { left = '', right = '' },
-            color = utils.get_hlgroup 'Comment',
           },
         },
         lualine_x = {},
