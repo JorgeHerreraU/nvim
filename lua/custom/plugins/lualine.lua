@@ -68,7 +68,6 @@ return {
         return ''
       end
     end
-
     -- Apply transparent background to all theme sections
     set_bg_none(custom_theme)
     require('lualine').setup {
@@ -81,15 +80,20 @@ return {
       },
       sections = {
         lualine_a = {},
-        lualine_b = {},
+        lualine_b = {
+          {
+            'grapple',
+            draw_empty = true,
+          },
+        },
         lualine_c = {
+          '%=',
           {
             'filename',
             path = 1,
             shorting_target = 20,
             separator = { left = '', right = '' },
             color = utils.get_hlgroup 'Comment',
-            padding = { left = math.floor(vim.o.columns / 2) - 15, right = 0 },
           },
           {
             'filetype',
@@ -97,10 +101,6 @@ return {
             icon_only = true,
             separator = { left = '', right = '' },
             color = utils.get_hlgroup 'Comment',
-          },
-          {
-            'grapple',
-            draw_empty = true,
           },
         },
         lualine_x = {},
