@@ -98,13 +98,13 @@ return {
           '%=',
           {
             'filename',
-            path = 1,
+            path = 0,
             shorting_target = 20,
             separator = { left = '', right = '' },
           },
           {
             'filetype',
-            colored = false,
+            colored = true,
             icon_only = true,
             separator = { left = '', right = '' },
           },
