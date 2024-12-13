@@ -1,4 +1,3 @@
-local utils = require 'utils'
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -135,3 +134,6 @@ vim.opt.pumheight = 12 -- Maximum number of entries in a popup
 
 -- Shortmess
 vim.opt.shortmess:append { W = true, I = true, c = true, C = true }
+
+-- Cmdheight
+vim.o.cmdheight = 0
