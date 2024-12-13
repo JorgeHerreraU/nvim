@@ -84,9 +84,23 @@ return {
         lualine_b = {},
         lualine_c = {
           {
+            'filename',
+            path = 1,
+            shorting_target = 20,
+            separator = { left = '', right = '' },
+            color = utils.get_hlgroup 'Comment',
+            padding = { left = math.floor(vim.o.columns / 2) - 15, right = 0 },
+          },
+          {
+            'filetype',
+            colored = false,
+            icon_only = true,
+            separator = { left = '', right = '' },
+            color = utils.get_hlgroup 'Comment',
+          },
+          {
             'grapple',
             draw_empty = true,
-            padding = { left = math.floor(vim.o.columns / 2) - 10, right = 0 },
           },
         },
         lualine_x = {},
@@ -111,21 +125,6 @@ return {
               hint = 'Comment', -- Changes diagnostics' hint color.
             },
             separator = { left = '', right = '' },
-          },
-          {
-            'filename',
-            path = 1,
-            shorting_target = 20,
-            separator = { left = '', right = '' },
-            color = utils.get_hlgroup 'Comment',
-          },
-          {
-            'filetype',
-            colored = false,
-            icon_only = true,
-            separator = { left = '', right = '' },
-            color = utils.get_hlgroup 'Comment',
-            padding = { right = 0 },
           },
           {
             require('lazy.status').updates,
