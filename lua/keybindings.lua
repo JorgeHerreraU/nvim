@@ -60,7 +60,10 @@ vim.keymap.set('i', '<M-;>', function()
   local row, col = vim.fn.line '.', vim.fn.col '.'
   local _, _, end_row, end_col = target:range()
 
-  vim.api.nvim_buf_set_text(0, end_row, end_col, end_row, end_col, { ';' })
+  local line = vim.fn.getline(end_row + 1)
+  if not line:match ';%s*$' then
+    vim.api.nvim_buf_set_text(0, end_row, end_col, end_row, end_col, { ';' })
+  end
   vim.api.nvim_win_set_cursor(0, { row, col })
 end, { desc = 'Add semicolon after expression' })
 
