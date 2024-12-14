@@ -140,6 +140,7 @@ return {
         'cucumber_language_server',
         'eslint',
         'intelephense',
+        'clangd',
       },
     }
 
@@ -361,6 +362,12 @@ return {
 
     -- php
     lspconfig.intelephense.setup {
+      handlers = handlers,
+      capabilities = capabilities,
+    }
+
+    --clangd
+    lspconfig.clangd.setup {
       handlers = handlers,
       capabilities = capabilities,
     }
