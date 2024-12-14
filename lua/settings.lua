@@ -136,4 +136,4 @@ vim.opt.pumheight = 12 -- Maximum number of entries in a popup
 vim.opt.shortmess:append { W = true, I = true, c = true, C = true }
 
 -- Cmdheight
-vim.o.cmdheight = 0
+vim.o.cmdheight = 1
