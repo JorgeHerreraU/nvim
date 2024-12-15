@@ -30,12 +30,16 @@ return {
         {
           'grapple',
           fmt = function(str)
-            if str == '' then
+            if str == '' or not str then
               mode_width = 0
               return ''
             end
-            mode_width = #str + 2
-            return str
+
+            local str_value = tostring(str)
+            local display_width = vim.fn.strdisplaywidth(str_value)
+
+            mode_width = display_width + 2
+            return str_value
           end,
         },
       },
