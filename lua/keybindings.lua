@@ -67,6 +67,16 @@ vim.keymap.set('i', '<M-;>', function()
   vim.api.nvim_win_set_cursor(0, { row, col })
 end, { desc = 'Add semicolon after expression' })
 
+vim.keymap.set('i', '<M-:>', function()
+  local line = vim.api.nvim_get_current_line()
+  local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+
+  local next_paren = line:find(')', col + 1)
+  if next_paren then
+    local new_line = line:sub(1, next_paren) .. ',' .. line:sub(next_paren + 1)
+    vim.api.nvim_set_current_line(new_line)
+  end
+end)
 -- resize
 vim.keymap.set('n', '<C-Right>', ':vertical resize +5<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Left>', ':vertical resize -5<CR>', { noremap = true, silent = true })

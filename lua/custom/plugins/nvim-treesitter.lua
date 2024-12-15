@@ -6,7 +6,23 @@ return {
   },
   build = ':TSUpdate',
   opts = {
-    ensure_installed = { 'bash', 'c', 'css', 'html', 'lua', 'markdown', 'markdown_inline', 'vim', 'vimdoc', 'javascript', 'typescript', 'go', 'tsx', 'xml' },
+    ensure_installed = {
+      'bash',
+      'c',
+      'css',
+      'html',
+      'lua',
+      'markdown',
+      'markdown_inline',
+      'vim',
+      'vimdoc',
+      'javascript',
+      'typescript',
+      'go',
+      'tsx',
+      'xml',
+      'dart',
+    },
     -- Autoinstall languages that are not installed
     auto_install = true,
     highlight = {
