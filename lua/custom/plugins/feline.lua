@@ -1,6 +1,22 @@
 return {
   'freddiehaddad/feline.nvim',
+  dependencies = {
+    'will-lynas/grapple-line.nvim',
+  },
   config = function()
+    vim.api.nvim_set_hl(0, 'GrappleActive', { fg = '#98c379', bold = true })
+    vim.api.nvim_set_hl(0, 'GrappleInactive', { fg = '#6c7380' })
+
+    require('grapple-line').setup {
+      colors = {
+        active = 'GrappleActive',
+        inactive = 'GrappleInactive',
+      },
+      number_of_files = 4,
+      mode = 'unique_filename',
+      show_names = false,
+      overflow = 'none',
+    }
     local function get_spacing()
       if vim.bo.expandtab then
         return 'Spaces: ' .. vim.bo.shiftwidth
@@ -18,6 +34,24 @@ return {
         active = {
           -- Left side
           {
+            {
+              provider = function()
+                local grapple_line = require('grapple-line').lualine()
+                return '󰛢 ' .. (grapple_line or '') -- Always show icon
+              end,
+              left_sep = ' ',
+              right_sep = ' ',
+              update = { 'BufEnter', 'User GrappleChanged' },
+              hl = {
+                fg = 'white', -- for inactive files
+                bg = 'NONE',
+                active = {
+                  fg = '#98c379', -- green color for active file
+                  bg = 'NONE',
+                  style = 'bold',
+                },
+              },
+            },
             {
               provider = 'git_branch',
               left_sep = ' ',
