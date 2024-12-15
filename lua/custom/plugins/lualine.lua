@@ -27,7 +27,17 @@ return {
 
     M.sections = {
       lualine_a = {
-        {},
+        {
+          'grapple',
+          fmt = function(str)
+            if str == '' then
+              mode_width = 0
+              return ''
+            end
+            mode_width = #str + 2
+            return str
+          end,
+        },
       },
       lualine_b = {
         {
