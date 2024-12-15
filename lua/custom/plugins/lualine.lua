@@ -1,6 +1,7 @@
 return {
   'nvim-lualine/lualine.nvim',
   event = 'VeryLazy',
+  enabled = false,
   config = function()
     local utils = require 'utils'
     local custom_theme = require 'lualine.themes.auto'
