@@ -19,7 +19,6 @@ return {
     { 'hrsh7th/cmp-nvim-lsp', event = 'InsertEnter' },
     { 'hrsh7th/cmp-path', event = 'InsertEnter' },
     { 'hrsh7th/cmp-cmdline', event = 'CmdlineEnter' },
-    { 'hrsh7th/cmp-nvim-lsp-signature-help' },
     { 'onsails/lspkind.nvim', event = 'InsertEnter' },
   },
   config = function()
@@ -123,7 +122,6 @@ return {
     local sources = {
       { name = 'lazydev', group_index = 0 },
       { name = 'nvim_lsp' },
-      { name = 'nvim_lsp_signature_help' },
       { name = 'luasnip' },
       { name = 'path' },
     }
