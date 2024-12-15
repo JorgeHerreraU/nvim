@@ -43,28 +43,14 @@ vim.keymap.set('n', '<C-m>', utils.expand_braces, { desc = 'Expand curly braces'
 
 -- insert semicolon at the end of the line
 vim.keymap.set('i', '<M-;>', function()
-  local node = vim.treesitter.get_node()
-  if not node then
-    return
-  end
+  local line = vim.api.nvim_get_current_line()
+  local _, col = unpack(vim.api.nvim_win_get_cursor(0))
 
-  -- Find the outermost expression/statement
-  local target = node
-  while node do
-    if node:type():match 'expression$' or node:type():match 'statement$' then
-      target = node
-    end
-    node = node:parent()
+  local next_paren = line:find(')', col + 1)
+  if next_paren then
+    local new_line = line:sub(1, next_paren) .. ';' .. line:sub(next_paren + 1)
+    vim.api.nvim_set_current_line(new_line)
   end
-
-  local row, col = vim.fn.line '.', vim.fn.col '.'
-  local _, _, end_row, end_col = target:range()
-
-  local line = vim.fn.getline(end_row + 1)
-  if not line:match ';%s*$' then
-    vim.api.nvim_buf_set_text(0, end_row, end_col, end_row, end_col, { ';' })
-  end
-  vim.api.nvim_win_set_cursor(0, { row, col })
 end, { desc = 'Add semicolon after expression' })
 
 vim.keymap.set('i', '<M-:>', function()
