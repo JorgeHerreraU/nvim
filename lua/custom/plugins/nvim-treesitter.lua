@@ -1,9 +1,6 @@
 return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
-  dependencies = {
-    'filNaj/tree-setter',
-  },
   build = ':TSUpdate',
   opts = {
     ensure_installed = {
@@ -41,9 +38,6 @@ return {
     indent = {
       enable = true,
       disable = { 'lua' },
-    },
-    tree_setter = {
-      enable = true,
     },
   },
   config = function(_, opts)
