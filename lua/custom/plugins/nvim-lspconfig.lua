@@ -50,9 +50,26 @@ return {
     local function setup_lsp_keymaps(bufnr)
       local builtin = require 'telescope.builtin'
       local opts = { buffer = bufnr }
+
       local function goto_references()
-        require('telescope.builtin').lsp_references { path_display = { 'smart' }, show_line = false }
+        local params = vim.lsp.util.make_position_params()
+        params.context = params.context or {}
+        params.context.includeDeclaration = nil
+        vim.lsp.buf_request(0, 'textDocument/references', params, function(err, result, _, _)
+          if not err and (not result or vim.tbl_isempty(result)) then
+            require('telescope.builtin').live_grep {
+              default_text = vim.fn.expand '<cword>',
+              prompt_title = 'Fallback: Grep Search',
+            }
+          else
+            require('telescope.builtin').lsp_references {
+              path_display = { 'smart' },
+              show_line = false,
+            }
+          end
+        end)
       end
+
       local function format_buffer()
         vim.lsp.buf.format { async = true }
       end
