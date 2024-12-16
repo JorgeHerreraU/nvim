@@ -10,12 +10,8 @@ return {
       version = 'v2.*',
       dependencies = {
         'saadparwaiz1/cmp_luasnip',
-        'rafamadriz/friendly-snippets',
       },
       build = 'make install_jsregexp',
-      config = function()
-        require('luasnip.loaders.from_vscode').lazy_load()
-      end,
     },
     { 'hrsh7th/cmp-nvim-lsp', event = 'InsertEnter' },
     { 'hrsh7th/cmp-path', event = 'InsertEnter' },
@@ -23,13 +19,14 @@ return {
     { 'onsails/lspkind.nvim', event = 'InsertEnter' },
   },
   config = function()
-    -- See `:help cmp`
-
     local cmp = require 'cmp'
     -- Luasnip
     local luasnip = require 'luasnip'
-    luasnip.filetype_extend('javascript', { 'jsdoc' })
+    luasnip.cleanup()
     luasnip.config.setup { enable_autosnippets = true }
+    local snippets_path = vim.fn.stdpath 'config' .. '/lua/custom/snippets'
+    require('luasnip.loaders.from_lua').load { paths = { snippets_path } }
+
     -- CMD
     cmp.setup.cmdline(':', {
       mapping = cmp.mapping.preset.cmdline(),
