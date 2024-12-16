@@ -13,14 +13,15 @@ return {
     },
     views = {
       hover = {
-        anchor = 'SW',
+        anchor = 'NE',
+        relative = 'editor',
         position = {
-          row = -2,
-          col = 0,
+          row = 0,
+          col = 999,
         },
         size = {
-          height = 8,
-          width = 'auto',
+          height = '75%',
+          width = '25%',
         },
       },
     },
