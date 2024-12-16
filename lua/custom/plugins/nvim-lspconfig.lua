@@ -233,7 +233,25 @@ return {
         end,
       }),
       settings = {
+        vtsls = {
+          experimental = {
+            completion = {
+              enableServerSideFuzzyMatch = true,
+              entriesLimit = 100,
+            },
+          },
+          enableMoveToFileCodeAction = true,
+          autoUseWorkspaceTsdk = true,
+        },
         javascript = {
+          suggest = {
+            enabled = true,
+            completeFunctionCalls = true,
+            includeCompletionsForImportStatements = true,
+            includeAutomaticOptionalChainCompletions = true,
+            classMemberSnippets = { enabled = true },
+          },
+          suggestionActions = { enabled = true },
           preferences = {
             importModuleSpecifierEnding = 'js',
           },
