@@ -18,7 +18,7 @@ return {
 
   config = function()
     -- Capabilities
-    local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+    local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
     capabilities.textDocument.completion.completionItem.snippetSupport = true
 
     -- Handlers
@@ -278,7 +278,7 @@ return {
     require('roslyn').setup {
       ---@diagnostic disable-next-line: missing-fields
       config = {
-        capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities()),
         handlers = handlers,
         on_attach = function(client, bufnr)
           vim.lsp.set_log_level 'DEBUG'
