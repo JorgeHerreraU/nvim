@@ -3,7 +3,10 @@ return {
   version = 'v0.*',
   dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
   opts = {
-    keymap = { preset = 'super-tab' },
+    keymap = {
+      preset = 'super-tab',
+      ['<CR>'] = { 'accept', 'fallback' },
+    },
     snippets = {
       expand = function(snippet)
         require('luasnip').lsp_expand(snippet)
@@ -19,11 +22,17 @@ return {
       end,
     },
     sources = {
+      min_keyword_length = 2,
       default = { 'lsp', 'path', 'luasnip', 'buffer' },
       providers = {
         buffer = {
           enabled = false,
         },
+      },
+    },
+    completion = {
+      list = {
+        selection = 'preselect',
       },
     },
   },
