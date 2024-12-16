@@ -1,5 +1,6 @@
 return {
   'saghen/blink.cmp',
+  enabled = false,
   version = 'v0.*',
   dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
   opts = {
@@ -23,12 +24,7 @@ return {
     },
     sources = {
       min_keyword_length = 2,
-      default = { 'lsp', 'path', 'luasnip', 'buffer' },
-      providers = {
-        buffer = {
-          enabled = false,
-        },
-      },
+      default = { 'lsp', 'path', 'luasnip' },
     },
     completion = {
       list = {

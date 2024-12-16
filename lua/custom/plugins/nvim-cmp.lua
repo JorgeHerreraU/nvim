@@ -2,7 +2,7 @@ return {
   -- Autocompletion
   'hrsh7th/nvim-cmp',
   event = { 'InsertEnter', 'CmdlineEnter' },
-  enabled = false,
+  enabled = true,
   dependencies = {
     -- luasnip
     {
