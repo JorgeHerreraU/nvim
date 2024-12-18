@@ -4,6 +4,10 @@ return {
   dependencies = {
     'MunifTanjim/nui.nvim',
   },
+  messages = {
+    view_error = 'messages',
+    view_warn = 'messages',
+  },
   opts = {
     cmdline = {
       view = 'cmdline',

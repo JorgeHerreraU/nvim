@@ -22,6 +22,8 @@ return {
         Normal = { bg = 'NONE' },
         NormalFloat = { bg = 'NONE' },
         NormalNC = { bg = 'NONE' },
+        TabLineFill = { bg = 'NONE' },
+        FoldColumn = { bg = 'NONE' },
         Pmenu = { bg = 'NONE' },
         StatusLine = { bg = 'NONE', fg = '#c6c6c6' },
         StatusLineNC = { bg = 'NONE' },

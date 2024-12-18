@@ -79,7 +79,7 @@ return {
         autoselect_one = true,
         include_current_win = true,
         bo = {
-          filetype = { 'NvimTree', 'neo-tree', 'notify', 'fidget', 'incline' },
+          filetype = { 'NvimTree', 'neo-tree', 'notify', 'fidget', 'incline', 'noice' },
           buftype = { 'terminal' },
         },
       },

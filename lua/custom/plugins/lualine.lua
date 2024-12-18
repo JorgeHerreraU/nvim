@@ -171,9 +171,19 @@ return {
       options = {
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
-        globalstatus = false,
+        globalstatus = true,
         disabled_filetypes = {
-          statusline = { 'NvimTree', 'alpha', 'dap-repl', 'dapui_console', 'dapui_watches', 'dapui_stacks', 'dapui_breakpoints', 'dapui_scopes' },
+          statusline = {
+            'NvimTree',
+            'alpha',
+            'dap-repl',
+            'dapui_console',
+            'dapui_watches',
+            'dapui_stacks',
+            'dapui_breakpoints',
+            'dapui_scopes',
+            'leetcode.nvim',
+          },
         },
         theme = {
           normal = {
