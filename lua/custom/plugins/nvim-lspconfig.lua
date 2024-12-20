@@ -157,6 +157,7 @@ return {
         'eslint',
         'intelephense',
         'clangd',
+        'basedpyright',
       },
     }
 
@@ -402,6 +403,12 @@ return {
 
     --clangd
     lspconfig.clangd.setup {
+      handlers = handlers,
+      capabilities = capabilities,
+    }
+
+    -- python
+    lspconfig.basepyright.setup {
       handlers = handlers,
       capabilities = capabilities,
     }
