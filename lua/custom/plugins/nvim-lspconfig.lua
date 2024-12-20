@@ -12,7 +12,6 @@ return {
       ft = 'lua',
       opts = { library = { { path = 'luvit-meta/library', words = { 'vim%.uv' } } } },
     },
-    'nvim-java/nvim-java',
   },
 
   config = function()
@@ -158,10 +157,9 @@ return {
         'intelephense',
         'clangd',
         'basedpyright',
+        'jdtls',
       },
     }
-
-    require('java').setup()
 
     local lspconfig = require 'lspconfig'
     local configs = require 'lspconfig.configs'
@@ -386,9 +384,6 @@ return {
       handlers = handlers,
     }
 
-    -- java
-    lspconfig.jdtls.setup {}
-
     -- eslint
     lspconfig.eslint.setup {
       handlers = handlers,
@@ -411,6 +406,76 @@ return {
     lspconfig.basedpyright.setup {
       handlers = handlers,
       capabilities = capabilities,
+    }
+
+    -- jdtls
+    -- Path configurations
+    local home = os.getenv 'HOME'
+    local mason_path = home .. '/.local/share/nvim/mason'
+    local jdtls_path = mason_path .. '/packages/jdtls'
+    -- Workspace configuration
+    local function get_workspace_dir()
+      local workspace_path = home .. '/.local/share/nvim/jdtls-workspace/'
+      local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+      return workspace_path .. project_name
+    end
+    -- JVM arguments
+    local function get_jvm_args()
+      return {
+        '-noverify',
+        '-Xmx1G',
+        '-XX:+UseG1GC',
+        '-XX:+UseStringDeduplication',
+        '--add-modules=ALL-SYSTEM',
+        '--add-opens',
+        'java.base/java.util=ALL-UNNAMED',
+        '--add-opens',
+        'java.base/java.lang=ALL-UNNAMED',
+      }
+    end
+    -- JDTLS specific arguments
+    local function get_jdtls_args()
+      return {
+        '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+        '-Dosgi.bundles.defaultStartLevel=4',
+        '-Declipse.product=org.eclipse.jdt.ls.core.product',
+        '-Dlog.protocol=true',
+        '-Dlog.level=ALL',
+      }
+    end
+    -- Java settings
+    local java_settings = {
+      java = {
+        maven = {
+          downloadSources = true,
+        },
+        referencesCodeLens = {
+          enabled = true,
+        },
+        references = {
+          includeDecompiledSources = true,
+        },
+        inlayHints = {
+          parameterNames = {
+            enabled = 'all', -- literals, all, none
+          },
+        },
+      },
+    }
+    lspconfig.jdtls.setup {
+      cmd = {
+        'java',
+        unpack(get_jdtls_args()),
+        unpack(get_jvm_args()),
+        '-javaagent:' .. jdtls_path .. '/lombok.jar',
+        '-jar',
+        vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar'),
+        '-configuration',
+        jdtls_path .. '/config_linux',
+        '-data',
+        get_workspace_dir(),
+      },
+      settings = java_settings,
     }
   end,
 }
