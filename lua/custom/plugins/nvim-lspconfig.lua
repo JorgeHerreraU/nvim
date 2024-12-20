@@ -408,7 +408,7 @@ return {
     }
 
     -- python
-    lspconfig.basepyright.setup {
+    lspconfig.basedpyright.setup {
       handlers = handlers,
       capabilities = capabilities,
     }
