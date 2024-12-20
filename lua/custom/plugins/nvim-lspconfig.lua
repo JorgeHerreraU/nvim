@@ -406,6 +406,21 @@ return {
     lspconfig.basedpyright.setup {
       handlers = handlers,
       capabilities = capabilities,
+      settings = {
+        basedpyright = {
+          analysis = {
+            diagnosticSeverityOverrides = {
+              reportUnknownParameterType = 'none',
+              reportMissingParameterType = 'none',
+              reportUnknownArgumentType = 'none',
+              reportUnusedCallResult = 'none',
+              reportUnknownMemberType = 'none',
+              reportImplicitStringConcatenation = 'none',
+              reportUnknownVariableType = 'none',
+            },
+          },
+        },
+      },
     }
 
     -- jdtls

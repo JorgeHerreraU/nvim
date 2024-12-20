@@ -14,6 +14,7 @@ return {
       'prettierd',
       'shfmt',
       'npm-groovy-lint',
+      'ruff',
     }
 
     if utils.is_dotnet_installed() then
@@ -38,6 +39,7 @@ return {
       bash = { 'shfmt' },
       zsh = { 'shfmt' },
       groovy = { 'npm-groovy-lint' },
+      python = { 'ruff_format' },
     }
 
     if utils.is_dotnet_installed() then
