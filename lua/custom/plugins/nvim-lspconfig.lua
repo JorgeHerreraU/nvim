@@ -140,6 +140,7 @@ return {
     ---@diagnostic disable-next-line: missing-fields
     require('mason').setup {}
     require('mason-lspconfig').setup {
+      ---@diagnostic disable-next-line: missing-fields
       ensure_installed = {
         'gopls',
         'lua_ls',
