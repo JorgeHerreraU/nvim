@@ -137,6 +137,7 @@ return {
     }
 
     -- Mason
+    ---@diagnostic disable-next-line: missing-fields
     require('mason').setup {}
     require('mason-lspconfig').setup {
       ensure_installed = {
@@ -438,7 +439,7 @@ return {
     local function get_jvm_args()
       return {
         '-noverify',
-        '-Xmx1G',
+        '-Xmx4G',
         '-XX:+UseG1GC',
         '-XX:+UseStringDeduplication',
         '--add-modules=ALL-SYSTEM',
@@ -455,7 +456,6 @@ return {
         '-Dosgi.bundles.defaultStartLevel=4',
         '-Declipse.product=org.eclipse.jdt.ls.core.product',
         '-Dlog.protocol=true',
-        '-Dlog.level=ALL',
       }
     end
     -- Java settings
