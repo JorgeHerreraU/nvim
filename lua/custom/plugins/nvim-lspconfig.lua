@@ -139,6 +139,7 @@ return {
     -- Mason
     ---@diagnostic disable-next-line: missing-fields
     require('mason').setup {}
+    ---@diagnostic disable-next-line: missing-fields
     require('mason-lspconfig').setup {
       ---@diagnostic disable-next-line: missing-fields
       ensure_installed = {
