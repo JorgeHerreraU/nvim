@@ -20,6 +20,7 @@ return {
   },
   config = function()
     local cmp = require 'cmp'
+    local lsp_signature = require 'lsp_signature'
     -- Luasnip
     local luasnip = require 'luasnip'
     luasnip.cleanup()
@@ -41,6 +42,20 @@ return {
         },
       }),
     })
+
+    -- LSP Signature
+    cmp.event:on('menu_opened', function()
+      vim.defer_fn(function()
+        lsp_signature.toggle_float_win() -- Hide floating signature when completion opens
+      end, 0)
+    end)
+
+    cmp.event:on('menu_closed', function()
+      vim.defer_fn(function()
+        lsp_signature.toggle_float_win() -- Restore floating signature when completion closes
+      end, 0)
+    end)
+
     -- Keymaps
     local keybinds = {
       -- Manually trigger a completion from nvim-cmp.
