@@ -5,6 +5,7 @@ return {
     'nvim-flutter/flutter-tools.nvim',
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
+    'Issafalcon/lsp-overloads.nvim',
     { 'j-hui/fidget.nvim', opts = { notification = { window = { winblend = 0 } } } },
     { 'seblj/roslyn.nvim', ft = { 'cs', 'axaml.cs' } },
     {
@@ -106,8 +107,20 @@ return {
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('lsp-attach-group', { clear = true }),
       callback = function(event)
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if not client then
+          return
+        end
+
         setup_lsp_keymaps(event.buf)
-        setup_document_highlight(vim.lsp.get_client_by_id(event.data.client_id), event.buf)
+        setup_document_highlight(client, event.buf)
+
+        if client.server_capabilities and client.server_capabilities.signatureHelpProvider then
+          require('lsp-overloads').setup(client, {
+            display_automatically = false,
+            vim.keymap.set('i', '<M-[>', '<cmd>LspOverloadsSignature<CR>', { noremap = true, silent = true, buffer = event.buf }),
+          })
+        end
       end,
     })
 
