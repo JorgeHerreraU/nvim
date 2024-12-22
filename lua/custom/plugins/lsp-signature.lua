@@ -3,8 +3,7 @@ return {
   event = 'VeryLazy',
   config = function()
     local cfg = {
-      doc_lines = 0,
-      floating_window = false,
+      doc_lines = 10,
       fix_pos = false,
       hint_enable = true,
       hint_scheme = 'Comment',
