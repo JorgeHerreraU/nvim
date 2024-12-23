@@ -19,6 +19,8 @@ return {
             ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
             -- You can also use captures from other query groups like `locals.scm`
             ['as'] = { query = '@local.scope', query_group = 'locals', desc = 'Select language scope' },
+            ['ia'] = '@parameter.inner', -- Select inner part of an argument
+            ['aa'] = '@parameter.outer', -- Select the argument including surrounding commas
           },
         },
       },
