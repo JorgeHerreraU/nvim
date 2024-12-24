@@ -1,22 +1,9 @@
 ---@diagnostic disable: missing-fields
--- debug.lua
---
--- Shows how to use the DAP plugin to debug your code.
---
--- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
-
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
-    -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
-    -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
-    -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
   },
@@ -24,6 +11,7 @@ return {
   event = 'VeryLazy',
   config = function()
     local dap = require 'dap'
+    dap.set_log_level 'DEBUG'
     local dapui
     local utils = require 'utils'
 
@@ -49,18 +37,9 @@ return {
     end
 
     require('mason-nvim-dap').setup {
-      -- Makes a best effort to setup the various debuggers with
-      -- reasonable debug configurations
       automatic_installation = true,
-
-      -- You can provide additional configuration to the handlers,
-      -- see mason-nvim-dap README for more information
       handlers = {},
-
-      -- You'll need to check that you have the required things installed
-      -- online, please don't ask me how to install them :)
       ensure_installed = {
-        -- Update this to ensure that you have the debuggers for the langs you want
         'coreclr',
         'delve',
         'js',
@@ -159,7 +138,6 @@ return {
       },
     }
 
-    -- typescript
     dap.adapters['pwa-node'] = {
       type = 'server',
       host = 'localhost',
@@ -171,49 +149,74 @@ return {
         },
       },
     }
-    dap.configurations.typescript = {
-      {
-        type = 'pwa-node',
-        request = 'launch',
-        name = 'Launch TypeScript File (ts-node installed locally)',
-        runtimeArgs = { '--require', 'ts-node/register' },
-        runtimeExecutable = 'node',
-        args = { '${file}' },
-        cwd = '${workspaceFolder}',
-        sourceMaps = true,
-        resolveSourceMapLocations = {
-          '${workspaceFolder}/**',
-          '!**/node_modules/.pnpm/**',
-        },
-      },
-      {
-        type = 'pwa-node',
-        request = 'launch',
-        name = 'Launch TypeScript File (tsx installed locally)',
-        runtimeExecutable = '${workspaceFolder}/node_modules/.bin/tsx',
-        args = { '${file}' },
-        cwd = '${workspaceFolder}',
-        sourceMaps = true,
-        resolveSourceMapLocations = {
-          '${workspaceFolder}/**',
-          '!**/node_modules/.pnpm/**',
-        },
-      },
-      {
-        type = 'pwa-node',
-        request = 'launch',
-        name = 'Launch TypeScript File (swc-node installed locally)',
-        runtimeExecutable = 'node',
-        runtimeArgs = { '--require', '@swc-node/register' },
-        args = { '${file}' },
-        cwd = '${workspaceFolder}',
-        sourceMaps = true,
-        resolveSourceMapLocations = {
-          '${workspaceFolder}/**',
-          '!**/node_modules/.pnpm/**',
+    dap.adapters['pwa-chrome'] = {
+      type = 'server',
+      host = 'localhost',
+      port = '${port}',
+      executable = {
+        command = 'js-debug-adapter',
+        args = {
+          '${port}',
         },
       },
     }
+
+    for _, lang in ipairs { 'typescript', 'typescriptreact' } do
+      dap.configurations[lang] = {
+        {
+          type = 'pwa-node',
+          request = 'launch',
+          name = 'Launch TypeScript File (ts-node installed locally)',
+          runtimeArgs = { '--require', 'ts-node/register' },
+          runtimeExecutable = 'node',
+          args = { '${file}' },
+          cwd = '${workspaceFolder}',
+          sourceMaps = true,
+          resolveSourceMapLocations = {
+            '${workspaceFolder}/**',
+            '!**/node_modules/.pnpm/**',
+          },
+        },
+        {
+          type = 'pwa-node',
+          request = 'launch',
+          name = 'Launch TypeScript File (tsx installed locally)',
+          runtimeExecutable = '${workspaceFolder}/node_modules/.bin/tsx',
+          args = { '${file}' },
+          cwd = '${workspaceFolder}',
+          sourceMaps = true,
+          resolveSourceMapLocations = {
+            '${workspaceFolder}/**',
+            '!**/node_modules/.pnpm/**',
+          },
+        },
+        {
+          type = 'pwa-node',
+          request = 'launch',
+          name = 'Launch TypeScript File (swc-node installed locally)',
+          runtimeExecutable = 'node',
+          runtimeArgs = { '--require', '@swc-node/register' },
+          args = { '${file}' },
+          cwd = '${workspaceFolder}',
+          sourceMaps = true,
+          resolveSourceMapLocations = {
+            '${workspaceFolder}/**',
+            '!**/node_modules/.pnpm/**',
+          },
+        },
+        {
+          type = 'pwa-chrome',
+          name = 'Launch Chrome',
+          request = 'launch',
+          url = 'http://localhost:5173',
+          sourceMaps = true,
+          protocol = 'inspector',
+          port = 9222,
+          webRoot = '${workspaceFolder}/src',
+          skipFiles = { '**/node_modules/**/*', '**/@vite/*', '**/src/client/*', '**/src/*' },
+        },
+      }
+    end
 
     vim.fn.sign_define('DapBreakpoint', {
       text = '',
