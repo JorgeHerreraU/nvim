@@ -37,7 +37,6 @@ return {
       { '<leader>h', group = 'Git', icon = { icon = '󰊢', color = 'grey' } },
       { '<leader>l', group = 'LSP', icon = { icon = '', color = 'grey' } },
       { '<leader>m', group = 'Testing', icon = { icon = '', color = 'grey' } },
-      { '<leader>r', group = 'Refactoring', icon = { icon = '󰣈', color = 'grey' } },
       { '<leader>/', hidden = true },
       { '<leader><leader>', hidden = true },
     }
