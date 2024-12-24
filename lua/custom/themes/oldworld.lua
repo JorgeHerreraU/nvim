@@ -37,6 +37,7 @@ return {
         CmpBorder = { fg = '#c6c6c6' },
         Comment = { fg = '#4E5163', italic = false },
         Type = { fg = '#c6c6c6', italic = false },
+        Folded = { fg = '#c6c6c6' },
 
         -- Virtual text colors (shown inline)
         DiagnosticVirtualTextError = { fg = '#ff9ea8' },
