@@ -24,10 +24,6 @@ return {
       mc.skipCursor '*'
     end)
 
-    -- Rotate the main cursor.
-    vim.keymap.set({ 'n', 'v' }, '<left>', mc.nextCursor)
-    vim.keymap.set({ 'n', 'v' }, '<right>', mc.prevCursor)
-
     vim.keymap.set('n', '<esc>', function()
       if not mc.cursorsEnabled() then
         mc.enableCursors()

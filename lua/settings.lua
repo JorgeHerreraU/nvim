@@ -137,3 +137,7 @@ vim.opt.shortmess:append { W = true, I = true, c = true, C = true }
 
 -- Cmdheight
 vim.o.cmdheight = 1
+
+vim.opt.lazyredraw = true
+
+vim.opt.ttyfast = true

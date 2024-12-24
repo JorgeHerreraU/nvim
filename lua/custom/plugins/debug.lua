@@ -83,6 +83,7 @@ return {
     vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
     vim.keymap.set('n', '<leader>dB', breakpoint_condition, { desc = 'Debug: Set Breakpoint' })
     vim.keymap.set('n', '<leader>di', toggle_dap_ui, { desc = 'Debug: Toggle Interface' })
+    vim.keymap.set('n', '<leader>dr', dap.clear_breakpoints, { desc = 'Debug: Clear Breakpoints' })
 
     -- Debuggers Setup
     -- c#
