@@ -22,6 +22,19 @@ return {
           controls = {
             enabled = false,
           },
+          layouts = {
+            {
+              elements = {
+                { id = 'scopes', size = 0.75 },
+                { id = 'watches', size = 0.25 },
+              },
+              position = 'left',
+              size = 40,
+            },
+          },
+          render = {
+            max_value_lines = 1,
+          },
         }
       end
     end
