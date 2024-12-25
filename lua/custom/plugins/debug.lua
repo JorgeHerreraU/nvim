@@ -6,10 +6,6 @@ return {
     'nvim-neotest/nvim-nio',
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
-    {
-      'theHamsta/nvim-dap-virtual-text',
-      opts = {},
-    },
   },
   lazy = true,
   event = 'VeryLazy',
@@ -23,34 +19,8 @@ return {
       if not dapui then
         dapui = require 'dapui'
         dapui.setup {
-          icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-          controls = { enabled = true },
-          layouts = {
-            {
-              elements = {
-                { id = 'scopes', size = 0.60, expanded = false },
-                { id = 'breakpoints', size = 0.20, expanded = false },
-                { id = 'watches', size = 0.20, expanded = false },
-              },
-              position = 'left',
-              size = 40,
-            },
-          },
-          expand_lines = false,
-          render = {
-            max_type_length = 0,
-            max_value_lines = 1,
-            sort_variables = function(a, b)
-              -- Only show local variables by putting them first
-              local is_a_local = string.match(a.name, '^[a-z]') ~= nil
-              local is_b_local = string.match(b.name, '^[a-z]') ~= nil
-              if is_a_local and not is_b_local then
-                return true
-              elseif not is_a_local and is_b_local then
-                return false
-              end
-              return a.name < b.name
-            end,
+          controls = {
+            enabled = false,
           },
         }
       end
@@ -232,9 +202,6 @@ return {
             local port = vim.fn.input('Port: ', '5173')
             return 'http://localhost:' .. port
           end,
-          sourceMaps = true,
-          protocol = 'inspector',
-          port = 9222,
           webRoot = '${workspaceFolder}/src',
         },
       }

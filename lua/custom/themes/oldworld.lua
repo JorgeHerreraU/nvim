@@ -39,6 +39,14 @@ return {
         Type = { fg = '#c6c6c6', italic = false },
         Folded = { fg = '#c6c6c6' },
 
+        -- DAP
+        DapBreakpoint = { fg = '#f79292' }, -- Default red breakpoint
+        DapBreakpointGreen = { fg = '#82ffac' }, -- Green breakpoint
+        DapBreakpointYellow = { fg = '#ffd700' }, -- Yellow breakpoint
+        DapBreakpointRejected = { fg = '#ff9ea8' }, -- Rejected breakpoint
+        DapLogPoint = { fg = '#82ffac' }, -- Log point
+        DapStopped = { fg = '#82ffac', bg = '#214283' }, -- Stopped line
+
         -- Virtual text colors (shown inline)
         DiagnosticVirtualTextError = { fg = '#ff9ea8' },
         DiagnosticUnnecessary = { fg = '#696969' },
