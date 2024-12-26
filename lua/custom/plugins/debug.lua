@@ -126,7 +126,7 @@ return {
       },
       {
         type = 'go',
-        name = 'Debug test', -- configuration for debugging test files
+        name = 'Debug test',
         request = 'launch',
         mode = 'test',
         program = '${file}',
