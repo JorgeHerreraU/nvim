@@ -51,7 +51,7 @@ return {
 
     -- Keymaps helper functions
     local breakpoint_condition = function()
-      dap.set_breakpoint(vim.fn.ibput 'Debug: Breakpoint Condition: ')
+      dap.set_breakpoint(vim.fn.input 'Debug: Breakpoint Condition: ')
     end
     local toggle_dap_ui = function()
       setup_dapui()
@@ -63,7 +63,7 @@ return {
     vim.keymap.set('n', '<leader>ds', dap.close, { desc = 'Debug: Stop' })
     vim.keymap.set('n', '<leader>dt', dap.terminate, { desc = 'Debug: Terminate' })
     vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
-    vim.keymap.set('n', '<leader>dB', breakpoint_condition, { desc = 'Debug: Set Breakpoint' })
+    vim.keymap.set('n', '<leader>dB', breakpoint_condition, { desc = 'Debug: Conditional Breakpoint' })
     vim.keymap.set('n', '<leader>di', toggle_dap_ui, { desc = 'Debug: Toggle Interface' })
     vim.keymap.set('n', '<leader>dr', dap.clear_breakpoints, { desc = 'Debug: Clear Breakpoints' })
 
