@@ -261,7 +261,6 @@ return {
             },
           },
           enableMoveToFileCodeAction = true,
-          autoUseWorkspaceTsdk = true,
         },
         javascript = {
           suggest = {
