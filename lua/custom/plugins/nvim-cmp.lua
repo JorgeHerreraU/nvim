@@ -17,14 +17,6 @@ return {
     { 'hrsh7th/cmp-path', event = 'InsertEnter' },
     { 'hrsh7th/cmp-cmdline', event = 'CmdlineEnter' },
     { 'onsails/lspkind.nvim', event = 'InsertEnter' },
-    {
-      'MattiasMTS/cmp-dbee',
-      dependencies = {
-        { 'kndndrj/nvim-dbee' },
-      },
-      ft = 'sql', -- optional but good to have
-      opts = {}, -- needed
-    },
   },
   config = function()
     local cmp = require 'cmp'
@@ -129,7 +121,6 @@ return {
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
       { name = 'path' },
-      { name = 'cmp-dbee' },
     }
 
     local formatting = {
