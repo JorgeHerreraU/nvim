@@ -12,10 +12,14 @@ return {
         end, { desc = 'Git: Blame line' })
         vim.keymap.set('n', '<leader>hB', gs.toggle_current_line_blame, { desc = 'Git: Toggle Blame' })
         vim.keymap.set('n', ']c', function()
-          gs.nav_hunk 'next'
+          gs.nav_hunk('next', {
+            target = 'all',
+          })
         end, { desc = 'Git: Next Hunk' })
         vim.keymap.set('n', '[c', function()
-          gs.nav_hunk 'prev'
+          gs.nav_hunk('prev', {
+            target = 'all',
+          })
         end, { desc = 'Git: Previous Hunk' })
         vim.keymap.set('n', '<leader>hd', gs.diffthis, { desc = 'Git: Toggle diff' })
       end,
