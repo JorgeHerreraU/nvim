@@ -35,7 +35,7 @@ return {
         Visual = { bg = '#214283' },
         PmenuSel = { bg = '#82ffac', fg = '#000000' },
         CmpBorder = { fg = '#c6c6c6' },
-        Comment = { fg = '#4E5163', italic = false },
+        Comment = { fg = '#989898', italic = false },
         Type = { fg = '#c6c6c6', italic = false },
         Folded = { fg = '#c6c6c6' },
 
