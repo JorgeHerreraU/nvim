@@ -25,7 +25,7 @@ return {
       end
     end
 
-    M.sections = {
+    M.tabline = {
       lualine_a = {
         {
           'grapple',
@@ -173,7 +173,7 @@ return {
         section_separators = { left = '', right = '' },
         globalstatus = true,
         disabled_filetypes = {
-          statusline = {
+          tabline = {
             'NvimTree',
             'alpha',
             'dap-repl',
@@ -236,7 +236,24 @@ return {
           },
         },
       },
-      sections = M.sections,
+      sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+      },
+      tabline = M.tabline, -- Move this out of options
+      -- sections = M.sections,
     }
   end,
 }
