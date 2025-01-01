@@ -98,6 +98,10 @@ return {
         {
           'filetype',
           fmt = function(str)
+            local disabled = vim.tbl_contains({ 'NvimTree', 'alpha', 'dap-repl' }, vim.bo.filetype)
+            if disabled then
+              return ''
+            end
             if str == '' then
               filetype_width = 0
               return ''
@@ -110,6 +114,10 @@ return {
         {
           'filename',
           fmt = function(filename)
+            local disabled = vim.tbl_contains({ 'NvimTree', 'alpha', 'dap-repl' }, vim.bo.filetype)
+            if disabled then
+              return ''
+            end
             if filename == '' then
               filename_width = 0
               return ''
@@ -172,19 +180,6 @@ return {
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         globalstatus = true,
-        disabled_filetypes = {
-          tabline = {
-            'NvimTree',
-            'alpha',
-            'dap-repl',
-            'dapui_console',
-            'dapui_watches',
-            'dapui_stacks',
-            'dapui_breakpoints',
-            'dapui_scopes',
-            'leetcode.nvim',
-          },
-        },
         theme = {
           normal = {
             a = { bg = 'NONE' },
@@ -253,7 +248,6 @@ return {
         lualine_z = {},
       },
       tabline = M.tabline, -- Move this out of options
-      -- sections = M.sections,
     }
   end,
 }
