@@ -4,5 +4,8 @@ return {
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
   },
-  opts = {},
+  config = function()
+    vim.keymap.set('n', '<leader>a', ':HarvgateChat<CR>', { desc = 'Harvgate Chat', noremap = true, silent = true })
+    require('harvgate').setup {}
+  end,
 }

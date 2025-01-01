@@ -29,7 +29,7 @@ return {
         { '<leader>q', icon = { icon = '󰈆', color = 'orange' }, desc = 'Quit' },
         { '<leader>e', icon = { icon = '󱏒', color = 'orange' }, desc = 'Explorer' },
         { '<leader>z', icon = { icon = '', color = 'orange' } },
-        { '<leader>a', group = 'Avante', icon = { icon = '󰬈', color = 'grey' }, desc = 'Avante' },
+        { '<leader>a', group = 'Harvgate', icon = { icon = '󰁤', color = 'grey' }, desc = 'Harvgate' },
         { '<leader>b', group = 'Bookmark', icon = { icon = '', color = 'grey' } },
         { '<leader>d', group = 'Debug', icon = { icon = '', color = 'grey' } },
         { '<leader>t', group = 'Features', icon = { icon = '', color = 'grey' } },
