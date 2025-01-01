@@ -107,3 +107,6 @@ vim.keymap.set({ 'n', 'x' }, '<leader>p', function()
   vim.fn.setreg('+', cleaned)
   return '"+p'
 end, { expr = true, desc = 'Paste' })
+
+-- insert break line in normal mode
+vim.keymap.set('n', '<C-j>', 'i<CR><Esc>', { desc = 'Insert break line' })
