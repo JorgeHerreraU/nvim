@@ -5,7 +5,19 @@ return {
     'nvim-flutter/flutter-tools.nvim',
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
-    { 'j-hui/fidget.nvim', opts = { notification = { window = { winblend = 0 } } } },
+    {
+      'j-hui/fidget.nvim',
+      opts = {
+        progress = {
+          display = {
+            render_limit = 1,
+          },
+        },
+        notification = {
+          window = { winblend = 0 },
+        },
+      },
+    },
     { 'seblj/roslyn.nvim', ft = { 'cs', 'axaml.cs' } },
     {
       'folke/lazydev.nvim',
