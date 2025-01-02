@@ -61,18 +61,6 @@ return {
     }
     vim.cmd.colorscheme 'oldworld'
     vim.cmd [[
-      hi TelescopeNormal guibg=NONE ctermbg=NONE
-      hi TelescopeBorder guibg=NONE ctermbg=NONE guifg=#c6c6c6
-      hi TelescopePromptNormal guibg=NONE ctermbg=NONE
-      hi TelescopePromptBorder guibg=NONE ctermbg=NONE guifg=#c6c6c6
-      hi TelescopePromptTitle guibg=NONE ctermbg=NONE guifg=#c6c6c6
-      hi TelescopePreviewNormal guibg=NONE ctermbg=NONE
-      hi TelescopePreviewBorder guibg=NONE ctermbg=NONE guifg=#c6c6c6
-      hi TelescopePreviewTitle guibg=NONE ctermbg=NONE guifg=#c6c6c6
-      hi TelescopeResultsNormal guibg=NONE ctermbg=NONE
-      hi TelescopeResultsBorder guibg=NONE ctermbg=NONE guifg=#c6c6c6
-      hi TelescopeResultsTitle guibg=NONE ctermbg=NONE guifg=#c6c6c6
-      hi TelescopePromptCounter guibg=NONE ctermbg=NONE guifg=#c6c6c6
       hi ModeMsg guibg=NONE ctermbg=NONE guifg=#c6c6c6
     ]]
     vim.defer_fn(function()
