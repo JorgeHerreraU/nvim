@@ -205,7 +205,6 @@ return {
     vim.keymap.set('n', '<leader>fu', '<cmd>Telescope undo<cr>', { desc = 'Find: Undo Tree' })
     vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Find: Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader>f/', grep_open_files, { desc = 'Find: In Open Files' })
-    vim.keymap.set('n', '<leader>/', find_buffer, { desc = 'Find: In buffer' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find: Opened Buffers' })
   end,
 }
