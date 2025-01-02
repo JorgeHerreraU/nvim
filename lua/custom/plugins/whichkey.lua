@@ -30,7 +30,6 @@ return {
         { '<leader>e', icon = { icon = '󱏒', color = 'orange' }, desc = 'Explorer' },
         { '<leader>z', icon = { icon = '', color = 'orange' } },
         { '<leader>a', group = 'Harvgate', icon = { icon = '󰁤', color = 'grey' }, desc = 'Harvgate' },
-        { '<leader>b', group = 'Bookmark', icon = { icon = '', color = 'grey' } },
         { '<leader>d', group = 'Debug', icon = { icon = '', color = 'grey' } },
         { '<leader>t', group = 'Features', icon = { icon = '', color = 'grey' } },
         { '<leader>f', group = 'Find', icon = { icon = '', color = 'grey' } },

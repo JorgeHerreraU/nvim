@@ -56,35 +56,35 @@ return {
 
     -- Keymaps
     local function setup_lsp_keymaps(bufnr)
-      local builtin = require 'telescope.builtin'
+      -- local builtin = require 'telescope.builtin'
       local opts = { buffer = bufnr }
 
-      local function goto_references()
-        local params = vim.lsp.util.make_position_params()
-        params.context = params.context or {}
-        params.context.includeDeclaration = nil
-        vim.lsp.buf_request(0, 'textDocument/references', params, function(err, result, _, _)
-          if not err and (not result or vim.tbl_isempty(result)) then
-            require('telescope.builtin').live_grep {
-              default_text = vim.fn.expand '<cword>',
-              prompt_title = 'Fallback: Grep Search',
-            }
-          else
-            require('telescope.builtin').lsp_references {
-              path_display = { 'smart' },
-              show_line = false,
-            }
-          end
-        end)
-      end
+      -- local function goto_references()
+      --   local params = vim.lsp.util.make_position_params()
+      --   params.context = params.context or {}
+      --   params.context.includeDeclaration = nil
+      --   vim.lsp.buf_request(0, 'textDocument/references', params, function(err, result, _, _)
+      --     if not err and (not result or vim.tbl_isempty(result)) then
+      --       require('telescope.builtin').live_grep {
+      --         default_text = vim.fn.expand '<cword>',
+      --         prompt_title = 'Fallback: Grep Search',
+      --       }
+      --     else
+      --       require('telescope.builtin').lsp_references {
+      --         path_display = { 'smart' },
+      --         show_line = false,
+      --       }
+      --     end
+      --   end)
+      -- end
 
       local function format_buffer()
         vim.lsp.buf.format { async = true }
       end
 
-      vim.keymap.set('n', 'gd', builtin.lsp_definitions, vim.tbl_extend('force', opts, { desc = 'LSP: Goto Definition' }))
-      vim.keymap.set('n', 'gr', goto_references, vim.tbl_extend('force', opts, { desc = 'LSP: Goto References' }))
-      vim.keymap.set('n', 'gI', builtin.lsp_implementations, vim.tbl_extend('force', opts, { desc = 'LSP: Goto Implementation' }))
+      -- vim.keymap.set('n', 'gd', builtin.lsp_definitions, vim.tbl_extend('force', opts, { desc = 'LSP: Goto Definition' }))
+      -- vim.keymap.set('n', 'gr', goto_references, vim.tbl_extend('force', opts, { desc = 'LSP: Goto References' }))
+      -- vim.keymap.set('n', 'gI', builtin.lsp_implementations, vim.tbl_extend('force', opts, { desc = 'LSP: Goto Implementation' }))
       vim.keymap.set('n', '<leader>lf', format_buffer, vim.tbl_extend('force', opts, { desc = 'LSP: Format buffer' }))
       vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, vim.tbl_extend('force', opts, { desc = 'LSP: Diagnostic messages' }))
       vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, vim.tbl_extend('force', opts, { desc = 'LSP: Rename' }))
