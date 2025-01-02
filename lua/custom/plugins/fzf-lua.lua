@@ -16,6 +16,12 @@ return {
       lsp = {
         jump_to_single_result = true, -- automatically jump if there is only one result
       },
+      winopts = {
+        async_renders = true,
+        animate = false,
+        hl_cursorline = false,
+        border = 'none',
+      },
     }
   end,
 }
