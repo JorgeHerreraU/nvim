@@ -8,7 +8,7 @@ return {
     'jay-babu/mason-nvim-dap.nvim',
   },
   lazy = true,
-  event = 'VeryLazy',
+  event = { 'CmdlineEnter', 'BufReadPost' }, -- Load only on specific actions
   config = function()
     local dap = require 'dap'
     dap.set_log_level 'DEBUG'
