@@ -4,7 +4,7 @@ return {
   config = function()
     local fzf = require 'fzf-lua'
     vim.keymap.set('n', '<leader>ff', fzf.files, { desc = 'Find: Files' })
-    vim.keymap.set('n', '<leader>fd', fzf.git_files, { desc = 'Find: Git Files' })
+    vim.keymap.set('n', '<leader>fd', fzf.git_status, { desc = 'Find: Modified Git Files' })
     vim.keymap.set('n', '<leader>/', fzf.live_grep, { desc = 'Find: LiveGrep' })
     vim.keymap.set('n', '<leader><leader>', fzf.buffers, { desc = 'Find: Buffers' })
     vim.keymap.set('n', '<leader>fw', fzf.grep_cword, { desc = 'Find: Grep current Word' })
