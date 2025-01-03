@@ -44,7 +44,7 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   { import = 'custom.plugins' },
-  { import = 'custom.themes' },
+  { import = 'theme' },
 }, {
   change_detection = { enabled = false },
   ui = {
