@@ -15,7 +15,7 @@ return {
     end)
 
     -- Add a cursor and jump to the next word under cursor.
-    vim.keymap.set({ 'n', 'v' }, '<c-n>', function()
+    vim.keymap.set({ 'n', 'v' }, '<A-m>', function()
       mc.addCursor '*'
     end)
 
