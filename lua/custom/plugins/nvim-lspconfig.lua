@@ -14,6 +14,13 @@ return {
           },
         },
         notification = {
+          history_size = 1,
+          configs = {
+            default = {
+              max_messages = 1,
+              history = false,
+            },
+          },
           window = { winblend = 0 },
         },
       },
