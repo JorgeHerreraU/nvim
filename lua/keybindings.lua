@@ -107,3 +107,6 @@ vim.keymap.set({ 'n', 'x' }, '<leader>p', function()
   vim.fn.setreg('+', cleaned)
   return '"+p'
 end, { expr = true, desc = 'Paste' })
+
+-- disable recording key q
+vim.keymap.set('n', 'q', '<Nop>', { noremap = true })
